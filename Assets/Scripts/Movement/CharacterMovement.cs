@@ -23,7 +23,6 @@ public class CharacterMovement : MonoBehaviour
 
     [SerializeField] private float jumpBufferTime = 0.25f;
 
-
     private Vector3 _currentMovement;
     private Coroutine _jumpCoroutine;
 
@@ -77,6 +76,11 @@ public class CharacterMovement : MonoBehaviour
         _jumpCoroutine = StartCoroutine(JumpCoroutine());
     }
 
+    public void OnShoot()
+    {
+            GetComponent<Shoot>().PlayerShoot();
+    }
+    
     /// <summary>
     /// Runs the characters Jump as soon as it's close to the ground and in the fixedUpdate period.
     /// </summary>
@@ -151,4 +155,6 @@ public class CharacterMovement : MonoBehaviour
         Gizmos.color = Color.red;
         Gizmos.DrawLine(feetPivot.position, feetPivot.position + Vector3.down * minJumpDistance);
     }
+
+   
 }
