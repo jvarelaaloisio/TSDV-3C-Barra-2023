@@ -26,6 +26,8 @@ public class CharacterMovement : MonoBehaviour
     private Vector3 _currentMovement;
     private Coroutine _jumpCoroutine;
 
+    private bool isSprinting = false;
+
     private bool _isJumpInput;
     [SerializeField] private float coyoteTime;
 
@@ -54,7 +56,9 @@ public class CharacterMovement : MonoBehaviour
 
     private void FixedUpdate()
     {
-        rigidBody.velocity = _currentMovement * movementSpeed + Vector3.up * rigidBody.velocity.y;
+        float playerSpeed = isSprinting ? movementSpeed * 2 : movementSpeed;
+
+        rigidBody.velocity = _currentMovement * playerSpeed + Vector3.up * rigidBody.velocity.y;
     }
 
     /// <summary>
@@ -63,7 +67,15 @@ public class CharacterMovement : MonoBehaviour
     public void OnMove(InputValue context)
     {
         var movementInput = context.Get<Vector2>();
-        _currentMovement = new Vector3(movementInput.x, 0, movementInput.y);
+        _currentMovement = new Vector3(-movementInput.y, 0, movementInput.x);
+
+        Quaternion meshRotation = rigidBody.transform.rotation;
+        _currentMovement = meshRotation * _currentMovement;
+    }
+
+    public void OnSprint(InputValue value)
+    {
+        isSprinting = value.isPressed;
     }
 
     /// <summary>
@@ -78,9 +90,9 @@ public class CharacterMovement : MonoBehaviour
 
     public void OnShoot()
     {
-            GetComponent<Shoot>().PlayerShoot();
+        GetComponent<Shoot>().PlayerShoot();
     }
-    
+
     /// <summary>
     /// Runs the characters Jump as soon as it's close to the ground and in the fixedUpdate period.
     /// </summary>
@@ -94,10 +106,10 @@ public class CharacterMovement : MonoBehaviour
 
         //Podemos utilizar for en reemplazo del While.
         //Ambos funcionan de la misma manera y su unica diferencia es como se ven.
-        
+
         //var timeElapsed = 0.0f;
         //while (timeElapsed <= jumpBufferTime)
-        for(var timeElapsed = 0.0f; timeElapsed <= jumpBufferTime; timeElapsed += Time.fixedDeltaTime)
+        for (var timeElapsed = 0.0f; timeElapsed <= jumpBufferTime; timeElapsed += Time.fixedDeltaTime)
         {
             yield return new WaitForFixedUpdate();
             var isFalling = rigidBody.velocity.y <= 0;
@@ -124,13 +136,11 @@ public class CharacterMovement : MonoBehaviour
 
                 rigidBody.AddForce(jumpForceVector, ForceMode.Impulse);
 
-                if (timeElapsed > 0)
-                    Debug.Log($"<color=grey>{name}: buffered jump for {timeElapsed} seconds</color>");
+                //if (timeElapsed > 0)
+                //Debug.Log($"<color=grey>{name}: buffered jump for {timeElapsed} seconds</color>");
 
                 yield break;
             }
-
-            // timeElapsed += Time.fixedDeltaTime;
         }
     }
 
@@ -155,6 +165,4 @@ public class CharacterMovement : MonoBehaviour
         Gizmos.color = Color.red;
         Gizmos.DrawLine(feetPivot.position, feetPivot.position + Vector3.down * minJumpDistance);
     }
-
-   
 }

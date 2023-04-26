@@ -7,7 +7,7 @@ public class Shoot : MonoBehaviour
     public float range = 100f;
     public float impactForce = 30f;
 
-    public Transform GunHitbox;
+    public Transform gunHitbox;
 
     public ParticleSystem muzzleFlash;
 
@@ -16,7 +16,7 @@ public class Shoot : MonoBehaviour
         RaycastHit hit;
         muzzleFlash.Play();
 
-        if (Physics.Raycast(GunHitbox.position, GunHitbox.forward, out hit, range))
+        if (Physics.Raycast(gunHitbox.position, gunHitbox.forward, out hit, range))
         {
             Debug.Log(hit.transform.name);
             Target target = hit.transform.GetComponent<Target>();
