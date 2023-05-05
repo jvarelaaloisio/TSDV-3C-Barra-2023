@@ -1,6 +1,7 @@
 using System.Collections;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using Weapons;
 
 /// <summary>
 /// Class that enables a character to be moved
@@ -88,7 +89,7 @@ public class CharacterMovement : MonoBehaviour
 
     public void OnShoot()
     {
-        GetComponent<Shoot>().PlayerShoot();
+        GetComponent<Shoot>().ShootRaycast();
     }
 
     /// <summary>
