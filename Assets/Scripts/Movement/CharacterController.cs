@@ -97,6 +97,17 @@ public class CharacterController : MonoBehaviour
         GetComponent<Shoot>().Fire();
     }
 
+    public void OnLockTarget()
+    {
+        Transform nearestTarget = GetComponent<CameraManager>().FindNearestTarget(transform.position, 20f);
+
+        if (nearestTarget != null)
+        {
+            rigidBody.transform.LookAt(nearestTarget);
+            GetComponent<Camera>().transform.LookAt(nearestTarget);
+        }
+    }
+
     /// <summary>
     /// Runs the characters Jump as soon as it's close to the ground and in the fixedUpdate period.
     /// </summary>

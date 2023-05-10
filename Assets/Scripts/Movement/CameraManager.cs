@@ -9,10 +9,30 @@ public class CameraManager : MonoBehaviour
     public float mouseSensitivity = 100f;
     public float xRotation = 0f;
     public float yRotation = 0f;
-    
+
     private void Start()
     {
         Cursor.lockState = CursorLockMode.Locked;
+    }
+
+    public Transform FindNearestTarget(Vector3 position, float maxDistance)
+    {
+        GameObject[] targets = GameObject.FindGameObjectsWithTag("Target");
+        Transform nearestTarget = null;
+        float closestDistance = Mathf.Infinity;
+
+        foreach (GameObject target in targets)
+        {
+            float distance = Vector3.Distance(position, target.transform.position);
+
+            if (distance < closestDistance && distance <= maxDistance)
+            {
+                closestDistance = distance;
+                nearestTarget = target.transform;
+            }
+        }
+
+        return nearestTarget;
     }
 
     private void FixedUpdate()
@@ -26,5 +46,4 @@ public class CameraManager : MonoBehaviour
         playerBody.rotation = Quaternion.Euler(0f, xRotation, 0f);
         //cameraTransform.eulerAngles = new Vector3(yRotation, xRotation, 0f);
     }
-    
 }
