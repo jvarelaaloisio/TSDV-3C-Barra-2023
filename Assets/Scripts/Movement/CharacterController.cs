@@ -99,13 +99,14 @@ public class CharacterController : MonoBehaviour
 
     public void OnLockTarget()
     {
+        Debug.Log("LockTarget");
         Transform nearestTarget = GetComponent<CameraManager>().FindNearestTarget(transform.position, 20f);
 
         if (nearestTarget != null)
         {
-            rigidBody.transform.LookAt(nearestTarget);
-            GetComponent<Camera>().transform.LookAt(nearestTarget);
+            rigidBody.transform.LookAt(nearestTarget);  
         }
+        
     }
 
     /// <summary>
