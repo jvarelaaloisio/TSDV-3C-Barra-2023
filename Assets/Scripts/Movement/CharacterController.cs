@@ -6,7 +6,7 @@ using Weapons;
 /// <summary>
 /// Class that enables a character to be moved
 /// </summary>
-public class CharacterMovement : MonoBehaviour
+public class CharacterController : MonoBehaviour
 {
     private const int MaxFloorDistance = 10;
 

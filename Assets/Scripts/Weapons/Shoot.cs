@@ -5,16 +5,21 @@ namespace Weapons
 {
     public class Shoot : MonoBehaviour
     {
-        [SerializeField] private float damage = 10f;
-        [SerializeField] private float range = 100f;
-        [SerializeField] private float impactForce = 30f;
-        [SerializeField] private float bulletForce = 100f;
-        
-        [SerializeField] private GameObject bullet;
-
+        [Header("Raycast")]
         [SerializeField] private Transform gunHitbox;
-
         [SerializeField] private ParticleSystem muzzleFlash;
+        [SerializeField] private float range = 100f;
+
+        [SerializeField] private float damage = 10f;
+        [SerializeField] private float impactForce = 30f;
+
+
+
+        [Header("Instance")]
+        [SerializeField] private GameObject bulletPrefab;
+        [SerializeField] private GameObject bulletPoint;
+        [SerializeField] private float bulletSpeed = 600.0f;
+
 
         public void ShootRaycast()
         {
@@ -23,6 +28,7 @@ namespace Weapons
             if (Physics.Raycast(gunHitbox.position, gunHitbox.forward, out var hit, range))
             {
                 Debug.Log(hit.transform.name);
+
                 Target target = hit.transform.GetComponent<Target>();
 
                 if (target != null) target.TakeDamage(damage);
@@ -34,9 +40,16 @@ namespace Weapons
             }
         }
 
-        public void ShootBullet()
+        
+        public void Fire()
         {
-            
+            Debug.Log("Fire");
+
+            GameObject bullet = Instantiate(bulletPrefab, bulletPoint.transform.position, bulletPoint.transform.rotation);
+
+            bullet.GetComponent<Rigidbody>().AddForce(bulletPoint.transform.forward * bulletSpeed);
+
+            Destroy(bullet, 1);
         }
-    }
+   }
 }
