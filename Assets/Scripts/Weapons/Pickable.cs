@@ -40,6 +40,7 @@ namespace Weapons
             rb.isKinematic = true;
             bc.isTrigger = true;
             weapon.enabled = true;
+            weapon.isActive = true;
 
             Transform transform1 = transform;
             transform1.SetParent(gunContainer);
