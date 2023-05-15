@@ -1,5 +1,4 @@
 using UnityEngine;
-using UnityEngine.Serialization;
 
 namespace Weapons
 {
@@ -12,13 +11,11 @@ namespace Weapons
 
         public void Fire()
         {
-            if (gunHitbox == null) return;
-
             Debug.Log("Fire");
 
             GameObject bullet = Instantiate(bulletPrefab, gunHitbox.transform.position, gunHitbox.transform.rotation);
 
-            bullet.GetComponent<Rigidbody>().AddForce(gunHitbox.transform.forward * bulletSpeed);
+            bullet.GetComponent<Rigidbody>()?.AddForce(gunHitbox.transform.forward * bulletSpeed);
 
             Destroy(bullet, 1);
         }

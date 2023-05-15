@@ -91,12 +91,18 @@ namespace Player
 
         public void OnShoot()
         {
-            GetComponent<ShootRaycast>().Shoot();
+            GetComponent<ShootRaycast>()?.Shoot();
         }
 
         public void OnShootSecondary()
         {
-            GetComponent<ShootInstance>().Fire();
+            GetComponent<ShootInstance>()?.Fire();
+        }
+
+        public void OnPickUp()
+        {
+            Debug.Log("Pick up");
+            FindObjectOfType<Pickable>()?.PickUp();
         }
 
         public void OnLockTarget()

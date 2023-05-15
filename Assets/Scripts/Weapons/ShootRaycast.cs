@@ -14,7 +14,6 @@ namespace Weapons
     
         public void Shoot()
         {
-            if(gunHitbox == null) return;
             muzzleFlash.Play();
 
             if (Physics.Raycast(gunHitbox.position, gunHitbox.forward, out var hit, range))
