@@ -91,12 +91,12 @@ namespace Player
 
         public void OnShoot()
         {
-            GetComponent<Shoot>().ShootRaycast();
+            GetComponent<ShootRaycast>().Shoot();
         }
 
         public void OnShootSecondary()
         {
-            GetComponent<Shoot>().Fire();
+            GetComponent<ShootInstance>().Fire();
         }
 
         public void OnLockTarget()

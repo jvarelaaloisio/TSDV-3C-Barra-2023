@@ -1,9 +1,8 @@
 using UnityEngine;
-using UnityEngine.Serialization;
 
 namespace Weapons
 {
-    public class Shoot : MonoBehaviour
+    public class ShootRaycast : MonoBehaviour
     {
         [Header("Raycast")]
         [SerializeField] private Transform gunHitbox;
@@ -12,17 +11,10 @@ namespace Weapons
 
         [SerializeField] private float damage = 10f;
         [SerializeField] private float impactForce = 30f;
-
-
-
-        [Header("Instance")]
-        [SerializeField] private GameObject bulletPrefab;
-        [SerializeField] private GameObject bulletPoint;
-        [SerializeField] private float bulletSpeed = 600.0f;
-
-
-        public void ShootRaycast()
+    
+        public void Shoot()
         {
+            if(gunHitbox == null) return;
             muzzleFlash.Play();
 
             if (Physics.Raycast(gunHitbox.position, gunHitbox.forward, out var hit, range))
@@ -39,17 +31,5 @@ namespace Weapons
                 hit.rigidbody.AddForce(-hit.normal * impactForce);
             }
         }
-
-        
-        public void Fire()
-        {
-            Debug.Log("Fire");
-
-            GameObject bullet = Instantiate(bulletPrefab, bulletPoint.transform.position, bulletPoint.transform.rotation);
-
-            bullet.GetComponent<Rigidbody>().AddForce(bulletPoint.transform.forward * bulletSpeed);
-
-            Destroy(bullet, 1);
-        }
-   }
+    }
 }
