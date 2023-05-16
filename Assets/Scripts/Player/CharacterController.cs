@@ -17,7 +17,7 @@ namespace Player
         [Header("Movement")] [SerializeField] private float movementSpeed = 10f;
 
         [SerializeField] private float minJumpDistance = 0.25f;
-
+        [SerializeField] private CameraManager cameraManager;
         private Vector3 currentMovement;
         private Coroutine jumpCoroutine;
 
@@ -98,15 +98,10 @@ namespace Player
             FindObjectOfType<Pickable>()?.PickUp();
         }
 
-        public void OnLockTarget()
+        public void OnCameraRotation(InputValue context)
         {
-            Debug.Log("LockTarget");
-            Transform nearestTarget = GetComponent<CameraManager>().FindNearestTarget(transform.position, 20f);
-
-            if (nearestTarget != null)
-            {
-                rigidBody.transform.LookAt(nearestTarget);
-            }
+            Vector2 rotationDelta = context.Get<Vector2>();
+            cameraManager?.Rotate(rotationDelta);
         }
 
         private void OnDrawGizmosSelected()
