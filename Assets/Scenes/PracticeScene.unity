@@ -2241,18 +2241,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: PlayerElements
       objectReference: {fileID: 0}
-    - target: {fileID: 7025749540342428172, guid: ae1c9e5ce32279947bd222e66a0308cd, type: 3}
-      propertyPath: jumpForce
-      value: 5
-      objectReference: {fileID: 0}
-    - target: {fileID: 7025749540342428173, guid: ae1c9e5ce32279947bd222e66a0308cd, type: 3}
-      propertyPath: mouseSensitivity
-      value: 50
-      objectReference: {fileID: 0}
-    - target: {fileID: 7025749540384851446, guid: ae1c9e5ce32279947bd222e66a0308cd, type: 3}
-      propertyPath: m_Material
-      value: 
-      objectReference: {fileID: 13400000, guid: 70a8d3958fe11d2479c4f18db6fddf68, type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ae1c9e5ce32279947bd222e66a0308cd, type: 3}
 --- !u!1001 &232023910
