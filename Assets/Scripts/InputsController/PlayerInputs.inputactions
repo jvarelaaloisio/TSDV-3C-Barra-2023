@@ -15,13 +15,13 @@
                     "initialStateCheck": true
                 },
                 {
-                    "name": "Jump",
-                    "type": "Button",
-                    "id": "6b083803-2410-4117-aa85-52d31b927e57",
-                    "expectedControlType": "Button",
+                    "name": "CameraRotation",
+                    "type": "Value",
+                    "id": "ec65a3ce-7c71-4633-93c4-5d63beed22e5",
+                    "expectedControlType": "Vector2",
                     "processors": "",
                     "interactions": "",
-                    "initialStateCheck": false
+                    "initialStateCheck": true
                 },
                 {
                     "name": "Sprint",
@@ -51,15 +51,6 @@
                     "initialStateCheck": false
                 },
                 {
-                    "name": "LockTarget",
-                    "type": "Button",
-                    "id": "b2c0d120-3cd1-420e-9dc1-ae5a511d6535",
-                    "expectedControlType": "Button",
-                    "processors": "",
-                    "interactions": "",
-                    "initialStateCheck": false
-                },
-                {
                     "name": "PickUp",
                     "type": "Button",
                     "id": "9bdfc083-429d-4e13-86fe-4a0b4f97e32a",
@@ -67,15 +58,6 @@
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": false
-                },
-                {
-                    "name": "CameraRotation",
-                    "type": "Value",
-                    "id": "ec65a3ce-7c71-4633-93c4-5d63beed22e5",
-                    "expectedControlType": "Vector2",
-                    "processors": "",
-                    "interactions": "",
-                    "initialStateCheck": true
                 }
             ],
             "bindings": [
@@ -147,28 +129,6 @@
                 },
                 {
                     "name": "",
-                    "id": "bf165a57-a399-4a5e-902e-b642fd4bee5e",
-                    "path": "<Keyboard>/space",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "Jump",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
-                    "id": "3d0a0a91-4770-4a2b-b881-98ef8005061c",
-                    "path": "<DualShockGamepad>/buttonSouth",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "Jump",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
                     "id": "6af9fda2-aa7c-491a-b4d9-70d6f17fbece",
                     "path": "<Keyboard>/shift",
                     "interactions": "",
@@ -230,28 +190,6 @@
                     "processors": "",
                     "groups": "",
                     "action": "ShootSecondary",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
-                    "id": "11d0d469-3348-4313-ab68-48e6cf7d7fd2",
-                    "path": "<Keyboard>/tab",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "LockTarget",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
-                    "id": "2d2ef37a-1804-4698-90a5-be789e8f4d2f",
-                    "path": "<DualShockGamepad>/leftShoulder",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "LockTarget",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },
