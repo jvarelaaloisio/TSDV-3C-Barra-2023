@@ -24,8 +24,6 @@ namespace Player
         private bool isSprinting = false;
 
         private bool isJumpInput;
-        [SerializeField] private float coyoteTime;
-
         private void OnValidate()
         {
             rigidBody ??= GetComponent<Rigidbody>();
@@ -101,7 +99,7 @@ namespace Player
         public void OnCameraRotation(InputValue context)
         {
             Vector2 rotationDelta = context.Get<Vector2>();
-            cameraManager?.Rotate(rotationDelta);
+            //cameraManager.Rotate(rotationDelta);
         }
 
         private void OnDrawGizmosSelected()

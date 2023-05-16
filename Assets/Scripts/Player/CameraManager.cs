@@ -1,29 +1,60 @@
 using UnityEngine;
+using UnityEngine.InputSystem;
 
-namespace Player
+public class CameraManager : MonoBehaviour
 {
-    public class CameraManager : MonoBehaviour
+    [SerializeField] private float rotationSpeedX = 1f;
+    [SerializeField] private float rotationSpeedY = 1f;
+    [SerializeField] private float maxRotationSpeed = 5f;
+    [SerializeField] private float maxRotationAngle = 90f;
+    public Transform characterTransform;
+
+    private Vector2 rotationInput;
+    private InputAction rotateAction;
+
+    private void Awake()
     {
-        [SerializeField] private Transform playerBody;
-        [SerializeField] private Vector2 rotationSpeed;
+        Cursor.lockState = CursorLockMode.Locked;
 
-        private void Start()
+        rotateAction = new InputAction(binding: "<Mouse>/delta");
+        rotateAction.performed += OnRotate;
+    }
+
+    private void OnEnable()
+    {
+        rotateAction.Enable();
+    }
+
+    private void OnDisable()
+    {
+        rotateAction.Disable();
+    }
+
+    private void OnRotate(InputAction.CallbackContext context)
+    {
+        rotationInput = context.ReadValue<Vector2>();
+    }
+
+    private void Update()
+    {
+        // Limit the rotation speed
+        float clampedRotationSpeed = Mathf.Clamp(rotationInput.y, 0f, maxRotationSpeed);
+
+        float rotationX = clampedRotationSpeed * Time.deltaTime;
+        float rotationY = rotationInput.x * rotationSpeedY * Time.deltaTime;
+
+        // Apply rotation on the Y-axis (horizontal rotation)
+        transform.Rotate(Vector3.up, rotationY);
+
+        // Apply rotation on the X-axis (vertical rotation)
+        float newRotationAngle = transform.eulerAngles.x - rotationX;
+        float clampedRotationAngle = Mathf.Clamp(newRotationAngle, -maxRotationAngle, maxRotationAngle);
+        transform.rotation = Quaternion.Euler(clampedRotationAngle, transform.eulerAngles.y, 0f);
+
+        // Rotate the character towards the camera's direction
+        if (characterTransform != null)
         {
-            Cursor.lockState = CursorLockMode.Locked;
-        }
-
-        public void Rotate(Vector2 rotation)
-        {
-            Vector2 scaledDelta = Vector2.Scale(rotation, rotationSpeed) * Time.deltaTime;
-
-            //First person camera rotation
-            transform.Rotate(transform.up * scaledDelta.x + transform.right * - scaledDelta.y, Space.Self);
-            
-            
-            //Third person
-            //transform.RotateAround(playerBody.position, playerBody.up,scaledDelta.x);
-            //transform.RotateAround(playerBody.position, playerBody.right,scaledDelta.y);
-            //transform.LookAt(playerBody);
+            characterTransform.rotation = Quaternion.Euler(0f, transform.eulerAngles.y, 0f);
         }
     }
 }
