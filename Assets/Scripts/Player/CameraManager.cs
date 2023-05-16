@@ -38,17 +38,18 @@ public class CameraManager : MonoBehaviour
     private void Update()
     {
         // Limit the rotation speed
-        float clampedRotationSpeed = Mathf.Clamp(rotationInput.y, 0f, maxRotationSpeed);
+        float clampedRotationSpeedY = Mathf.Clamp(rotationInput.y, 0f, rotationSpeedY);
+        float clampedRotationSpeedX = Mathf.Clamp(rotationInput.x, 0f, rotationSpeedX);
 
-        float rotationX = clampedRotationSpeed * Time.deltaTime;
-        float rotationY = rotationInput.x * rotationSpeedY * Time.deltaTime;
+        float rotationX = clampedRotationSpeedY * Time.deltaTime;
+        float rotationY = clampedRotationSpeedX * Time.deltaTime;
 
         // Apply rotation on the Y-axis (horizontal rotation)
         transform.Rotate(Vector3.up, rotationY);
 
         // Apply rotation on the X-axis (vertical rotation)
         float newRotationAngle = transform.eulerAngles.x - rotationX;
-        float clampedRotationAngle = Mathf.Clamp(newRotationAngle, -maxRotationAngle, maxRotationAngle);
+        float clampedRotationAngle = Mathf.Clamp(newRotationAngle, 0, maxRotationAngle);
         transform.rotation = Quaternion.Euler(clampedRotationAngle, transform.eulerAngles.y, 0f);
 
         // Rotate the character towards the camera's direction
