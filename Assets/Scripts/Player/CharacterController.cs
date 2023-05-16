@@ -68,10 +68,20 @@ namespace Player
         public void OnMove(InputValue context)
         {
             var movementInput = context.Get<Vector2>();
-            _currentMovement = new Vector3(-movementInput.y, 0, movementInput.x);
+            AnimationState animationState = FindObjectOfType<AnimationState>();
+            _currentMovement = new Vector3(movementInput.x, 0, movementInput.y);
 
             Quaternion meshRotation = rigidBody.transform.rotation;
             _currentMovement = meshRotation * _currentMovement;
+            
+            if (movementInput.x != 0 || movementInput.y != 0)
+            {
+                animationState.PlayerWalking();
+            }
+            else
+            {
+                animationState.PlayerIdle();
+            }
         }
 
         public void OnSprint(InputValue value)
@@ -112,9 +122,8 @@ namespace Player
 
             if (nearestTarget != null)
             {
-                rigidBody.transform.LookAt(nearestTarget);  
+                rigidBody.transform.LookAt(nearestTarget);
             }
-        
         }
 
         /// <summary>

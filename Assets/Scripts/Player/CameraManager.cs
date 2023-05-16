@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 
 namespace Player
@@ -42,9 +43,9 @@ namespace Player
             float mouseY = Input.GetAxis("Mouse Y") * mouseSensitivity * Time.deltaTime;
             xRotation += mouseX;
             yRotation -= mouseY * mouseSensitivity;
-            yRotation = Mathf.Clamp(yRotation, -90f, 90f);
+            yRotation = Mathf.Clamp(xRotation, Single.MinValue, Single.MaxValue);
 
-            playerBody.rotation = Quaternion.Euler(0f, xRotation, 0f);
+            playerBody.rotation = Quaternion.Euler(0f, yRotation, 0f);
             //cameraTransform.eulerAngles = new Vector3(yRotation, xRotation, 0f);
         }
     }
