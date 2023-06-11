@@ -56,20 +56,16 @@ namespace Player
             isSprinting = value.isPressed;
         }
 
+        /// <summary>
+        /// In case of having a weapon equiped, shoots
+        /// </summary>
         public void OnShoot()
         {
-            Debug.Log("shoot");
-            FindObjectOfType<ShootRaycast>()?.Shoot();
-        }
-
-        public void OnShootSecondary()
-        {
-            FindObjectOfType<ShootInstance>()?.Fire();
+            FindObjectOfType<WeaponContainer>().GetWeapon()?.Shoot();
         }
 
         public void OnPickUp()
         {
-            Debug.Log("Pick up");
             FindObjectOfType<Pickable>()?.PickAndDrop();
         }
     }

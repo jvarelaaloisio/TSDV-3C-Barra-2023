@@ -23186,8 +23186,31 @@ PrefabInstance:
       propertyPath: gunContainer
       value: 
       objectReference: {fileID: 7025749540036744031}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 5027125900109176867, guid: a59eacac6405f6e428215ddd0963c0f8, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: a59eacac6405f6e428215ddd0963c0f8, type: 3}
+--- !u!1 &1868903536 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 2667357751582923504, guid: a59eacac6405f6e428215ddd0963c0f8, type: 3}
+  m_PrefabInstance: {fileID: 1868903535}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1868903537
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1868903536}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 43a67d1ef45f4d9087155e513f5f5931, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  bulletPrefab: {fileID: 2123023524163366923, guid: c99b23e625ff46745a96485a11f8ec30, type: 3}
+  gunHitbox: {fileID: 1671518610537735534}
+  bullets: 30
+  maxBullets: 30
+  bulletSpeed: 600
 --- !u!1001 &1869314074
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -26712,6 +26735,14 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 8266228811451356391, guid: ae1c9e5ce32279947bd222e66a0308cd, type: 3}
+      propertyPath: gunHitbox
+      value: 
+      objectReference: {fileID: 7025749540036744031}
+    - target: {fileID: 8266228811451356391, guid: ae1c9e5ce32279947bd222e66a0308cd, type: 3}
+      propertyPath: muzzleFlash
+      value: 
+      objectReference: {fileID: 1671518610537735533}
     - target: {fileID: 8552921364225179906, guid: ae1c9e5ce32279947bd222e66a0308cd, type: 3}
       propertyPath: m_Name
       value: PlayerElements
@@ -26762,6 +26793,16 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ae1c9e5ce32279947bd222e66a0308cd, type: 3}
+--- !u!198 &1671518610537735533 stripped
+ParticleSystem:
+  m_CorrespondingSourceObject: {fileID: 8552921362787356043, guid: ae1c9e5ce32279947bd222e66a0308cd, type: 3}
+  m_PrefabInstance: {fileID: 1671518610537735532}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &1671518610537735534 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 8552921364691908144, guid: ae1c9e5ce32279947bd222e66a0308cd, type: 3}
+  m_PrefabInstance: {fileID: 1671518610537735532}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &6970404293881118964
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -26873,6 +26914,18 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 8552921364691908147, guid: ae1c9e5ce32279947bd222e66a0308cd, type: 3}
   m_PrefabInstance: {fileID: 1671518610537735532}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &7025749540036744032
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1671518610537735534}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5c47ec5008a8400fb5476a5c1493df77, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &7025749541768763592
 GameObject:
   m_ObjectHideFlags: 0

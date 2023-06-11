@@ -1,16 +1,19 @@
 using UnityEngine;
 
-public class BulletHit : MonoBehaviour
+namespace Weapons
 {
-    [SerializeField] private float damage = 10;
-
-    private void OnCollisionEnter(Collision other)
+    public class BulletHit : MonoBehaviour
     {
-        Target target = other.transform.GetComponent<Target>();
-        if (target != null)
+        [SerializeField] private float damage = 10;
+
+        private void OnCollisionEnter(Collision other)
         {
-            target.TakeDamage(damage);
-            Debug.Log(target.transform.name);
+            Target target = other.transform.GetComponent<Target>();
+            if (target != null)
+            {
+                target.TakeDamage(damage);
+                Debug.Log(target.transform.name);
+            }
         }
     }
 }

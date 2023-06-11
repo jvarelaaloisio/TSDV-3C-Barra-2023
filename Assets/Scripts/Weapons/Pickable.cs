@@ -8,7 +8,7 @@ namespace Weapons
 {
     public class Pickable : MonoBehaviour
     {
-        [SerializeField] private ShootInstance weapon;
+        [SerializeField] private IWeapon weapon;
         [SerializeField] private Rigidbody rb;
         [SerializeField] private BoxCollider bc;
         [SerializeField] private Transform player, gunContainer;
@@ -24,7 +24,7 @@ namespace Weapons
         {
             if (!isEquipped)
             {
-                weapon.enabled = false;
+                weapon.SetEquiped(false);
                 rb.isKinematic = false;
                 bc.isTrigger = false;
             }
@@ -58,8 +58,8 @@ namespace Weapons
             slotFull = true;
             rb.isKinematic = true;
             bc.isTrigger = true;
-            weapon.enabled = true;
-            weapon.isActive = true;
+            //weapon.enabled = true;
+            weapon.SetEquiped(true);
 
             Transform transform1 = transform;
             transform1.SetParent(gunContainer);
@@ -84,7 +84,7 @@ namespace Weapons
 
             float random = Random.Range(-1f, 1f);
             rb.AddTorque(new Vector3(random, random, random) * 3);
-            weapon.enabled = true;
+            //weapon.enabled = true;
         }
     }
 }

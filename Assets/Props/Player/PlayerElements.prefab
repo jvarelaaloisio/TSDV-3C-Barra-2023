@@ -5517,7 +5517,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8552921364691908147}
   m_Layer: 0
-  m_Name: GunContainer
+  m_Name: WeaponContainer
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -5547,7 +5547,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8552921364791114507}
-  - component: {fileID: 8552921364791114506}
+  - component: {fileID: 8266228811451356391}
   m_Layer: 0
   m_Name: Raycast Gun
   m_TagString: Untagged
@@ -5573,7 +5573,7 @@ Transform:
   m_Father: {fileID: 8552921364673111822}
   m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &8552921364791114506
+--- !u!114 &8266228811451356391
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -5582,13 +5582,15 @@ MonoBehaviour:
   m_GameObject: {fileID: 8552921364791114504}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1f418bcf2fc9fa041b20887fc51892e2, type: 3}
+  m_Script: {fileID: 11500000, guid: 1f06523080694dc3bbfa2d25a6066971, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  gunHitbox: {fileID: 8552921364791114507}
-  muzzleFlash: {fileID: 8552921362787356043}
+  gunHitbox: {fileID: 0}
+  muzzleFlash: {fileID: 0}
   range: 100
   damage: 10
+  bullets: 10
+  maxBullets: 10
   impactForce: 30
 --- !u!1 &8552921364810248499
 GameObject:

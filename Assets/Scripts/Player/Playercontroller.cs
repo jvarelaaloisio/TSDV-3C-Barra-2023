@@ -27,14 +27,13 @@ namespace Player
 
         private void Start()
         {
-            cameraTransform = Camera.main.transform;
+            if (Camera.main != null) cameraTransform = Camera.main.transform;
             controller = FindObjectOfType<CharacterController>();
             inputManager = InputManager.Instance;
         }
 
         void Update()
         {
-            groundedPlayer = controller.isGrounded;
             if (groundedPlayer && playerVelocity.y < 0)
             {
                 playerVelocity.y = 0f;
@@ -43,6 +42,9 @@ namespace Player
             Move();
         }
 
+        /// <summary>
+        /// Character movement
+        /// </summary>
         void Move()
         {
             Vector2 movement = inputManager.GetPlayerMovement();
