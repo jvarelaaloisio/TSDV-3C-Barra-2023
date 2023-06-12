@@ -12,7 +12,6 @@ namespace Weapons
             if (target != null)
             {
                 target.TakeDamage(damage);
-                Debug.Log(target.transform.name);
             }
         }
     }

@@ -64,15 +64,6 @@ public partial class @PlayerInputs: IInputActionCollection2, IDisposable
                     ""initialStateCheck"": false
                 },
                 {
-                    ""name"": ""ShootSecondary"",
-                    ""type"": ""Button"",
-                    ""id"": ""97b6ef6a-9f9d-4816-9b0c-3899432b350f"",
-                    ""expectedControlType"": ""Button"",
-                    ""processors"": """",
-                    ""interactions"": """",
-                    ""initialStateCheck"": false
-                },
-                {
                     ""name"": ""PickUp"",
                     ""type"": ""Button"",
                     ""id"": ""9bdfc083-429d-4e13-86fe-4a0b4f97e32a"",
@@ -195,28 +186,6 @@ public partial class @PlayerInputs: IInputActionCollection2, IDisposable
                 },
                 {
                     ""name"": """",
-                    ""id"": ""a5c623b3-be1c-4ceb-90a3-f3b377af0f7a"",
-                    ""path"": ""<Mouse>/rightButton"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""ShootSecondary"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
-                    ""id"": ""561dd828-b247-4d2a-8a75-6ae816a8ec54"",
-                    ""path"": ""<DualShockGamepad>/leftTrigger"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""ShootSecondary"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
                     ""id"": ""b301aac0-b69d-415e-80b9-e793896e7f8d"",
                     ""path"": ""<Keyboard>/e"",
                     ""interactions"": """",
@@ -276,7 +245,6 @@ public partial class @PlayerInputs: IInputActionCollection2, IDisposable
         m_World_CameraRotation = m_World.FindAction("CameraRotation", throwIfNotFound: true);
         m_World_Sprint = m_World.FindAction("Sprint", throwIfNotFound: true);
         m_World_Shoot = m_World.FindAction("Shoot", throwIfNotFound: true);
-        m_World_ShootSecondary = m_World.FindAction("ShootSecondary", throwIfNotFound: true);
         m_World_PickUp = m_World.FindAction("PickUp", throwIfNotFound: true);
         // Menu
         m_Menu = asset.FindActionMap("Menu", throwIfNotFound: true);
@@ -346,7 +314,6 @@ public partial class @PlayerInputs: IInputActionCollection2, IDisposable
     private readonly InputAction m_World_CameraRotation;
     private readonly InputAction m_World_Sprint;
     private readonly InputAction m_World_Shoot;
-    private readonly InputAction m_World_ShootSecondary;
     private readonly InputAction m_World_PickUp;
     public struct WorldActions
     {
@@ -356,7 +323,6 @@ public partial class @PlayerInputs: IInputActionCollection2, IDisposable
         public InputAction @CameraRotation => m_Wrapper.m_World_CameraRotation;
         public InputAction @Sprint => m_Wrapper.m_World_Sprint;
         public InputAction @Shoot => m_Wrapper.m_World_Shoot;
-        public InputAction @ShootSecondary => m_Wrapper.m_World_ShootSecondary;
         public InputAction @PickUp => m_Wrapper.m_World_PickUp;
         public InputActionMap Get() { return m_Wrapper.m_World; }
         public void Enable() { Get().Enable(); }
@@ -379,9 +345,6 @@ public partial class @PlayerInputs: IInputActionCollection2, IDisposable
             @Shoot.started += instance.OnShoot;
             @Shoot.performed += instance.OnShoot;
             @Shoot.canceled += instance.OnShoot;
-            @ShootSecondary.started += instance.OnShootSecondary;
-            @ShootSecondary.performed += instance.OnShootSecondary;
-            @ShootSecondary.canceled += instance.OnShootSecondary;
             @PickUp.started += instance.OnPickUp;
             @PickUp.performed += instance.OnPickUp;
             @PickUp.canceled += instance.OnPickUp;
@@ -401,9 +364,6 @@ public partial class @PlayerInputs: IInputActionCollection2, IDisposable
             @Shoot.started -= instance.OnShoot;
             @Shoot.performed -= instance.OnShoot;
             @Shoot.canceled -= instance.OnShoot;
-            @ShootSecondary.started -= instance.OnShootSecondary;
-            @ShootSecondary.performed -= instance.OnShootSecondary;
-            @ShootSecondary.canceled -= instance.OnShootSecondary;
             @PickUp.started -= instance.OnPickUp;
             @PickUp.performed -= instance.OnPickUp;
             @PickUp.canceled -= instance.OnPickUp;
@@ -476,7 +436,6 @@ public partial class @PlayerInputs: IInputActionCollection2, IDisposable
         void OnCameraRotation(InputAction.CallbackContext context);
         void OnSprint(InputAction.CallbackContext context);
         void OnShoot(InputAction.CallbackContext context);
-        void OnShootSecondary(InputAction.CallbackContext context);
         void OnPickUp(InputAction.CallbackContext context);
     }
     public interface IMenuActions

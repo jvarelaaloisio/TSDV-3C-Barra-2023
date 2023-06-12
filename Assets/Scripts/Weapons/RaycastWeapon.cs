@@ -4,28 +4,27 @@ namespace Weapons
 {
     public class RaycastWeapon : MonoBehaviour, IWeapon
     {
-        [Header("Raycast")]
-        [SerializeField] private Transform gunHitbox;
+        [Header("Raycast")] [SerializeField] private Transform gunHitbox;
         [SerializeField] private ParticleSystem muzzleFlash;
         [SerializeField] private float range = 100f;
 
-        
-        [Header("Stats")]
-        [SerializeField] private float damage = 10f;
+
+        [Header("Stats")] [SerializeField] private float damage = 10f;
         [SerializeField] private int bullets = 10;
         [SerializeField] private int maxBullets = 10;
         [SerializeField] private float impactForce = 30f;
         private bool isActive;
-        
-        
+
+
         public GameObject GetGameObject()
         {
             return gameObject;
         }
+
         public void Shoot()
         {
             muzzleFlash.Play();
-            
+
             if (Physics.Raycast(gunHitbox.position, gunHitbox.forward, out var hit, range))
             {
                 Target target = hit.transform.GetComponent<Target>();
@@ -41,22 +40,22 @@ namespace Weapons
 
         public int GetBullets()
         {
-            throw new System.NotImplementedException();
+            return bullets;
         }
 
         public bool IsEquiped()
         {
-            throw new System.NotImplementedException();
+            return isActive;
         }
 
         public void SetEquiped(bool equiped)
         {
-            throw new System.NotImplementedException();
+            isActive = equiped;
         }
 
         public void Reload()
         {
-            throw new System.NotImplementedException();
+            bullets = maxBullets;
         }
     }
 }

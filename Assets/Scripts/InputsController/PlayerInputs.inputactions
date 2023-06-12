@@ -42,15 +42,6 @@
                     "initialStateCheck": false
                 },
                 {
-                    "name": "ShootSecondary",
-                    "type": "Button",
-                    "id": "97b6ef6a-9f9d-4816-9b0c-3899432b350f",
-                    "expectedControlType": "Button",
-                    "processors": "",
-                    "interactions": "",
-                    "initialStateCheck": false
-                },
-                {
                     "name": "PickUp",
                     "type": "Button",
                     "id": "9bdfc083-429d-4e13-86fe-4a0b4f97e32a",
@@ -168,28 +159,6 @@
                     "processors": "",
                     "groups": "",
                     "action": "Shoot",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
-                    "id": "a5c623b3-be1c-4ceb-90a3-f3b377af0f7a",
-                    "path": "<Mouse>/rightButton",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "ShootSecondary",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
-                    "id": "561dd828-b247-4d2a-8a75-6ae816a8ec54",
-                    "path": "<DualShockGamepad>/leftTrigger",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "ShootSecondary",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },

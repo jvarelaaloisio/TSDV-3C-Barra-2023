@@ -5,12 +5,34 @@ namespace Player
 {
     public class WeaponContainer : MonoBehaviour
     {
-        [SerializeField] private IWeapon equipedWeapon;
-        [SerializeField] private IWeapon unequipedWeapon;
+        private IWeapon equipedWeapon;
+        private IWeapon unequipedWeapon;
 
         public IWeapon GetWeapon()
         {
             return equipedWeapon;
+        }
+
+        public void SetWeapon(IWeapon weapon)
+        {
+            if (equipedWeapon == null)
+            {
+                equipedWeapon = weapon;
+            }
+            else if (unequipedWeapon == null)
+            {
+                unequipedWeapon = weapon;
+            }
+        }
+
+        public void SetEquipedWeapon(IWeapon weapon)
+        {
+            equipedWeapon = weapon;
+        }
+
+        public void SetUnequipedWeapon(IWeapon weapon)
+        {
+            unequipedWeapon = weapon;
         }
 
         /// <summary>
@@ -18,8 +40,6 @@ namespace Player
         /// </summary>
         public void SwapWeapon()
         {
-            if (equipedWeapon == null || unequipedWeapon == null) return;
-            
             (equipedWeapon, unequipedWeapon) = (unequipedWeapon, equipedWeapon);
         }
     }
