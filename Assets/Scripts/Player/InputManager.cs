@@ -51,6 +51,10 @@ namespace Player
             return playerInput.World.CameraRotation.ReadValue<Vector2>();
         }
 
+        /// <summary>
+        /// Increases movement speed
+        /// </summary>
+        /// <param name="value"> new speed </param>
         public void OnSprint(InputValue value)
         {
             isSprinting = value.isPressed;
@@ -64,9 +68,28 @@ namespace Player
             FindObjectOfType<WeaponContainer>().GetWeapon()?.Shoot();
         }
 
+        /// <summary>
+        /// Picks up nearest weapon if in range.
+        /// </summary>
         public void OnPickUp()
         {
             FindObjectOfType<Pickable>()?.PickAndDrop();
+        }
+
+        /// <summary>
+        /// Swaps equiped weapon with the unequiped weapon
+        /// </summary>
+        public void OnSwapWeapon()
+        {
+            FindObjectOfType<WeaponContainer>().SwapWeapon();
+        }
+        
+        /// <summary>
+        /// Resets the bullets count
+        /// </summary>
+        public void OnReload()
+        {
+            FindObjectOfType<WeaponContainer>().GetWeapon()?.Reload();
         }
     }
 }

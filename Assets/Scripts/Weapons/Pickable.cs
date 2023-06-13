@@ -1,10 +1,5 @@
-using System;
 using Player;
-using UnityEditor;
 using UnityEngine;
-using UnityEngine.UI;
-using Input = UnityEngine.Windows.Input;
-using Random = UnityEngine.Random;
 
 namespace Weapons
 {
@@ -18,18 +13,15 @@ namespace Weapons
 
         [SerializeField] private float pickupRange;
         [SerializeField] private float dropForwardForce, dropUpwardForce;
-
+        
         [SerializeField] private bool isEquipped = false;
+        
         private Vector3 distance;
-
-        private void OnDrawGizmos()
-        {
-            Gizmos.DrawSphere(rb.position, pickupRange);
-        }
 
         private void Start()
         {
             weapon = GetComponent<IWeapon>();
+            
             if (!isEquipped)
             {
                 weapon.SetEquiped(false);
@@ -61,6 +53,7 @@ namespace Weapons
         private void PickUp()
         {
             if (isEquipped || distance.magnitude > pickupRange) return;
+            Transform objectTransform = transform;
 
             isEquipped = true;
             rb.isKinematic = true;
@@ -69,26 +62,26 @@ namespace Weapons
             weapon.SetEquiped(true);
             weaponContainer.SetWeapon(weapon);
             
-            Transform transform1 = transform;
-            transform1.SetParent(gunContainer);
-            transform1.localPosition = Vector3.zero;
-            transform1.localRotation = Quaternion.Euler(Vector3.zero);
-            transform1.localScale = Vector3.one;
+            
+            objectTransform.SetParent(gunContainer);
+            objectTransform.localPosition = Vector3.zero;
+            objectTransform.localRotation = Quaternion.Euler(Vector3.zero);
         }
 
         private void Drop()
         {
             isEquipped = false;
-
+            
             rb.isKinematic = false;
             bc.isTrigger = false;
 
             transform.SetParent(null);
+            
             rb.velocity = player.GetComponent<Rigidbody>().velocity;
 
             rb.AddForce(player.transform.forward * dropUpwardForce, ForceMode.Impulse);
             rb.AddForce(player.transform.up * dropUpwardForce, ForceMode.Impulse);
-
+            
             //float random = Random.Range(-1f, 1f);
             //rb.AddTorque(new Vector3(random, random, random) * 3);
             //weapon.enabled = true;
