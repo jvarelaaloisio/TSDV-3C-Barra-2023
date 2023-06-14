@@ -24,17 +24,9 @@ namespace Weapons
             
             if (!isEquipped)
             {
-                weapon.SetEquiped(false);
+                weapon.SetEquipped(false);
                 rb.isKinematic = false;
                 bc.isTrigger = false;
-            }
-        }
-
-        private void Update()
-        {
-            if (!isEquipped)
-            {
-                distance = player.position - transform.position;
             }
         }
 
@@ -52,14 +44,14 @@ namespace Weapons
 
         private void PickUp()
         {
+            distance = player.position - transform.position;
             if (isEquipped || distance.magnitude > pickupRange) return;
             Transform objectTransform = transform;
 
             isEquipped = true;
             rb.isKinematic = true;
             bc.isTrigger = true;
-            //weapon.enabled = true;
-            weapon.SetEquiped(true);
+            weapon.SetEquipped(true);
             weaponContainer.SetWeapon(weapon);
             
             
@@ -84,7 +76,7 @@ namespace Weapons
             
             //float random = Random.Range(-1f, 1f);
             //rb.AddTorque(new Vector3(random, random, random) * 3);
-            //weapon.enabled = true;
+            weapon.SetEquipped(false);
         }
     }
 }

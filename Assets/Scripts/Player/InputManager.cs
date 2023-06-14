@@ -15,6 +15,7 @@ namespace Player
         }
 
         private PlayerInputs playerInput;
+        private Pickable[] pickables;
 
         private void Awake()
         {
@@ -29,6 +30,7 @@ namespace Player
             }
 
             playerInput = new PlayerInputs();
+            pickables = FindObjectsOfType<Pickable>();
         }
 
         private void OnEnable()
@@ -73,7 +75,10 @@ namespace Player
         /// </summary>
         public void OnPickUp()
         {
-            FindObjectOfType<Pickable>()?.PickAndDrop();
+            foreach (Pickable pickable in pickables)
+            {
+                pickable.PickAndDrop();
+            }
         }
 
         /// <summary>

@@ -1,4 +1,6 @@
+using System.Collections.Generic;
 using UnityEngine;
+using Weapons;
 
 namespace Player
 {
@@ -8,7 +10,7 @@ namespace Player
     [RequireComponent(typeof(CharacterController))]
     public class Playercontroller : MonoBehaviour
     {
-
+        [SerializeField] private IWeapon[] weapons;
         [SerializeField] private float playerSpeed = 2.0f;
         [SerializeField] private float gravityValue = -9.81f;
         [SerializeField] private float rotationSensitivity = 5f;
@@ -27,6 +29,7 @@ namespace Player
 
         private void Start()
         {
+            //weapons = FindObjectsOfType<IWeapon>();
             if (Camera.main != null) cameraTransform = Camera.main.transform;
             controller = FindObjectOfType<CharacterController>();
             inputManager = InputManager.Instance;
