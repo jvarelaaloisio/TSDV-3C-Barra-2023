@@ -1,21 +1,38 @@
-﻿using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 using Weapons;
 
 namespace Player
 {
     public class WeaponContainer : MonoBehaviour
     {
-        private List<IWeapon> weapons;
+        private IWeapon equipedWeapon;
+        private IWeapon unequipedWeapon;
 
         public IWeapon GetWeapon()
         {
-            return weapons[0];
+            return equipedWeapon;
         }
 
         public void SetWeapon(IWeapon weapon)
         {
-            weapons.Add(weapon);
+            if (equipedWeapon == null)
+            {
+                equipedWeapon = weapon;
+            }
+            else if (unequipedWeapon == null)
+            {
+                unequipedWeapon = weapon;
+            }
+        }
+
+        public void SetEquipedWeapon(IWeapon weapon)
+        {
+            equipedWeapon = weapon;
+        }
+
+        public void SetUnequipedWeapon(IWeapon weapon)
+        {
+            unequipedWeapon = weapon;
         }
 
         /// <summary>
@@ -23,9 +40,7 @@ namespace Player
         /// </summary>
         public void SwapWeapon()
         {
-            if (weapons[1] == null) return;
-            
-            (weapons[0], weapons[1]) = (weapons[1], weapons[0]);
+            (equipedWeapon, unequipedWeapon) = (unequipedWeapon, equipedWeapon);
         }
     }
 }

@@ -25,7 +25,7 @@ namespace Weapons
         public void Shoot()
         {
             if (!isActive) return;
-            
+
             FireLaser();
 
             if (Physics.Raycast(gunHitbox.position, gunHitbox.forward, out var hit, range))
@@ -46,14 +46,14 @@ namespace Weapons
             return bullets;
         }
 
-        public bool IsEquipped()
+        public bool IsEquiped()
         {
             return isActive;
         }
 
-        public void SetEquipped(bool equipped)
+        public void SetEquiped(bool equiped)
         {
-            isActive = equipped;
+            isActive = equiped;
         }
 
         public void Reload()

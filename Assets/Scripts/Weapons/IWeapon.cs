@@ -7,8 +7,8 @@ namespace Weapons
         GameObject GetGameObject();
         void Shoot();
         int GetBullets();
-        bool IsEquipped();
-        void SetEquipped(bool equipped);
+        bool IsEquiped();
+        void SetEquiped(bool equiped);
         void Reload();
     }
 }

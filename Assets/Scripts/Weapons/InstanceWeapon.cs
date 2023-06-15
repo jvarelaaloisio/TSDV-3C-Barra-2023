@@ -21,7 +21,7 @@ namespace Weapons
         }
 
         /// <summary>
-        /// If weapon is equipped (active), instantiate the bullet prefab forward
+        /// If weapon is equiped (active), instanciate the bullet prefab foward
         /// </summary>
         public void Shoot()
         {
@@ -39,14 +39,14 @@ namespace Weapons
             return bullets;
         }
 
-        public bool IsEquipped()
+        public bool IsEquiped()
         {
             return isActive;
         }
 
-        public void SetEquipped(bool equipped)
+        public void SetEquiped(bool equiped)
         {
-            isActive = equipped;
+            isActive = equiped;
         }
 
         public void Reload()
