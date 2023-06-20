@@ -35,17 +35,19 @@ public class Target : MonoBehaviour
     private bool movingRight = true;
     private bool movingUp = true;
 
-    private void Update()
-    {
-        Move();
-    }
+    private TargetsManager targetsManager;
+    
 
     private void Start()
     {
         originalSpeed = speed;
         originalPosition = transform.position;
+        targetsManager = FindObjectOfType<TargetsManager>();
     }
-
+    private void Update()
+    {
+        Move();
+    }
     public void TakeDamage(float amount)
     {
         health -= amount;
@@ -57,6 +59,7 @@ public class Target : MonoBehaviour
 
     void Die()
     {
+        targetsManager.UpdateTargets();
         Destroy(gameObject);
     }
 
