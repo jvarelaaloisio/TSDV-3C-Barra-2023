@@ -8,6 +8,7 @@ namespace Menu
     public class PauseManager : MonoBehaviourSingleton<PauseManager>
     {
         [SerializeField] private GameObject pauseMenu;
+        [SerializeField] private PlayerInput playerInput;
         [SerializeField] private Button resumeButton;
         private InputAction pauseAction;
 
@@ -44,6 +45,7 @@ namespace Menu
         private void PauseGame()
         {
             Time.timeScale = 0;
+            playerInput.enabled = false;
             pauseMenu.SetActive(true);
             resumeButton.Select();
         }
@@ -51,6 +53,7 @@ namespace Menu
         public void ResumeGame()
         {
             Time.timeScale = 1;
+            playerInput.enabled = true;
             pauseMenu.SetActive(false);
         }
         
