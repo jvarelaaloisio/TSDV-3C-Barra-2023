@@ -7,8 +7,8 @@ namespace Weapons
     public class Pickable : MonoBehaviour
     {
         private IWeapon weapon;
-        [SerializeField] private Rigidbody itemBody;
-        [SerializeField] private BoxCollider itemCollider;
+        private Rigidbody itemBody;
+        private BoxCollider itemCollider;
         [SerializeField] private Transform gunContainer;
         [SerializeField] private Transform playerTransform;
         [SerializeField] private WeaponContainer weaponContainer;
@@ -23,6 +23,8 @@ namespace Weapons
         private void Start()
         {
             weapon = GetComponent<IWeapon>();
+            itemBody = GetComponent<Rigidbody>();
+            itemCollider = GetComponent<BoxCollider>();
 
             if (!isEquipped)
             {
@@ -60,8 +62,7 @@ namespace Weapons
             isEquipped = true;
             itemBody.isKinematic = true;
             itemCollider.isTrigger = true;
-            weapon.SetEquiped(true);
-            weaponContainer.SetWeapon(weapon);
+            weaponContainer.EquipWeapon(weapon.GetId());
 
 
             objectTransform.SetParent(gunContainer);
@@ -73,7 +74,7 @@ namespace Weapons
         {
             isEquipped = false;
             weapon.SetEquiped(false);
-            weaponContainer.SetWeapon(null);
+            weaponContainer.UnequipWeapon(weapon.GetId());
             
             itemCollider.isTrigger = false;
 
