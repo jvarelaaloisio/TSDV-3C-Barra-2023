@@ -1,64 +1,42 @@
+using System;
 using UnityEngine;
-using UnityEngine.InputSystem;
 
 namespace Player
 {
     public class CameraManager : MonoBehaviour
     {
-        [SerializeField] private float rotationSpeedX = 1f;
-        [SerializeField] private float rotationSpeedY = 1f;
-        [SerializeField] private float maxRotationSpeed = 5f;
-        [SerializeField] private float maxRotationAngle = 90f;
-        public Transform characterTransform;
+        [SerializeField] private float sensitivityX;
+        [SerializeField] private float sensitivityY;
 
-        private Vector2 rotationInput;
-        private InputAction rotateAction;
+        [SerializeField] private Transform orientation;
 
-        private void Awake()
+        private float xRotation;
+        private float yRotation;
+
+        private void Start()
         {
             Cursor.lockState = CursorLockMode.Locked;
-
-            rotateAction = new InputAction(binding: "<Mouse>/delta");
-            rotateAction.performed += OnRotate;
-        }
-
-        private void OnEnable()
-        {
-            rotateAction.Enable();
-        }
-
-        private void OnDisable()
-        {
-            rotateAction.Disable();
-        }
-
-        private void OnRotate(InputAction.CallbackContext context)
-        {
-            rotationInput = context.ReadValue<Vector2>();
+            Cursor.visible = false;
         }
 
         private void Update()
         {
-            // Limit the rotation speed
-            float clampedRotationSpeedY = Mathf.Clamp(rotationInput.y, 0f, rotationSpeedY);
-            float clampedRotationSpeedX = Mathf.Clamp(rotationInput.x, 0f, rotationSpeedX);
+            MoveCamera();
+        }
 
-            float rotationX = clampedRotationSpeedY * Time.deltaTime;
-            float rotationY = clampedRotationSpeedX * Time.deltaTime;
+        void MoveCamera()
+        {
+            float mouseX = Input.GetAxisRaw("Mouse X") * Time.deltaTime * sensitivityX;
+            float mouseY = Input.GetAxisRaw("Mouse Y") * Time.deltaTime * sensitivityY;
 
-            // Apply rotation on the Y-axis (horizontal rotation)
-            transform.Rotate(Vector3.up, rotationY);
+            yRotation += mouseX;
+            xRotation -= mouseY;
 
-            // Apply rotation on the X-axis (vertical rotation)
-            float newRotationAngle = transform.eulerAngles.x - rotationX;
-            float clampedRotationAngle = Mathf.Clamp(newRotationAngle, 0, maxRotationAngle);
-            transform.rotation = Quaternion.Euler(clampedRotationAngle, transform.eulerAngles.y, 0f);
-
-            // Rotate the character towards the camera's direction
-            if (characterTransform != null)
-            {
-                characterTransform.rotation = Quaternion.Euler(0f, transform.eulerAngles.y, 0f);
-            }
+            xRotation = Mathf.Clamp(xRotation, -90f, 90f);
+            
+            transform.rotation = Quaternion.Euler(xRotation, yRotation, 0);
+            orientation.rotation = Quaternion.Euler(0, yRotation, 0);
+            
         }
     }
 }
