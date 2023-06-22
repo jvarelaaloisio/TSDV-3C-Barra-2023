@@ -1,14 +1,16 @@
 using Player;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 namespace Weapons
 {
     public class Pickable : MonoBehaviour
     {
         private IWeapon weapon;
-        [SerializeField] private Rigidbody rb;
-        [SerializeField] private BoxCollider bc;
-        [SerializeField] private Transform player, gunContainer;
+        [SerializeField] private Rigidbody itemBody;
+        [SerializeField] private BoxCollider itemCollider;
+        [SerializeField] private Transform gunContainer;
+        [SerializeField] private Transform playerTransform;
         [SerializeField] private WeaponContainer weaponContainer;
 
         [SerializeField] private float pickupRange;
@@ -25,8 +27,8 @@ namespace Weapons
             if (!isEquipped)
             {
                 weapon.SetEquiped(false);
-                rb.isKinematic = false;
-                bc.isTrigger = false;
+                itemBody.isKinematic = false;
+                itemCollider.isTrigger = false;
             }
         }
 
@@ -34,7 +36,7 @@ namespace Weapons
         {
             if (!isEquipped)
             {
-                distance = player.position - transform.position;
+                distance = playerTransform.position - transform.position;
             }
         }
 
@@ -56,8 +58,8 @@ namespace Weapons
             Transform objectTransform = transform;
 
             isEquipped = true;
-            rb.isKinematic = true;
-            bc.isTrigger = true;
+            itemBody.isKinematic = true;
+            itemCollider.isTrigger = true;
             weapon.SetEquiped(true);
             weaponContainer.SetWeapon(weapon);
 
@@ -73,14 +75,14 @@ namespace Weapons
             weapon.SetEquiped(false);
             weaponContainer.SetWeapon(null);
             
-            bc.isTrigger = false;
+            itemCollider.isTrigger = false;
 
             transform.SetParent(null);
 
-            rb.isKinematic = false;
-            rb.velocity = player.GetComponent<Rigidbody>().velocity;
-            rb.AddForce(player.transform.forward * dropUpwardForce, ForceMode.Impulse);
-            rb.AddForce(player.transform.up * dropUpwardForce, ForceMode.Impulse);
+            itemBody.isKinematic = false;
+            itemBody.velocity = playerTransform.GetComponent<Rigidbody>().velocity;
+            itemBody.AddForce(playerTransform.transform.forward * dropUpwardForce, ForceMode.Impulse);
+            itemBody.AddForce(playerTransform.transform.up * dropUpwardForce, ForceMode.Impulse);
         }
     }
 }
