@@ -3,6 +3,7 @@ using UnityEngine.UI;
 
 namespace Menu
 {
+    //TODO: Documentation - Add summary
     public class CreditsManager : MonoBehaviour
     {
         [Header("Menu")]
@@ -12,6 +13,7 @@ namespace Menu
         [SerializeField] private Button backButton;
         [SerializeField] private Button menuCreditsButton;
 
+        //TODO: TP2 - Syntax - Consistency in access modifiers (private/protected/public/etc)
         void Start()
         {
             backButton.Select();

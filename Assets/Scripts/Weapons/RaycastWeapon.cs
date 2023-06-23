@@ -43,21 +43,25 @@ namespace Weapons
             }
         }
 
+        //TODO: Fix - Should be native Setter/Getter
         public int GetBullets()
         {
             return bullets;
         }
 
+        //TODO: Fix - Should be native Setter/Getter
         public bool IsEquiped()
         {
             return isActive;
         }
 
+        //TODO: Fix - Should be native Setter/Getter
         public void SetEquiped(bool equiped)
         {
             isActive = equiped;
         }
 
+        //TODO: Fix - Repeated code
         public void Reload()
         {
             bullets = maxBullets;
@@ -80,8 +84,10 @@ namespace Weapons
 
         private void FireLaser()
         {
+            //TODO: TP2 - SOLID
             lineRenderer.enabled = true;
 
+            //TODO: Fix - Calculating hit twice
             RaycastHit hit;
             Vector3 position = transform.position;
             if (Physics.Raycast(position, transform.forward, out hit, range))
@@ -89,6 +95,7 @@ namespace Weapons
                 lineRenderer.SetPosition(0, position);
                 lineRenderer.SetPosition(1, hit.point);
 
+                //TODO: TP2 - Remove unused methods/variables/classes
                 // Perform actions when the laser hits an object (e.g., apply damage, trigger effects)
                 if (hit.collider != null)
                 {
@@ -101,6 +108,8 @@ namespace Weapons
                 lineRenderer.SetPosition(1, position + transform.forward * range);
             }
 
+            //TODO: Fix - Hardcoded value
+            //TODO: Fix - These comments really make it feel as if this is not your code.
             // Hide the laser beam after a short delay (adjust as needed)
             Invoke(nameof(HideLaser), 0.1f);
         }

@@ -16,6 +16,7 @@ namespace Menu
         {
             base.Awake();
             resumeButton.Select();
+            //TODO: Fix - Hardcoded value - Why not just setup this in the input window?
             pauseAction = new InputAction(binding: "<Keyboard>/escape");
             pauseAction.performed += OnPause;
         }

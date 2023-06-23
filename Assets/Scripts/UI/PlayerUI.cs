@@ -18,11 +18,13 @@ namespace UI
 
         private void Update()
         {
+            //TODO: Fix - Should be event based
             ShowTargetsRemaining();
         }
 
         private void LateUpdate()
         {
+            //TODO: Fix - This can be placed in the update. Did you have any trouble putting it there?
             ShowTimer();
         }
 

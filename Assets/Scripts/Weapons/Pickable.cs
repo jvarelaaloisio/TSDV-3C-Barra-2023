@@ -48,6 +48,7 @@ namespace Weapons
             {
                 PickUp();
             }
+            //TODO: Fix - Redundant logic
             else if (isEquipped)
             {
                 Drop();

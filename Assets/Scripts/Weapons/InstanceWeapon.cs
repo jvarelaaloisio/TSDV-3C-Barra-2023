@@ -28,25 +28,30 @@ namespace Weapons
         /// </summary>
         public void Shoot()
         {
+            //TODO: Fix - Unclear name
             if (!isActive) return;
 
             GameObject bullet = Instantiate(bulletPrefab, gunHitbox.transform.position, gunHitbox.transform.rotation);
 
             bullet.GetComponent<Rigidbody>()?.AddForce(gunHitbox.transform.forward * bulletSpeed);
 
+            //TODO: TP2 - SOLID
             Destroy(bullet, 1);
         }
 
+        //TODO: Fix - Should be native Setter/Getter
         public int GetBullets()
         {
             return bullets;
         }
 
+        //TODO: Fix - Should be native Setter/Getter
         public bool IsEquiped()
         {
             return isActive;
         }
 
+        //TODO: Fix - Should be native Setter/Getter
         public void SetEquiped(bool equiped)
         {
             isActive = equiped;

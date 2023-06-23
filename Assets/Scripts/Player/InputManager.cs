@@ -6,6 +6,7 @@ namespace Player
 {
     public class InputManager : MonoBehaviour
     {
+        //TODO: TP2 - Remove unused methods/variables/classes
         private bool isSprinting = false;
         private static InputManager _instance;
 
