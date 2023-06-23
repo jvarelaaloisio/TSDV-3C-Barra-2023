@@ -6,8 +6,10 @@ using Random = UnityEngine.Random;
 
 public class Target : MonoBehaviour
 {
+    //TODO: TP2 - Syntax - Consistency in access modifiers (private/protected/public/etc)
     enum MoveType
     {
+        //TODO: Fix - Redundant name "Movement". The type is already named MoveType
         StaticMovement,
         VerticalMovement,
         HorizontalMovement,
@@ -65,6 +67,7 @@ public class Target : MonoBehaviour
 
     void Move()
     {
+        //TODO: TP2 - Strategy
         switch (moveType)
         {
             case MoveType.HorizontalMovement:
@@ -84,8 +87,10 @@ public class Target : MonoBehaviour
                 break;
         }
 
+        //TODO: Fix - Unclear name
         void HorizontalMovement()
         {
+            //TODO: Fix - Remove redundant comments
             // Calculate the new position
             float newPositionX = transform.position.x + (movingRight ? speed : -speed) * Time.deltaTime;
 

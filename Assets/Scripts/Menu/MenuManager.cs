@@ -16,6 +16,7 @@ namespace Menu
         [SerializeField] private GameObject optionsMenu;
         [SerializeField] private GameObject creditsMenu;
 
+        //TODO: TP2 - Syntax - Consistency in access modifiers (private/protected/public/etc)
         void Start()
         {
             playButton.Select();
@@ -26,6 +27,7 @@ namespace Menu
 
         public void OnPlayButtonClick()
         {
+            //TODO: Fix - Hardcoded value
             SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
         }
 

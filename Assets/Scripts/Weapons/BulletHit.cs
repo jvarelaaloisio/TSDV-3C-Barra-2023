@@ -8,6 +8,7 @@ namespace Weapons
 
         private void OnCollisionEnter(Collision other)
         {
+            //TODO: Fix - TryGetComponent
             Target target = other.transform.GetComponent<Target>();
             if (target != null)
             {

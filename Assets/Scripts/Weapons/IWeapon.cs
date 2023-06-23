@@ -4,6 +4,7 @@ namespace Weapons
 {
     public interface IWeapon
     {
+        //TODO: TP2 - Remove unused methods/variables/classes
         GameObject GetGameObject();
         void Shoot();
         int GetBullets();

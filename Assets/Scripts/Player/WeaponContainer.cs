@@ -6,6 +6,7 @@ namespace Player
 {
     public class WeaponContainer : MonoBehaviour
     {
+        //TODO: TP2 - Remove unused methods/variables/classes
         private IWeapon equipedWeapon;
 
         [SerializeField] private GameObject[] weapons;
@@ -38,6 +39,7 @@ namespace Player
                 if (weapon.GetComponent<IWeapon>().IsEquiped())
                 {
                     weapon.GetComponent<IWeapon>().SetEquiped(false);
+                    //TODO: Fix - Too many iterations
                     foreach (GameObject weapon2 in weapons)
                     {
                         if (weapon2.GetComponent<IWeapon>().GetId() != weapon.GetComponent<IWeapon>().GetId() &&
@@ -61,6 +63,7 @@ namespace Player
         {
             foreach (GameObject weapon in weapons)
             {
+                //TODO: Fix - Cache value
                 if (weapon.GetComponent<IWeapon>().IsEquiped())
                 {
                     return weapon.GetComponent<IWeapon>();
@@ -70,6 +73,7 @@ namespace Player
             return null;
         }
 
+        //TODO: Fix - This could be cached in a dictionary
         private IWeapon FindWeaponById(int id)
         {
             foreach (GameObject weapon in weapons)
