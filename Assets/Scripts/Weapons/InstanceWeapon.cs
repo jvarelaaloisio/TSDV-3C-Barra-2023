@@ -38,7 +38,9 @@ namespace Weapons
 
         private void SpawnBullet(out GameObject bullet)
         {
-            bullet = Instantiate(bulletPrefab, gunHitbox.transform.position, gunHitbox.transform.rotation);
+            bullet = Instantiate(bulletPrefab, gunHitbox.transform.position, transform.rotation);
+            bullet.transform.Rotate(0,0,-90);
+            bullet.transform.SetParent(transform);
             bullet.GetComponent<Rigidbody>()?.AddForce(gunHitbox.transform.forward * bulletSpeed);
         }
 
