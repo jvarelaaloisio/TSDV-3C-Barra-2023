@@ -13,6 +13,9 @@ namespace Weapons
         [SerializeField] private int bullets = 30;
         [SerializeField] private int maxBullets = 30;
         [SerializeField] private float bulletSpeed = 600.0f;
+        [SerializeField] private int id = 0;
+        private bool inInventory = false;
+
         private bool isActive;
 
         public GameObject GetGameObject()
@@ -52,6 +55,22 @@ namespace Weapons
         public void Reload()
         {
             bullets = maxBullets;
+        }
+
+        public int GetId()
+        {
+            return id;
+        }
+
+        public bool InInventory()
+        {
+            return inInventory;
+        }
+
+        public void SetInventory(bool inInventory)
+        {
+             this.inInventory = inInventory;
+
         }
     }
 }

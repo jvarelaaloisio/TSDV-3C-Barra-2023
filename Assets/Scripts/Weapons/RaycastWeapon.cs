@@ -13,6 +13,8 @@ namespace Weapons
         [SerializeField] private int bullets = 10;
         [SerializeField] private int maxBullets = 10;
         [SerializeField] private float impactForce = 30f;
+        [SerializeField] private int id = 1;
+        private bool inInventory = false;
 
         private bool isActive;
 
@@ -59,6 +61,21 @@ namespace Weapons
         public void Reload()
         {
             bullets = maxBullets;
+        }
+
+        public int GetId()
+        {
+            return id;
+        }
+
+        public bool InInventory()
+        {
+            return inInventory;
+        }
+
+        public void SetInventory(bool inInventory)
+        {
+            this.inInventory = inInventory;
         }
 
         private void FireLaser()
