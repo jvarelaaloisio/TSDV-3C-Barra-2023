@@ -8,12 +8,12 @@ namespace Weapons
 
         private void OnCollisionEnter(Collision other)
         {
-            //TODO: Fix - TryGetComponent
-            Target target = other.transform.GetComponent<Target>();
-            if (target != null)
+            if (other.transform.TryGetComponent(out Target target))
             {
                 target.TakeDamage(damage);
             }
+            Destroy(gameObject);
         }
+
     }
 }

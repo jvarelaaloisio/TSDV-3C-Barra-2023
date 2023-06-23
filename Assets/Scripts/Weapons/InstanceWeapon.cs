@@ -12,7 +12,8 @@ namespace Weapons
         [SerializeField] private int maxBullets = 30;
         [SerializeField] private float bulletSpeed = 600.0f;
         [SerializeField] private int id = 0;
-
+        [SerializeField] private float bulletDuration = 1;
+        
         private void Awake()
         {
             Id = id;
@@ -28,17 +29,26 @@ namespace Weapons
         /// </summary>
         public void Shoot()
         {
-            //TODO: Fix - Unclear name
             if (!Equiped) return;
 
-            GameObject bullet = Instantiate(bulletPrefab, gunHitbox.transform.position, gunHitbox.transform.rotation);
+            SpawnBullet(out GameObject bullet);
+            DestroyBullet(bullet);
 
-            bullet.GetComponent<Rigidbody>()?.AddForce(gunHitbox.transform.forward * bulletSpeed);
-
-            //TODO: TP2 - SOLID
-            Destroy(bullet, 1);
         }
 
+        private void SpawnBullet(out GameObject bullet)
+        {
+            bullet = Instantiate(bulletPrefab, gunHitbox.transform.position, gunHitbox.transform.rotation);
+            bullet.GetComponent<Rigidbody>()?.AddForce(gunHitbox.transform.forward * bulletSpeed);
+        }
+
+        private void DestroyBullet(GameObject bullet)
+        {
+            Destroy(bullet, bulletDuration);
+        }
+
+      
+        
         public int Bullets { get; set; }
         public int Id { get; set; }
 

@@ -7,62 +7,78 @@ namespace Player
 {
     public class WeaponContainer : MonoBehaviour
     {
-        //TODO: TP2 - Remove unused methods/variables/classes
         private IWeapon equipedWeapon;
-        private Dictionary<int, IWeapon> idWeapon;
+        private Dictionary<int, IWeapon> idWeapons;
 
         [SerializeField] private GameObject[] weapons;
 
         private void Start()
         {
-            idWeapon = new Dictionary<int, IWeapon>(weapons.Length);
+            CreateIdWeapons();
+        }
+
+        void CreateIdWeapons()
+        {
+            idWeapons = new Dictionary<int, IWeapon>(weapons.Length);
+
             foreach (GameObject weapon in weapons)
             {
-                idWeapon.Add(weapon.GetComponent<IWeapon>().Id, weapon.GetComponent<IWeapon>());
+                idWeapons.Add(weapon.GetComponent<IWeapon>().Id, weapon.GetComponent<IWeapon>());
             }
         }
 
         public void EquipWeapon(int id)
         {
             IWeapon weapon = FindWeaponById(id);
-            if (weapon != null)
+
+            if (weapon == null) return;
+
+            weapon.Inventory = true;
+
+            bool equipWeapon = true;
+
+            foreach (GameObject weapon2 in weapons)
             {
-                weapon.Inventory = true;
-
-                bool equipWeapon = true;
-
-                foreach (GameObject weapon2 in weapons)
+                if (weapon2.GetComponent<IWeapon>().Equiped)
                 {
-                    if (weapon2.GetComponent<IWeapon>().Equiped)
-                    {
-                        equipWeapon = false;
-                    }
+                    equipWeapon = false;
                 }
-
-                weapon.GetGameObject().SetActive(equipWeapon);
-                weapon.Equiped = equipWeapon;
             }
+
+            weapon.GetGameObject().SetActive(equipWeapon);
+            weapon.Equiped = equipWeapon;
         }
 
         public void SwapWeapon()
         {
             IWeapon weapon = GetWeapon();
 
-            if(weapon == null) return;
-            
-            weapon.Equiped = false;
-            weapon.GetGameObject().SetActive(false);
-            //TODO: Fix - Too many iterations
-            foreach (GameObject weapon2 in weapons)
+            int id = 0;
+
+            if (weapon != null)
             {
-                if (weapon2.GetComponent<IWeapon>().Id != weapon.Id &&
-                    weapon2.GetComponent<IWeapon>().Inventory)
+                id = weapon.Id + 1;
+                UnequipWeapon(weapon.Id);
+                weapon.GetGameObject().SetActive(false);
+            }
+
+            if (id >= weapons.Length) id = 0;
+
+            IWeapon weapon2 = FindWeaponById(id);
+
+            if (!FindWeaponById(id).Inventory)
+            {
+                foreach (GameObject weaponAux in weapons)
                 {
-                    weapon2.GetComponent<IWeapon>().Equiped = true;
-                    weapon2.SetActive(true);
-                    break;
+                    if (weaponAux.GetComponent<IWeapon>().Inventory)
+                    {
+                        weapon2 = weaponAux.GetComponent<IWeapon>();
+                    }
                 }
             }
+            
+            weapon2.Equiped = true;
+            weapon2.GetGameObject().SetActive(true);
         }
 
         public void UnequipWeapon(int id)
@@ -75,8 +91,7 @@ namespace Player
         {
             foreach (GameObject weapon in weapons)
             {
-                IWeapon weaponComponent;
-                if (weapon.TryGetComponent(out weaponComponent) && weaponComponent.Equiped)
+                if (weapon.TryGetComponent(out IWeapon weaponComponent) && weaponComponent.Equiped)
                 {
                     return weaponComponent;
                 }
@@ -85,10 +100,9 @@ namespace Player
             return null;
         }
 
-        //TODO: Fix - This could be cached in a dictionary
         private IWeapon FindWeaponById(int id)
         {
-            return idWeapon[id];
+            return idWeapons[id];
         }
     }
 }
