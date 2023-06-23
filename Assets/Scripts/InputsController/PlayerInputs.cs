@@ -73,6 +73,15 @@ public partial class @PlayerInputs: IInputActionCollection2, IDisposable
                     ""initialStateCheck"": false
                 },
                 {
+                    ""name"": ""Drop"",
+                    ""type"": ""Button"",
+                    ""id"": ""1bb1b7ce-fc42-4e9c-939c-18399e4ad991"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
                     ""name"": ""SwapWeapon"",
                     ""type"": ""Button"",
                     ""id"": ""84922535-9243-4887-93af-c60eb06629a5"",
@@ -245,6 +254,17 @@ public partial class @PlayerInputs: IInputActionCollection2, IDisposable
                     ""action"": ""Reload"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""870c0858-f849-40f5-b1f0-93b4982f0334"",
+                    ""path"": ""<Keyboard>/f"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Drop"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         },
@@ -286,6 +306,7 @@ public partial class @PlayerInputs: IInputActionCollection2, IDisposable
         m_World_Sprint = m_World.FindAction("Sprint", throwIfNotFound: true);
         m_World_Shoot = m_World.FindAction("Shoot", throwIfNotFound: true);
         m_World_PickUp = m_World.FindAction("PickUp", throwIfNotFound: true);
+        m_World_Drop = m_World.FindAction("Drop", throwIfNotFound: true);
         m_World_SwapWeapon = m_World.FindAction("SwapWeapon", throwIfNotFound: true);
         m_World_Reload = m_World.FindAction("Reload", throwIfNotFound: true);
         // Menu
@@ -357,6 +378,7 @@ public partial class @PlayerInputs: IInputActionCollection2, IDisposable
     private readonly InputAction m_World_Sprint;
     private readonly InputAction m_World_Shoot;
     private readonly InputAction m_World_PickUp;
+    private readonly InputAction m_World_Drop;
     private readonly InputAction m_World_SwapWeapon;
     private readonly InputAction m_World_Reload;
     public struct WorldActions
@@ -368,6 +390,7 @@ public partial class @PlayerInputs: IInputActionCollection2, IDisposable
         public InputAction @Sprint => m_Wrapper.m_World_Sprint;
         public InputAction @Shoot => m_Wrapper.m_World_Shoot;
         public InputAction @PickUp => m_Wrapper.m_World_PickUp;
+        public InputAction @Drop => m_Wrapper.m_World_Drop;
         public InputAction @SwapWeapon => m_Wrapper.m_World_SwapWeapon;
         public InputAction @Reload => m_Wrapper.m_World_Reload;
         public InputActionMap Get() { return m_Wrapper.m_World; }
@@ -394,6 +417,9 @@ public partial class @PlayerInputs: IInputActionCollection2, IDisposable
             @PickUp.started += instance.OnPickUp;
             @PickUp.performed += instance.OnPickUp;
             @PickUp.canceled += instance.OnPickUp;
+            @Drop.started += instance.OnDrop;
+            @Drop.performed += instance.OnDrop;
+            @Drop.canceled += instance.OnDrop;
             @SwapWeapon.started += instance.OnSwapWeapon;
             @SwapWeapon.performed += instance.OnSwapWeapon;
             @SwapWeapon.canceled += instance.OnSwapWeapon;
@@ -419,6 +445,9 @@ public partial class @PlayerInputs: IInputActionCollection2, IDisposable
             @PickUp.started -= instance.OnPickUp;
             @PickUp.performed -= instance.OnPickUp;
             @PickUp.canceled -= instance.OnPickUp;
+            @Drop.started -= instance.OnDrop;
+            @Drop.performed -= instance.OnDrop;
+            @Drop.canceled -= instance.OnDrop;
             @SwapWeapon.started -= instance.OnSwapWeapon;
             @SwapWeapon.performed -= instance.OnSwapWeapon;
             @SwapWeapon.canceled -= instance.OnSwapWeapon;
@@ -495,6 +524,7 @@ public partial class @PlayerInputs: IInputActionCollection2, IDisposable
         void OnSprint(InputAction.CallbackContext context);
         void OnShoot(InputAction.CallbackContext context);
         void OnPickUp(InputAction.CallbackContext context);
+        void OnDrop(InputAction.CallbackContext context);
         void OnSwapWeapon(InputAction.CallbackContext context);
         void OnReload(InputAction.CallbackContext context);
     }

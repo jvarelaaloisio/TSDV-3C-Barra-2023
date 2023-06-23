@@ -7,14 +7,12 @@ namespace Weapons
         //TODO: TP2 - Remove unused methods/variables/classes
         GameObject GetGameObject();
         void Shoot();
-        int GetBullets();
-        bool IsEquiped();
-        void SetEquiped(bool equiped);
+        int Bullets { get; set; }
+        int Id { get; set; }
         void Reload();
 
-        int GetId();
-        bool InInventory();
-        void SetInventory(bool inInventory);
-
+        bool Equiped { get; set; }
+        bool Inventory { get; set; }
+      
     }
 }

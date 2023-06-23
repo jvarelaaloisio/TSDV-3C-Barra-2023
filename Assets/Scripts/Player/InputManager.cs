@@ -78,10 +78,17 @@ namespace Player
         {
             foreach (Pickable pickable in pickables)
             {
-                pickable.PickAndDrop();
+                pickable.PickUp();
             }
         }
 
+        public void OnDrop()
+        {
+            foreach (Pickable pickable in pickables)
+            {
+                pickable.Drop();
+            }
+        }
         /// <summary>
         /// Swaps equiped weapon with the unequiped weapon
         /// </summary>

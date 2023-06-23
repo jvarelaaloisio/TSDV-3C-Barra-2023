@@ -135,7 +135,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 40e53d27532c1a84985300e4b4142402, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerSpeed: 5
+  playerSpeed: 8
   gravityValue: -9.81
   rotationSensitivity: 5
 --- !u!1001 &1309139
@@ -24958,9 +24958,8 @@ MonoBehaviour:
   playerTransform: {fileID: 7025749540019815010}
   weaponContainer: {fileID: 1132191994}
   pickupRange: 3
-  dropForwardForce: 5
-  dropUpwardForce: 5
-  isEquipped: 0
+  forwardForce: 3
+  upwardForce: 3
 --- !u!114 &1818967745
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -29673,7 +29672,19 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 7025749540019815010}
     - target: {fileID: 212035110026947228, guid: 8801c706a183aa6439eeeecc67f2c0bc, type: 3}
+      propertyPath: fowardForce
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 212035110026947228, guid: 8801c706a183aa6439eeeecc67f2c0bc, type: 3}
       propertyPath: pickupRange
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 212035110026947228, guid: 8801c706a183aa6439eeeecc67f2c0bc, type: 3}
+      propertyPath: upwardForce
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 212035110026947228, guid: 8801c706a183aa6439eeeecc67f2c0bc, type: 3}
+      propertyPath: forwardForce
       value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 212035110026947228, guid: 8801c706a183aa6439eeeecc67f2c0bc, type: 3}

@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using UnityEngine;
 using Weapons;
 
@@ -8,65 +9,76 @@ namespace Player
     {
         //TODO: TP2 - Remove unused methods/variables/classes
         private IWeapon equipedWeapon;
+        private Dictionary<int, IWeapon> idWeapon;
 
         [SerializeField] private GameObject[] weapons;
 
+        private void Start()
+        {
+            idWeapon = new Dictionary<int, IWeapon>(weapons.Length);
+            foreach (GameObject weapon in weapons)
+            {
+                idWeapon.Add(weapon.GetComponent<IWeapon>().Id, weapon.GetComponent<IWeapon>());
+            }
+        }
+
         public void EquipWeapon(int id)
         {
-            if (FindWeaponById(id) != null)
+            IWeapon weapon = FindWeaponById(id);
+            if (weapon != null)
             {
-                IWeapon weapon = FindWeaponById(id);
-                weapon.SetInventory(true);
+                weapon.Inventory = true;
 
                 bool equipWeapon = true;
 
                 foreach (GameObject weapon2 in weapons)
                 {
-                    if (weapon2.GetComponent<IWeapon>().IsEquiped())
+                    if (weapon2.GetComponent<IWeapon>().Equiped)
                     {
                         equipWeapon = false;
                     }
                 }
 
-                weapon.SetEquiped(equipWeapon);
+                weapon.GetGameObject().SetActive(equipWeapon);
+                weapon.Equiped = equipWeapon;
             }
         }
 
         public void SwapWeapon()
         {
-            foreach (GameObject weapon in weapons)
+            IWeapon weapon = GetWeapon();
+
+            if(weapon == null) return;
+            
+            weapon.Equiped = false;
+            weapon.GetGameObject().SetActive(false);
+            //TODO: Fix - Too many iterations
+            foreach (GameObject weapon2 in weapons)
             {
-                if (weapon.GetComponent<IWeapon>().IsEquiped())
+                if (weapon2.GetComponent<IWeapon>().Id != weapon.Id &&
+                    weapon2.GetComponent<IWeapon>().Inventory)
                 {
-                    weapon.GetComponent<IWeapon>().SetEquiped(false);
-                    //TODO: Fix - Too many iterations
-                    foreach (GameObject weapon2 in weapons)
-                    {
-                        if (weapon2.GetComponent<IWeapon>().GetId() != weapon.GetComponent<IWeapon>().GetId() &&
-                            weapon2.GetComponent<IWeapon>().InInventory())
-                        {
-                            weapon2.GetComponent<IWeapon>().SetEquiped(true);
-                            break;
-                        }
-                    }
+                    weapon2.GetComponent<IWeapon>().Equiped = true;
+                    weapon2.SetActive(true);
+                    break;
                 }
             }
         }
 
         public void UnequipWeapon(int id)
         {
-            FindWeaponById(id).SetInventory(false);
-            FindWeaponById(id).SetEquiped(false);
+            FindWeaponById(id).Inventory = false;
+            FindWeaponById(id).Equiped = false;
         }
 
         public IWeapon GetWeapon()
         {
             foreach (GameObject weapon in weapons)
             {
-                //TODO: Fix - Cache value
-                if (weapon.GetComponent<IWeapon>().IsEquiped())
+                IWeapon weaponComponent;
+                if (weapon.TryGetComponent(out weaponComponent) && weaponComponent.Equiped)
                 {
-                    return weapon.GetComponent<IWeapon>();
+                    return weaponComponent;
                 }
             }
 
@@ -76,15 +88,7 @@ namespace Player
         //TODO: Fix - This could be cached in a dictionary
         private IWeapon FindWeaponById(int id)
         {
-            foreach (GameObject weapon in weapons)
-            {
-                if (weapon.GetComponent<IWeapon>().GetId() == id)
-                {
-                    return weapon.GetComponent<IWeapon>();
-                }
-            }
-
-            return null;
+            return idWeapon[id];
         }
     }
 }

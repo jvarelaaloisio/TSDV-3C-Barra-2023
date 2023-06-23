@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 
 namespace Weapons
 {
@@ -14,10 +15,11 @@ namespace Weapons
         [SerializeField] private int maxBullets = 10;
         [SerializeField] private float impactForce = 30f;
         [SerializeField] private int id = 1;
-        private bool inInventory = false;
 
-        private bool isActive;
-
+        private void Awake()
+        {
+            Id = id;
+        }
 
         public GameObject GetGameObject()
         {
@@ -26,7 +28,7 @@ namespace Weapons
 
         public void Shoot()
         {
-            if (!isActive) return;
+            if (!Equiped) return;
 
             FireLaser();
 
@@ -43,23 +45,8 @@ namespace Weapons
             }
         }
 
-        //TODO: Fix - Should be native Setter/Getter
-        public int GetBullets()
-        {
-            return bullets;
-        }
-
-        //TODO: Fix - Should be native Setter/Getter
-        public bool IsEquiped()
-        {
-            return isActive;
-        }
-
-        //TODO: Fix - Should be native Setter/Getter
-        public void SetEquiped(bool equiped)
-        {
-            isActive = equiped;
-        }
+        public int Bullets { get; set; }
+        public int Id { get; set; }
 
         //TODO: Fix - Repeated code
         public void Reload()
@@ -67,20 +54,8 @@ namespace Weapons
             bullets = maxBullets;
         }
 
-        public int GetId()
-        {
-            return id;
-        }
-
-        public bool InInventory()
-        {
-            return inInventory;
-        }
-
-        public void SetInventory(bool inInventory)
-        {
-            this.inInventory = inInventory;
-        }
+        public bool Equiped { get; set; }
+        public bool Inventory { get; set; }
 
         private void FireLaser()
         {

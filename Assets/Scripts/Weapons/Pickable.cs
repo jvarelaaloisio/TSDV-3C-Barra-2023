@@ -14,9 +14,8 @@ namespace Weapons
         [SerializeField] private WeaponContainer weaponContainer;
 
         [SerializeField] private float pickupRange;
-        [SerializeField] private float dropForwardForce, dropUpwardForce;
-
-        [SerializeField] private bool isEquipped = false;
+        [SerializeField] private float forwardForce = 5;
+        [SerializeField] private float upwardForce = 5;
 
         private Vector3 distance;
 
@@ -26,65 +25,47 @@ namespace Weapons
             itemBody = GetComponent<Rigidbody>();
             itemCollider = GetComponent<BoxCollider>();
 
-            if (!isEquipped)
+            if (!weapon.Equiped)
             {
-                weapon.SetEquiped(false);
+                weapon.Equiped = false;
                 itemBody.isKinematic = false;
                 itemCollider.isTrigger = false;
             }
         }
 
-        private void Update()
-        {
-            if (!isEquipped)
-            {
-                distance = playerTransform.position - transform.position;
-            }
-        }
 
-        public void PickAndDrop()
+        public void PickUp()
         {
-            if (!isEquipped)
-            {
-                PickUp();
-            }
-            //TODO: Fix - Redundant logic
-            else if (isEquipped)
-            {
-                Drop();
-            }
-        }
+            distance = playerTransform.position - transform.position;
 
-        private void PickUp()
-        {
-            if (isEquipped || distance.magnitude > pickupRange) return;
-            Transform objectTransform = transform;
+            if (weapon.Equiped || distance.magnitude > pickupRange) return;
 
-            isEquipped = true;
             itemBody.isKinematic = true;
             itemCollider.isTrigger = true;
-            weaponContainer.EquipWeapon(weapon.GetId());
+            weaponContainer.EquipWeapon(weapon.Id);
 
 
+            Transform objectTransform = transform;
             objectTransform.SetParent(gunContainer);
             objectTransform.localPosition = Vector3.zero;
             objectTransform.localRotation = Quaternion.Euler(Vector3.zero);
         }
 
-        private void Drop()
+        public void Drop()
         {
-            isEquipped = false;
-            weapon.SetEquiped(false);
-            weaponContainer.UnequipWeapon(weapon.GetId());
-            
+            if (!weapon.Equiped) return;
+
+            weapon.Equiped = false;
+            weaponContainer.UnequipWeapon(weapon.Id);
+
             itemCollider.isTrigger = false;
 
             transform.SetParent(null);
 
             itemBody.isKinematic = false;
             itemBody.velocity = playerTransform.GetComponent<Rigidbody>().velocity;
-            itemBody.AddForce(playerTransform.transform.forward * dropUpwardForce, ForceMode.Impulse);
-            itemBody.AddForce(playerTransform.transform.up * dropUpwardForce, ForceMode.Impulse);
+            itemBody.AddForce(playerTransform.transform.forward * forwardForce, ForceMode.Impulse);
+            itemBody.AddForce(playerTransform.transform.up * upwardForce, ForceMode.Impulse);
         }
     }
 }

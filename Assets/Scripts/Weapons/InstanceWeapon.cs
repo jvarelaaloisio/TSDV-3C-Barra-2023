@@ -5,18 +5,18 @@ namespace Weapons
 {
     public class InstanceWeapon : MonoBehaviour, IWeapon
     {
-        [Header("Instance")]
-        [SerializeField] private GameObject bulletPrefab;
+        [Header("Instance")] [SerializeField] private GameObject bulletPrefab;
         [SerializeField] private GameObject gunHitbox;
 
-        [Header("Stats")] 
-        [SerializeField] private int bullets = 30;
+        [Header("Stats")] [SerializeField] private int bullets = 30;
         [SerializeField] private int maxBullets = 30;
         [SerializeField] private float bulletSpeed = 600.0f;
         [SerializeField] private int id = 0;
-        private bool inInventory = false;
 
-        private bool isActive;
+        private void Awake()
+        {
+            Id = id;
+        }
 
         public GameObject GetGameObject()
         {
@@ -29,7 +29,7 @@ namespace Weapons
         public void Shoot()
         {
             //TODO: Fix - Unclear name
-            if (!isActive) return;
+            if (!Equiped) return;
 
             GameObject bullet = Instantiate(bulletPrefab, gunHitbox.transform.position, gunHitbox.transform.rotation);
 
@@ -39,43 +39,15 @@ namespace Weapons
             Destroy(bullet, 1);
         }
 
-        //TODO: Fix - Should be native Setter/Getter
-        public int GetBullets()
-        {
-            return bullets;
-        }
+        public int Bullets { get; set; }
+        public int Id { get; set; }
 
-        //TODO: Fix - Should be native Setter/Getter
-        public bool IsEquiped()
-        {
-            return isActive;
-        }
-
-        //TODO: Fix - Should be native Setter/Getter
-        public void SetEquiped(bool equiped)
-        {
-            isActive = equiped;
-        }
+        public bool Equiped { get; set; }
+        public bool Inventory { get; set; }
 
         public void Reload()
         {
             bullets = maxBullets;
-        }
-
-        public int GetId()
-        {
-            return id;
-        }
-
-        public bool InInventory()
-        {
-            return inInventory;
-        }
-
-        public void SetInventory(bool inInventory)
-        {
-             this.inInventory = inInventory;
-
         }
     }
 }
