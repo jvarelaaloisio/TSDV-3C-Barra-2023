@@ -17606,6 +17606,7 @@ GameObject:
   - component: {fileID: 1343549331}
   - component: {fileID: 1343549335}
   - component: {fileID: 1343549336}
+  - component: {fileID: 1343549337}
   m_Layer: 5
   m_Name: Canvas
   m_TagString: Untagged
@@ -17727,6 +17728,36 @@ MonoBehaviour:
   timer: {fileID: 1808198301}
   targetsRemaining: {fileID: 344595190}
   targetsManager: {fileID: 1757367989}
+--- !u!114 &1343549337
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1343549330}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 62899f850307741f2a39c98a8b639597, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Actions: {fileID: -944628639613478452, guid: 0275f940bd016e44db2c27affdc72ccd, type: 3}
+  m_NotificationBehavior: 0
+  m_UIInputModule: {fileID: 0}
+  m_DeviceLostEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  m_DeviceRegainedEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  m_ControlsChangedEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  m_ActionEvents: []
+  m_NeverAutoSwitchControlSchemes: 0
+  m_DefaultControlScheme: 
+  m_DefaultActionMap: Menu
+  m_SplitScreenIndex: -1
+  m_Camera: {fileID: 0}
 --- !u!1001 &1346361881
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -30117,8 +30148,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 35eb65f5e8b455e44a15338982991c76, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  sensitivityX: 400
-  sensitivityY: 400
+  sensitivityX: 50
+  sensitivityY: 50
   orientation: {fileID: 726284217}
 --- !u!114 &8552921364691488969
 MonoBehaviour:
