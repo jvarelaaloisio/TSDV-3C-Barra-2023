@@ -13,16 +13,12 @@ namespace Menu
 
     public class MenuManager : MonoBehaviour
     {
-        [Header("Buttons")] 
-        [SerializeField] private Button playButton;
+        [Header("Buttons")] [SerializeField] private Button playButton;
         [SerializeField] private Button optionsBackButton;
         [SerializeField] private Button creditsBackButton;
 
-        [Header("Menus")] 
-        [SerializeField] private GameObject optionsMenu;
+        [Header("Menus")] [SerializeField] private GameObject optionsMenu;
         [SerializeField] private GameObject creditsMenu;
-
-        //TODO: TP2 - Syntax - Consistency in access modifiers (private/protected/public/etc)
         private void Start()
         {
             LoadMenu();
@@ -32,13 +28,13 @@ namespace Menu
         {
             ChangeMenu(Menus.Main);
         }
+
         public void LoadGame()
         {
             const int sceneOffset = 1;
             LoadNextScene(sceneOffset);
         }
-
-
+        
         public void LoadOptions()
         {
             ChangeMenu(Menus.Options);

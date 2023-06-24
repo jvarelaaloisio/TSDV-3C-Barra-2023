@@ -16,7 +16,7 @@ namespace Player
         private Vector3 playerVelocity;
         private CharacterController controller;
         private InputManager inputManager;
-        private Transform cameraTransform;
+        [SerializeField] private Transform cameraTransform;
         private bool groundedPlayer;
 
 
