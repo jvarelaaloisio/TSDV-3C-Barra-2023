@@ -1,4 +1,5 @@
 ﻿using System;
+using Targets;
 using UnityEngine;
 
 namespace Weapons

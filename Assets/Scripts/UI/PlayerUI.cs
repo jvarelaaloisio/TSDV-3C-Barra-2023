@@ -1,5 +1,6 @@
 using System;
 using System.Globalization;
+using Targets;
 using TMPro;
 using UnityEngine;
 
@@ -20,12 +21,8 @@ namespace UI
         {
             //TODO: Fix - Should be event based
             ShowTargetsRemaining();
-        }
-
-        private void LateUpdate()
-        {
-            //TODO: Fix - This can be placed in the update. Did you have any trouble putting it there?
             ShowTimer();
+
         }
 
         private void ShowTimer()
