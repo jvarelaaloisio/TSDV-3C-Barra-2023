@@ -15,7 +15,6 @@ namespace Menu
         {
             base.Awake();
             resumeButton.Select();
-            //TODO: Fix - Hardcoded value - Why not just setup this in the input window?
         }
 
         private void OnPause()

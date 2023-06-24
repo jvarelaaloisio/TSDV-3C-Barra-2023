@@ -25,22 +25,26 @@ namespace Menu
         //TODO: TP2 - Syntax - Consistency in access modifiers (private/protected/public/etc)
         private void Start()
         {
-            ChangeMenu(Menus.Main);
+            LoadMenu();
         }
 
-        public void OnPlayButtonClick()
+        public void LoadMenu()
+        {
+            ChangeMenu(Menus.Main);
+        }
+        public void LoadGame()
         {
             const int sceneOffset = 1;
             LoadNextScene(sceneOffset);
         }
 
 
-        public void OnOptionsButtonClick()
+        public void LoadOptions()
         {
             ChangeMenu(Menus.Options);
         }
 
-        public void OnCreditsButtonClick()
+        public void LoadCredits()
         {
             ChangeMenu(Menus.Credits);
         }
