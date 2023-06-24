@@ -1,54 +1,85 @@
 using UnityEngine;
-using UnityEngine.InputSystem;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 namespace Menu
 {
+    public enum Menus
+    {
+        Main,
+        Options,
+        Credits
+    }
+
     public class MenuManager : MonoBehaviour
     {
-        [Header("Buttons")]
+        [Header("Buttons")] 
         [SerializeField] private Button playButton;
         [SerializeField] private Button optionsBackButton;
         [SerializeField] private Button creditsBackButton;
 
-        [Header("Menus")]
+        [Header("Menus")] 
         [SerializeField] private GameObject optionsMenu;
         [SerializeField] private GameObject creditsMenu;
 
         //TODO: TP2 - Syntax - Consistency in access modifiers (private/protected/public/etc)
-        void Start()
+        private void Start()
         {
-            playButton.Select();
-            gameObject.SetActive(true);
-            optionsMenu.SetActive(false);
-            creditsMenu.SetActive(false);
+            ChangeMenu(Menus.Main);
         }
 
         public void OnPlayButtonClick()
         {
-            //TODO: Fix - Hardcoded value
-            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
+            const int sceneOffset = 1;
+            LoadNextScene(sceneOffset);
         }
+
 
         public void OnOptionsButtonClick()
         {
-            gameObject.SetActive(false);
-            optionsMenu.SetActive(true);
-            optionsBackButton.Select();
-            
+            ChangeMenu(Menus.Options);
         }
 
         public void OnCreditsButtonClick()
         {
-            gameObject.SetActive(false);
-            creditsMenu.SetActive(true);
-            creditsBackButton.Select();
+            ChangeMenu(Menus.Credits);
         }
 
         public void OnExitButtonClick()
         {
             Application.Quit();
+        }
+
+        private void LoadNextScene(int sceneOffset)
+        {
+            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + sceneOffset);
+        }
+
+        public void ChangeMenu(Menus menu)
+        {
+            optionsMenu.SetActive(false);
+            creditsMenu.SetActive(false);
+            gameObject.SetActive(false);
+
+            switch (menu)
+            {
+                case Menus.Main:
+                    playButton.Select();
+                    gameObject.SetActive(true);
+                    break;
+                case Menus.Options:
+                    optionsBackButton.Select();
+                    optionsMenu.SetActive(true);
+                    break;
+                case Menus.Credits:
+                    creditsBackButton.Select();
+                    creditsMenu.SetActive(true);
+                    break;
+                default:
+                    playButton.Select();
+                    gameObject.SetActive(true);
+                    break;
+            }
         }
     }
 }

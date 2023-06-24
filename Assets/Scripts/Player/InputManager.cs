@@ -7,7 +7,7 @@ namespace Player
     public class InputManager : MonoBehaviour
     {
         //TODO: TP2 - Remove unused methods/variables/classes
-        private bool isSprinting = false;
+        public bool IsSprinting { get; private set; }
         private static InputManager _instance;
 
         public static InputManager Instance
@@ -49,18 +49,13 @@ namespace Player
             return playerInput.World.Move.ReadValue<Vector2>();
         }
 
-        public Vector2 GetMouseDelta()
-        {
-            return playerInput.World.CameraRotation.ReadValue<Vector2>();
-        }
-
         /// <summary>
         /// Increases movement speed
         /// </summary>
         /// <param name="value"> new speed </param>
         public void OnSprint(InputValue value)
         {
-            isSprinting = value.isPressed;
+            IsSprinting = value.isPressed;
         }
 
         /// <summary>
@@ -82,6 +77,9 @@ namespace Player
             }
         }
 
+        /// <summary>
+        /// Drops the currently equipped weapon, if any equipped.
+        /// </summary>
         public void OnDrop()
         {
             foreach (Pickable pickable in pickables)
@@ -90,7 +88,7 @@ namespace Player
             }
         }
         /// <summary>
-        /// Swaps equiped weapon with the unequiped weapon
+        /// Swaps equiped weapon with the next available weapon.
         /// </summary>
         public void OnSwapWeapon()
         {

@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.Serialization;
 using UnityEngine.UI;
 
 namespace Menu
@@ -6,11 +7,10 @@ namespace Menu
     public class OptionsManager : MonoBehaviour
     {
         [Header("Menu")]
-        [SerializeField] private GameObject mainMenu;
+        [SerializeField] private MenuManager menuManager;
 
         [Header("Buttons")]
         [SerializeField] private Button backButton;
-        [SerializeField] private Button menuOptionsButton;
 
         void Start()
         {
@@ -20,9 +20,7 @@ namespace Menu
         //TODO: Fix - Repeated code
         public void OnBackButtonClick()
         {
-            gameObject.SetActive(false);
-            mainMenu.SetActive(true);
-            menuOptionsButton.Select();
+            menuManager.ChangeMenu(Menus.Main);
         }
         
         
