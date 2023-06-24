@@ -1,162 +1,140 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
-public class Target : MonoBehaviour
+namespace Targets
 {
-    //TODO: TP2 - Syntax - Consistency in access modifiers (private/protected/public/etc)
-    enum MoveType
+    public class Target : MonoBehaviour
     {
-        //TODO: Fix - Redundant name "Movement". The type is already named MoveType
-        StaticMovement,
-        VerticalMovement,
-        HorizontalMovement,
-        RandomMovement,
-        AccelerationMovement
-    }
-
-    [Header("Targets configuration")] [SerializeField]
-    private float speed = 5f;
-   
-
-    [SerializeField] private float moveDistance = 5f;
-    [SerializeField] private float health = 50f;
-    [SerializeField] private MoveType moveType;
-
-    [Header("Acceleration options")] 
-    
-    [SerializeField] private float acceleration = 1f;
-    [SerializeField] private float maxSpeed = 10f;
-    private float distanceTraveled = 0;
-    private float originalSpeed;
-    private bool isMovingForward = true;
-
-    private Vector3 originalPosition;
-    private bool movingRight = true;
-    private bool movingUp = true;
-
-    private TargetsManager targetsManager;
-    
-
-    private void Start()
-    {
-        originalSpeed = speed;
-        originalPosition = transform.position;
-        targetsManager = FindObjectOfType<TargetsManager>();
-    }
-    private void Update()
-    {
-        Move();
-    }
-    public void TakeDamage(float amount)
-    {
-        health -= amount;
-        if (health <= 0)
+        //TODO: TP2 - Syntax - Consistency in access modifiers (private/protected/public/etc)
+        private enum MoveType
         {
-            Die();
+            Static,
+            Vertical,
+            Horizontal,
+            Random,
+            Acceleration
         }
-    }
 
-    void Die()
-    {
-        targetsManager.UpdateTargets();
-        Destroy(gameObject);
-    }
+        [Header("Targets configuration")] 
+        [SerializeField] private float speed = 5f;
+        [SerializeField] private float moveDistance = 5f;
+        [SerializeField] private float health = 50f;
+        [SerializeField] private MoveType moveType;
 
-    void Move()
-    {
-        //TODO: TP2 - Strategy
-        switch (moveType)
+        [Header("Acceleration options")]
+        [SerializeField] private float acceleration = 1f;
+        [SerializeField] private float maxSpeed = 10f;
+
+        private float distanceTraveled = 0;
+        private float originalSpeed;
+        private bool isMovingForward = true;
+
+        private Vector3 originalPosition;
+        private bool movingRight = true;
+        private bool movingUp = true;
+
+        private TargetsManager targetsManager;
+
+
+        private void Start()
         {
-            case MoveType.HorizontalMovement:
-                HorizontalMovement();
+            originalSpeed = speed;
+            originalPosition = transform.position;
+            targetsManager = FindObjectOfType<TargetsManager>();
+        }
 
-                break;
-            case MoveType.StaticMovement:
-                break;
-            case MoveType.VerticalMovement:
-                VerticalMovement();
-                break;
-            case MoveType.RandomMovement:
-                RandomMovement();
-                break;
-            case MoveType.AccelerationMovement:
-                AccelerationMovement();
-                break;
+        private void Update()
+        {
+            Move();
+        }
+
+        public void TakeDamage(float amount)
+        {
+            health -= amount;
+            if (health <= 0)
+            {
+                Die();
+            }
+        }
+
+        private void Die()
+        {
+            targetsManager.UpdateTargets();
+            Destroy(gameObject);
+        }
+
+        private void Move()
+        {
+            //TODO: TP2 - Strategy
+            switch (moveType)
+            {
+                case MoveType.Horizontal:
+                    HorizontalMovement();
+                    break;
+                case MoveType.Static:
+                    break;
+                case MoveType.Vertical:
+                    VerticalMovement();
+                    break;
+                case MoveType.Random:
+                    RandomMovement();
+                    break;
+                case MoveType.Acceleration:
+                    AccelerationMovement();
+                    break;
+            }
         }
 
         //TODO: Fix - Unclear name
-        void HorizontalMovement()
+        private void HorizontalMovement()
         {
-            //TODO: Fix - Remove redundant comments
-            // Calculate the new position
-            float newPositionX = transform.position.x + (movingRight ? speed : -speed) * Time.deltaTime;
+            Vector3 objPosition = transform.position;
+            float newPositionX = objPosition.x + (movingRight ? speed : -speed) * Time.deltaTime;
 
-            // Check if the new position is within the range
             if (Mathf.Abs(newPositionX - originalPosition.x) > moveDistance)
             {
-                // Change direction when reaching the range limit
                 movingRight = !movingRight;
             }
 
-            // Update the object's position
-            transform.position = new Vector3(newPositionX, transform.position.y, transform.position.z);
+            transform.position = new Vector3(newPositionX, transform.position.y, objPosition.z);
         }
 
-        void VerticalMovement()
+        private void VerticalMovement()
         {
-            // Calculate the new position
-            float newPositionY = transform.position.y + (movingUp ? speed : -speed) * Time.deltaTime;
+            Vector3 objPosition = transform.position;
 
-            // Check if the new position is within the range
+            float newPositionY = objPosition.y + (movingUp ? speed : -speed) * Time.deltaTime;
+
             if (Mathf.Abs(newPositionY - originalPosition.y) > moveDistance)
             {
-                // Change direction when reaching the range limit
                 movingUp = !movingUp;
             }
 
-            // Update the object's position
-            transform.position = new Vector3(transform.position.x, newPositionY, transform.position.z);
+            transform.position = new Vector3(transform.position.x, newPositionY, objPosition.z);
         }
 
-        void RandomMovement()
+        private void RandomMovement()
         {
-            // Calculate a random direction within the movement range
             Vector3 randomDirection = Random.insideUnitCircle.normalized * moveDistance;
 
-            // Calculate the target position
             Vector3 targetPosition = originalPosition + randomDirection;
 
-            // Move towards the target position
             transform.position = Vector3.MoveTowards(transform.position, targetPosition, speed * Time.deltaTime * 5);
         }
 
-        void AccelerationMovement()
+        private void AccelerationMovement()
         {
-            // Calculate the movement direction
             Vector3 movementDirection = isMovingForward ? Vector3.forward : Vector3.back;
 
-            // Move the target along the movement direction
             transform.Translate(movementDirection * (speed * Time.deltaTime));
 
-            // Increment the distance traveled
             distanceTraveled += speed * Time.deltaTime;
-
-            // Accelerate the speed
             speed += acceleration * Time.deltaTime;
-
-            // Clamp the speed to the maximum value
             speed = Mathf.Clamp(speed, originalSpeed, maxSpeed);
 
-            // Check if the distance limit is reached
             if (distanceTraveled >= moveDistance)
             {
-                // Reverse the movement direction
                 isMovingForward = !isMovingForward;
-
-                // Reset the distance traveled and speed
                 distanceTraveled = 0f;
             }
         }

@@ -1,40 +1,43 @@
 using UnityEngine;
 
-public class TargetsManager : MonoBehaviour
+namespace Targets
 {
-    public float Timer { get; set; }
-    private int targets;
-
-    private void Update()
+    public class TargetsManager : MonoBehaviour
     {
-        //TODO: Fix - Could be a coroutine
-        Timer -= Time.deltaTime;
-        if (Timer <= 0)
+        public float Timer { get; set; }
+        private int targets;
+
+        private void Update()
         {
-            PlayerLost();
+            //TODO: Fix - Could be a coroutine
+            Timer -= Time.deltaTime;
+            if (Timer <= 0)
+            {
+                OnLose();
+            }
         }
-    }
 
-    //TODO: TP2 - Remove unused methods/variables/classes
-    private void PlayerLost()
-    {
-        
-    }
-    private void Start()
-    {
-        UpdateTargets();
-    }
+        //TODO: TP2 - Remove unused methods/variables/classes
+        private void OnLose()
+        {
+        //TODO Make player lose
+        }
+        private void Start()
+        {
+            UpdateTargets();
+        }
 
-    public void UpdateTargets()
-    {
-        //TODO: Fix - Should be event based
-        targets = FindObjectsOfType<Target>().Length;
-    }
+        public void UpdateTargets()
+        {
+            //TODO: Fix - Should be event based
+            targets = FindObjectsOfType<Target>().Length;
+        }
 
-    public int GetTargetsAmmount()
-    {
-        return targets;
-    }
+        public int GetTargetsAmmount()
+        {
+            return targets;
+        }
     
     
+    }
 }
