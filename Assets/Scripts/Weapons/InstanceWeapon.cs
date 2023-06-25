@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using Audio;
+using UnityEngine;
 using UnityEngine.Serialization;
 
 namespace Weapons
@@ -13,7 +14,9 @@ namespace Weapons
         [SerializeField] private float bulletSpeed = 600.0f;
         [SerializeField] private int id = 0;
         [SerializeField] private float bulletDuration = 1;
-        
+
+        [Header("Events")] 
+        [SerializeField] private SoundEvent onInstanceShot;
         private void Awake()
         {
             Id = id;
@@ -31,6 +34,7 @@ namespace Weapons
         {
             if (!Equiped) return;
 
+            onInstanceShot.Raise();
             SpawnBullet(out GameObject bullet);
             DestroyBullet(bullet);
 
