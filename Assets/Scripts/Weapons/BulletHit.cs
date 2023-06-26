@@ -1,3 +1,4 @@
+using Audio;
 using Targets;
 using UnityEngine;
 
@@ -7,20 +8,16 @@ namespace Weapons
     {
         [SerializeField] private float damage = 10;
 
-        private static AudioSource _audioSource;
-
-        private void Start()
-        {
-            _audioSource = GetComponent<AudioSource>();
-        }
-
+        [Header("Events")] 
+        [SerializeField] private SoundEvent onBulletHit;
         private void OnCollisionEnter(Collision other)
         {
-            _audioSource.Play();
+            
 
             if (other.transform.TryGetComponent(out Target target))
             {
                 target.TakeDamage(damage);
+                onBulletHit.Raise();
             }
 
             Destroy(gameObject);

@@ -1,27 +1,46 @@
-using System;
-using System.Collections;
 using System.Collections.Generic;
-using Audio;
 using UnityEngine;
 using UnityEngine.Events;
 
-public class SoundEventListener : MonoBehaviour
+namespace Audio
 {
-    public SoundEvent soundEvent;
-
-    public UnityEvent response;
-    private void OnEnable()
+    public class SoundEventListener : MonoBehaviour
     {
-        soundEvent.RegisterListener(this);
-    }
+        [System.Serializable]
+        public class EventResponse
+        {
+            public SoundEvent soundEvent;
+            public UnityEvent response;
+        }
 
-    private void OnDisable()
-    {
-        soundEvent.UnregisterListener(this);
-    }
+        [SerializeField] private List<EventResponse> eventResponses = new List<EventResponse>();
 
-    public void OnEventRised()
-    {
-        response.Invoke();
+        private void OnEnable()
+        {
+            foreach (var eventResponse in eventResponses)
+            {
+                eventResponse.soundEvent.RegisterListener(this);
+            }
+        }
+
+        private void OnDisable()
+        {
+            foreach (var eventResponse in eventResponses)
+            {
+                eventResponse.soundEvent.UnregisterListener(this);
+            }
+        }
+
+        public void OnEventRaised(SoundEvent soundEvent)
+        {
+            foreach (var eventResponse in eventResponses)
+            {
+                if (eventResponse.soundEvent == soundEvent)
+                {
+                    eventResponse.response.Invoke();
+                    break;
+                }
+            }
+        }
     }
 }

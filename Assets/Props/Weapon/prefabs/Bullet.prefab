@@ -130,6 +130,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   damage: 10
+  onBulletHit: {fileID: 11400000, guid: aee3adefe91016d4485914c2218a5da8, type: 2}
 --- !u!82 &6676655020312376950
 AudioSource:
   m_ObjectHideFlags: 0

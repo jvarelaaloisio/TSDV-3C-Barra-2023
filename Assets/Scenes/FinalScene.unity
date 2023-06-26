@@ -13380,66 +13380,6 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 95c00f442e3cf3643b2062e8e0d0bbd6, type: 3}
---- !u!1 &1027413795
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1027413797}
-  - component: {fileID: 1027413796}
-  m_Layer: 0
-  m_Name: EventManager
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!114 &1027413796
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1027413795}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0b8c1943ed96d694da34e2d7016c90f2, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  soundEvent: {fileID: 11400000, guid: 471823ef4737b984e839b5bb69fb0717, type: 2}
-  response:
-    m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 2063538317}
-        m_TargetAssemblyTypeName: Audio.AudioManager, Assembly-CSharp
-        m_MethodName: ShotSound
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
---- !u!4 &1027413797
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1027413795}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 86.26017, y: -1.5396416, z: 14.983126}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_RootOrder: 12
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &1029906343
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -28150,6 +28090,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2063538316}
   - component: {fileID: 2063538317}
+  - component: {fileID: 2063538318}
   m_Layer: 0
   m_Name: AudioManager
   m_TagString: Untagged
@@ -28184,7 +28125,52 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f4e8273b481df594083efeea670d3cbd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  audioSource: {fileID: 2784579445481750575}
+  audioSource: {fileID: 7025749540019815011}
+--- !u!114 &2063538318
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2063538315}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0b8c1943ed96d694da34e2d7016c90f2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  eventResponses:
+  - soundEvent: {fileID: 11400000, guid: 471823ef4737b984e839b5bb69fb0717, type: 2}
+    response:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 2063538317}
+          m_TargetAssemblyTypeName: Audio.AudioManager, Assembly-CSharp
+          m_MethodName: PlaySound
+          m_Mode: 2
+          m_Arguments:
+            m_ObjectArgument: {fileID: 8300000, guid: b998d6397782255489d97ceb5db73122, type: 3}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.AudioClip, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+  - soundEvent: {fileID: 11400000, guid: aee3adefe91016d4485914c2218a5da8, type: 2}
+    response:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 2063538317}
+          m_TargetAssemblyTypeName: Audio.AudioManager, Assembly-CSharp
+          m_MethodName: PlaySound
+          m_Mode: 2
+          m_Arguments:
+            m_ObjectArgument: {fileID: 8300000, guid: d70ebe09cd42d4249a3f4ae84300fba1, type: 3}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.AudioClip, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
 --- !u!1001 &2077161364
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -29300,6 +29286,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 2296434312628967250, guid: 7889f089da8201545b838e30b1ed16c5, type: 3}
+      propertyPath: cameraTransform
+      value: 
+      objectReference: {fileID: 2296434312628967254}
     - target: {fileID: 2296434313336851950, guid: 7889f089da8201545b838e30b1ed16c5, type: 3}
       propertyPath: m_RootOrder
       value: 3
@@ -29358,6 +29348,16 @@ PrefabInstance:
       objectReference: {fileID: 1818967742}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 7889f089da8201545b838e30b1ed16c5, type: 3}
+--- !u!4 &2296434312628967254 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 9105974074755583896, guid: 7889f089da8201545b838e30b1ed16c5, type: 3}
+  m_PrefabInstance: {fileID: 2296434312628967253}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &2296434312628967255 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 9105974073283466550, guid: 7889f089da8201545b838e30b1ed16c5, type: 3}
+  m_PrefabInstance: {fileID: 2296434312628967253}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &2784579445481750570 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 7060231816217979574, guid: 8801c706a183aa6439eeeecc67f2c0bc, type: 3}
@@ -29731,6 +29731,102 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 9105974073283466551, guid: 7889f089da8201545b838e30b1ed16c5, type: 3}
   m_PrefabInstance: {fileID: 2296434312628967253}
   m_PrefabAsset: {fileID: 0}
+--- !u!82 &7025749540019815011
+AudioSource:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2296434312628967255}
+  m_Enabled: 1
+  serializedVersion: 4
+  OutputAudioMixerGroup: {fileID: 0}
+  m_audioClip: {fileID: 0}
+  m_PlayOnAwake: 0
+  m_Volume: 1
+  m_Pitch: 1
+  Loop: 0
+  Mute: 0
+  Spatialize: 0
+  SpatializePostEffects: 0
+  Priority: 128
+  DopplerLevel: 1
+  MinDistance: 1
+  MaxDistance: 500
+  Pan2D: 0
+  rolloffMode: 0
+  BypassEffects: 0
+  BypassListenerEffects: 0
+  BypassReverbZones: 0
+  rolloffCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 1
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  panLevelCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  spreadCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  reverbZoneMixCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
 --- !u!114 &8552921364691488969 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 7596594544641935260, guid: 7889f089da8201545b838e30b1ed16c5, type: 3}

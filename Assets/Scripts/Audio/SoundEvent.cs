@@ -1,6 +1,5 @@
 ﻿using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.Events;
 
 namespace Audio
 {
@@ -13,7 +12,7 @@ namespace Audio
         {
             foreach (SoundEventListener listener in listeners)
             {
-                listener.OnEventRised();
+                listener.OnEventRaised(this);
             }
         }
 
