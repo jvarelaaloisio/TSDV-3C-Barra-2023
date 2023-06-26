@@ -10,7 +10,7 @@ namespace Weapons
         int Id { get; set; }
         void Reload();
 
-        bool Equiped { get; set; }
+        bool Equipped { get; set; }
         bool Inventory { get; set; }
       
     }

@@ -1,6 +1,5 @@
 ﻿using Audio;
 using UnityEngine;
-using UnityEngine.Serialization;
 
 namespace Weapons
 {
@@ -28,13 +27,14 @@ namespace Weapons
         }
 
         /// <summary>
-        /// If weapon is equiped (active), instanciate the bullet prefab foward
+        /// If weapon is equipped (active), instantiate the bullet prefab forward
         /// </summary>
         public void Shoot()
         {
-            if (!Equiped) return;
+            if (!Equipped) return;
 
             onInstanceShot.Raise();
+            
             SpawnBullet(out GameObject bullet);
             DestroyBullet(bullet);
 
@@ -44,7 +44,6 @@ namespace Weapons
         {
             bullet = Instantiate(bulletPrefab, gunHitbox.transform.position, transform.rotation);
             bullet.transform.Rotate(0,0,-90);
-            bullet.transform.SetParent(transform);
             bullet.GetComponent<Rigidbody>()?.AddForce(gunHitbox.transform.forward * bulletSpeed);
         }
 
@@ -58,7 +57,7 @@ namespace Weapons
         public int Bullets { get; set; }
         public int Id { get; set; }
 
-        public bool Equiped { get; set; }
+        public bool Equipped { get; set; }
         public bool Inventory { get; set; }
 
         public void Reload()

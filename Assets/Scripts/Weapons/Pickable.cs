@@ -25,9 +25,9 @@ namespace Weapons
             itemBody = GetComponent<Rigidbody>();
             itemCollider = GetComponent<BoxCollider>();
 
-            if (!weapon.Equiped)
+            if (!weapon.Equipped)
             {
-                weapon.Equiped = false;
+                weapon.Equipped = false;
                 itemBody.isKinematic = false;
                 itemCollider.isTrigger = false;
             }
@@ -38,7 +38,7 @@ namespace Weapons
         {
             distance = playerTransform.position - transform.position;
 
-            if (weapon.Equiped || distance.magnitude > pickupRange) return;
+            if (weapon.Equipped || distance.magnitude > pickupRange) return;
 
             itemBody.isKinematic = true;
             itemCollider.isTrigger = true;
@@ -53,9 +53,9 @@ namespace Weapons
 
         public void Drop()
         {
-            if (!weapon.Equiped) return;
+            if (!weapon.Equipped) return;
 
-            weapon.Equiped = false;
+            weapon.Equipped = false;
             weaponContainer.UnequipWeapon(weapon.Id);
 
             itemCollider.isTrigger = false;

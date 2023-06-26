@@ -6,14 +6,10 @@ namespace Player
 {
     public class InputManager : MonoBehaviour
     {
-        //TODO: TP2 - Remove unused methods/variables/classes
         public bool IsSprinting { get; private set; }
         private static InputManager _instance;
 
-        public static InputManager Instance
-        {
-            get { return _instance; }
-        }
+        public static InputManager Instance => _instance;
 
         private PlayerInputs playerInput;
         private Pickable[] pickables;
@@ -23,7 +19,7 @@ namespace Player
             Cursor.visible = false;
             if (_instance != null && _instance != this)
             {
-                Destroy(this.gameObject);
+                Destroy(gameObject);
             }
             else
             {
@@ -59,7 +55,7 @@ namespace Player
         }
 
         /// <summary>
-        /// In case of having a weapon equiped, shoots
+        /// In case of having a weapon equipped, shoots
         /// </summary>
         public void OnShoot()
         {
@@ -88,7 +84,7 @@ namespace Player
             }
         }
         /// <summary>
-        /// Swaps equiped weapon with the next available weapon.
+        /// Swaps equipped weapon with the next available weapon.
         /// </summary>
         public void OnSwapWeapon()
         {

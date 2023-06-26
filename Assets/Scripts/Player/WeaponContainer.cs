@@ -7,7 +7,6 @@ namespace Player
 {
     public class WeaponContainer : MonoBehaviour
     {
-        private IWeapon equipedWeapon;
         private Dictionary<int, IWeapon> idWeapons;
 
         [SerializeField] private GameObject[] weapons;
@@ -39,14 +38,14 @@ namespace Player
 
             foreach (GameObject weapon2 in weapons)
             {
-                if (weapon2.GetComponent<IWeapon>().Equiped)
+                if (weapon2.GetComponent<IWeapon>().Equipped)
                 {
                     equipWeapon = false;
                 }
             }
 
             weapon.GetGameObject().SetActive(equipWeapon);
-            weapon.Equiped = equipWeapon;
+            weapon.Equipped = equipWeapon;
         }
 
         public void SwapWeapon()
@@ -58,7 +57,7 @@ namespace Player
             if (weapon != null)
             {
                 id = weapon.Id + 1;
-                UnequipWeapon(weapon.Id);
+                weapon.Equipped = false;
                 weapon.GetGameObject().SetActive(false);
             }
 
@@ -76,22 +75,24 @@ namespace Player
                     }
                 }
             }
+
+            if (!weapon2.Inventory) return;
             
-            weapon2.Equiped = true;
+            weapon2.Equipped = true;
             weapon2.GetGameObject().SetActive(true);
         }
 
         public void UnequipWeapon(int id)
         {
             FindWeaponById(id).Inventory = false;
-            FindWeaponById(id).Equiped = false;
+            FindWeaponById(id).Equipped = false;
         }
 
         public IWeapon GetWeapon()
         {
             foreach (GameObject weapon in weapons)
             {
-                if (weapon.TryGetComponent(out IWeapon weaponComponent) && weaponComponent.Equiped)
+                if (weapon.TryGetComponent(out IWeapon weaponComponent) && weaponComponent.Equipped)
                 {
                     return weaponComponent;
                 }

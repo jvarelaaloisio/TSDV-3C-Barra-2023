@@ -29,7 +29,7 @@ namespace Weapons
 
         public void Shoot()
         {
-            if (!Equiped) return;
+            if (!Equipped) return;
 
             FireLaser();
 
@@ -55,7 +55,7 @@ namespace Weapons
             bullets = maxBullets;
         }
 
-        public bool Equiped { get; set; }
+        public bool Equipped { get; set; }
         public bool Inventory { get; set; }
 
         private void FireLaser()
