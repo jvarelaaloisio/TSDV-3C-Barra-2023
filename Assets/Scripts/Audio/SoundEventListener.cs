@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using UnityEngine.Events;
 
@@ -33,13 +34,10 @@ namespace Audio
 
         public void OnEventRaised(SoundEvent soundEvent)
         {
-            foreach (var eventResponse in eventResponses)
+            foreach (var eventResponse in eventResponses.Where(eventResponse => eventResponse.soundEvent == soundEvent))
             {
-                if (eventResponse.soundEvent == soundEvent)
-                {
-                    eventResponse.response.Invoke();
-                    break;
-                }
+                eventResponse.response.Invoke();
+                break;
             }
         }
     }

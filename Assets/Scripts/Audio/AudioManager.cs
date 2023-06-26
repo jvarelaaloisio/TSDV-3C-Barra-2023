@@ -10,8 +10,7 @@ namespace Audio
 
         public void PlaySound(AudioClip audioClip)
         {
-            audioSource.clip = audioClip;
-            audioSource.Play();
+            audioSource.PlayOneShot(audioClip);
         }
     }
 }
