@@ -65,7 +65,7 @@ namespace Weapons
 
             //TODO: Fix - Calculating hit twice
             RaycastHit hit;
-            Vector3 position = transform.position;
+            Vector3 position = gunHitbox.position;
             if (Physics.Raycast(position, transform.forward, out hit, range))
             {
                 lineRenderer.SetPosition(0, position);

@@ -44,12 +44,13 @@ namespace Menu
 
         private void ChangeState()
         {
-            playerInput.enabled = !playerInput.inputIsActive;
+            //playerInput.enabled = !playerInput.inputIsActive;
             pauseMenu.SetActive(!pauseMenu.activeSelf);
         }
 
         public void OnResetButtonClick()
         {
+            Time.timeScale = 1;
             SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
         }
 

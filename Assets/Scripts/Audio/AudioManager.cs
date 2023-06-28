@@ -3,10 +3,9 @@ using UnityEngine;
 
 namespace Audio
 {
-    public class AudioManager : MonoBehaviour
+    public class AudioManager : MonoBehaviourSingleton<AudioManager>
     {
-        
-        [SerializeField] private AudioSource audioSource;
+        public AudioSource audioSource { get; set; }
 
         public void PlaySound(AudioClip audioClip)
         {

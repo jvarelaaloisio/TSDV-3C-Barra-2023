@@ -5,7 +5,7 @@ using UnityEngine.Events;
 
 namespace Audio
 {
-    public class SoundEventListener : MonoBehaviour
+    public class SoundEventListener : MonoBehaviourSingleton<SoundEventListener>
     {
         [System.Serializable]
         public class EventResponse

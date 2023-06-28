@@ -22,8 +22,15 @@ namespace Weapons
         private void Start()
         {
             weapon = GetComponent<IWeapon>();
-            itemBody = GetComponent<Rigidbody>();
-            itemCollider = GetComponent<BoxCollider>();
+            if (GetComponent<Rigidbody>() != null)
+            {
+                itemBody = GetComponent<Rigidbody>();
+            }
+
+            if (GetComponent<BoxCollider>() != null)
+            {
+                itemCollider = GetComponent<BoxCollider>();
+            }
 
             if (!weapon.Equipped)
             {
