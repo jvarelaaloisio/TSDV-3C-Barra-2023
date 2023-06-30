@@ -3,12 +3,12 @@ using UnityEngine;
 
 namespace Weapons
 {
-    public class InstanceWeapon : MonoBehaviour, IWeapon
+    public class InstanceWeapon : Weapon
     {
         [Header("Instance")] [SerializeField] private GameObject bulletPrefab;
         [SerializeField] private GameObject gunHitbox;
 
-        [Header("Stats")] [SerializeField] private int bullets = 30;
+        [Header("Stats")]
         [SerializeField] private int maxBullets = 30;
         [SerializeField] private float bulletSpeed = 600.0f;
         [SerializeField] private int id = 0;
@@ -19,17 +19,14 @@ namespace Weapons
         private void Awake()
         {
             Id = id;
-        }
-
-        public GameObject GetGameObject()
-        {
-            return gameObject;
+            MaxBullets = maxBullets;
+            Bullets = maxBullets;
         }
 
         /// <summary>
         /// If weapon is equipped (active), instantiate the bullet prefab forward
         /// </summary>
-        public void Shoot()
+        public override void Shoot()
         {
             if (!Equipped) return;
 
@@ -51,18 +48,6 @@ namespace Weapons
         {
             Destroy(bullet, bulletDuration);
         }
-
-      
-        
-        public int Bullets { get; set; }
-        public int Id { get; set; }
-
-        public bool Equipped { get; set; }
-        public bool Inventory { get; set; }
-
-        public void Reload()
-        {
-            bullets = maxBullets;
-        }
+        public override int Bullets { get; set; }
     }
 }

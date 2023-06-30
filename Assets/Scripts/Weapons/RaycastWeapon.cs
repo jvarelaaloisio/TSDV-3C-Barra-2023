@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace Weapons
 {
-    public class RaycastWeapon : MonoBehaviour, IWeapon
+    public class RaycastWeapon : Weapon
     {
         [Header("Raycast")] [SerializeField] private Transform gunHitbox;
         [SerializeField] private float range = 100f;
@@ -12,7 +12,6 @@ namespace Weapons
 
 
         [Header("Stats")] [SerializeField] private float damage = 10f;
-        [SerializeField] private int bullets = 10;
         [SerializeField] private int maxBullets = 10;
         [SerializeField] private float impactForce = 30f;
         [SerializeField] private int id = 1;
@@ -20,14 +19,11 @@ namespace Weapons
         private void Awake()
         {
             Id = id;
+            MaxBullets = maxBullets;
+            Bullets = maxBullets;
         }
 
-        public GameObject GetGameObject()
-        {
-            return gameObject;
-        }
-
-        public void Shoot()
+        public override void Shoot()
         {
             if (!Equipped) return;
 
@@ -45,19 +41,6 @@ namespace Weapons
                 hit.rigidbody.AddForce(-hit.normal * impactForce);
             }
         }
-
-        public int Bullets { get; set; }
-        public int Id { get; set; }
-
-        //TODO: Fix - Repeated code
-        public void Reload()
-        {
-            bullets = maxBullets;
-        }
-
-        public bool Equipped { get; set; }
-        public bool Inventory { get; set; }
-
         private void FireLaser()
         {
             //TODO: TP2 - SOLID

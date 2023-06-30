@@ -6,7 +6,7 @@ namespace Weapons
 {
     public class Pickable : MonoBehaviour
     {
-        private IWeapon weapon;
+        private Weapon weapon;
         private Rigidbody itemBody;
         private BoxCollider itemCollider;
         [SerializeField] private Transform gunContainer;
@@ -21,7 +21,7 @@ namespace Weapons
 
         private void Start()
         {
-            weapon = GetComponent<IWeapon>();
+            weapon = GetComponent<Weapon>();
             if (GetComponent<Rigidbody>() != null)
             {
                 itemBody = GetComponent<Rigidbody>();

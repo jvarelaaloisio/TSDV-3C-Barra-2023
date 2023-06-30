@@ -7,7 +7,7 @@ namespace Player
 {
     public class WeaponContainer : MonoBehaviour
     {
-        private Dictionary<int, IWeapon> idWeapons;
+        private Dictionary<int, Weapon> idWeapons;
 
         [SerializeField] private GameObject[] weapons;
 
@@ -18,17 +18,17 @@ namespace Player
 
         void CreateIdWeapons()
         {
-            idWeapons = new Dictionary<int, IWeapon>(weapons.Length);
+            idWeapons = new Dictionary<int, Weapon>(weapons.Length);
 
             foreach (GameObject weapon in weapons)
             {
-                idWeapons.Add(weapon.GetComponent<IWeapon>().Id, weapon.GetComponent<IWeapon>());
+                idWeapons.Add(weapon.GetComponent<Weapon>().Id, weapon.GetComponent<Weapon>());
             }
         }
 
         public void EquipWeapon(int id)
         {
-            IWeapon weapon = FindWeaponById(id);
+            Weapon weapon = FindWeaponById(id);
 
             if (weapon == null) return;
 
@@ -38,7 +38,7 @@ namespace Player
 
             foreach (GameObject weapon2 in weapons)
             {
-                if (weapon2.GetComponent<IWeapon>().Equipped)
+                if (weapon2.GetComponent<Weapon>().Equipped)
                 {
                     equipWeapon = false;
                 }
@@ -50,7 +50,7 @@ namespace Player
 
         public void SwapWeapon()
         {
-            IWeapon weapon = GetWeapon();
+            Weapon weapon = GetWeapon();
 
             int id = 0;
 
@@ -63,15 +63,15 @@ namespace Player
 
             if (id >= weapons.Length) id = 0;
 
-            IWeapon weapon2 = FindWeaponById(id);
+            Weapon weapon2 = FindWeaponById(id);
 
             if (!FindWeaponById(id).Inventory)
             {
                 foreach (GameObject weaponAux in weapons)
                 {
-                    if (weaponAux.GetComponent<IWeapon>().Inventory)
+                    if (weaponAux.GetComponent<Weapon>().Inventory)
                     {
-                        weapon2 = weaponAux.GetComponent<IWeapon>();
+                        weapon2 = weaponAux.GetComponent<Weapon>();
                     }
                 }
             }
@@ -88,11 +88,11 @@ namespace Player
             FindWeaponById(id).Equipped = false;
         }
 
-        public IWeapon GetWeapon()
+        public Weapon GetWeapon()
         {
             foreach (GameObject weapon in weapons)
             {
-                if (weapon.TryGetComponent(out IWeapon weaponComponent) && weaponComponent.Equipped)
+                if (weapon.TryGetComponent(out Weapon weaponComponent) && weaponComponent.Equipped)
                 {
                     return weaponComponent;
                 }
@@ -101,7 +101,7 @@ namespace Player
             return null;
         }
 
-        private IWeapon FindWeaponById(int id)
+        private Weapon FindWeaponById(int id)
         {
             return idWeapons[id];
         }
