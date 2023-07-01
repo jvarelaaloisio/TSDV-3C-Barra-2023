@@ -1,4 +1,3 @@
-using System;
 using System.Collections;
 using UnityEngine;
 
@@ -9,10 +8,7 @@ namespace Targets
         public float Timer { get; set; }
         private int targets;
         
-        private void Start()
-        {
-            UpdateTargets();
-        }
+       
         private void Update()
         {
             StartCoroutine(TimerCoroutine());
@@ -20,15 +16,12 @@ namespace Targets
 
         private IEnumerator TimerCoroutine()
         {
-            // Decrement the timer
             Timer -= Time.deltaTime;
-            // Check if the timer has expired
+            //TODO CALL EVENT ON LOSE
             if (Timer <= 0)
             {
-                // Call the OnLose function
                 OnLose();
             }
-            // Yield until the next frame
             yield return null;
         }
 
@@ -36,17 +29,6 @@ namespace Targets
         {
         //TODO Make player lose
         }
-        public void UpdateTargets()
-        {
-            //TODO: Fix - Should be event based
-            targets = FindObjectsOfType<Target>().Length;
-        }
 
-        public int GetTargetsAmmount()
-        {
-            return targets;
-        }
-    
-    
     }
 }

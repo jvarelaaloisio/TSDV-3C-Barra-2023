@@ -1,5 +1,5 @@
+using System;
 using UnityEngine;
-using Random = UnityEngine.Random;
 
 namespace Targets
 {
@@ -24,20 +24,16 @@ namespace Targets
         private Vector3 originalPosition;
         private bool direction = true;
 
-        private TargetsManager targetsManager;
-
+        public static Action OnTargetDeath;
 
         private void Start()
         {
             originalSpeed = speed;
             originalPosition = transform.position;
-            targetsManager = FindObjectOfType<TargetsManager>();
         }
 
         private void Update()
         {
-            //(Transform transform, Vector3 originalPos, ref bool direction, float speed,
-            //float distance, float distanceTraveled, float acceleration, float ogSpeed, float maxSpeed)
             movement.Move(transform, originalPosition, ref direction, speed, moveDistance, distanceTraveled, acceleration, originalSpeed, maxSpeed);
         }
 
@@ -52,7 +48,7 @@ namespace Targets
 
         private void Die()
         {
-            targetsManager.UpdateTargets();
+            OnTargetDeath?.Invoke();
             Destroy(gameObject);
         }
         

@@ -16,6 +16,7 @@ namespace Weapons
 
         [Header("Events")] 
         [SerializeField] private SoundEvent onInstanceShot;
+        [SerializeField] private SoundEvent onEmptyMagazine;
         private void Awake()
         {
             Id = id;
@@ -29,9 +30,14 @@ namespace Weapons
         public override void Shoot()
         {
             if (!Equipped) return;
+            if (Bullets <= 0)
+            {
+                onEmptyMagazine.Raise();
+                return;
+            }
 
+            Bullets--;
             onInstanceShot.Raise();
-            
             SpawnBullet(out GameObject bullet);
             DestroyBullet(bullet);
 

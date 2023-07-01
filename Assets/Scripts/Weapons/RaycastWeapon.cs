@@ -1,6 +1,7 @@
-﻿using System;
+﻿using Audio;
 using Targets;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 namespace Weapons
 {
@@ -16,6 +17,9 @@ namespace Weapons
         [SerializeField] private float impactForce = 30f;
         [SerializeField] private int id = 1;
 
+        [Header("Events")] [SerializeField] private SoundEvent onRaycastShoot;
+        [SerializeField] private SoundEvent onEmptyMagazine;
+
         private void Awake()
         {
             Id = id;
@@ -26,9 +30,15 @@ namespace Weapons
         public override void Shoot()
         {
             if (!Equipped) return;
+            if (Bullets <= 0)
+            {
+                onEmptyMagazine.Raise();
+                return;
+            }
 
+            Bullets--;
+            onRaycastShoot.Raise();
             FireLaser();
-
             if (Physics.Raycast(gunHitbox.position, gunHitbox.forward, out var hit, range))
             {
                 Target target = hit.transform.GetComponent<Target>();
@@ -41,6 +51,7 @@ namespace Weapons
                 hit.rigidbody.AddForce(-hit.normal * impactForce);
             }
         }
+
         private void FireLaser()
         {
             //TODO: TP2 - SOLID
