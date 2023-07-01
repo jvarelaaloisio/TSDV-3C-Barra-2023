@@ -1,3 +1,6 @@
+using System;
+using Game;
+using Targets;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.SceneManagement;
@@ -10,11 +13,22 @@ namespace Menu
         [SerializeField] private GameObject pauseMenu;
         [SerializeField] private PlayerInput playerInput;
         [SerializeField] private Button resumeButton;
+        
         private const int MenuSceneIndex = 0;
+        
+        private const float NormalTimeScale = 1;
+        private const float PauseTimeScale = 0;
+        
         private new void Awake()
         {
             base.Awake();
             resumeButton.Select();
+            GameManager.OnLoseEvent += StopTime;
+        }
+
+        private void OnDestroy()
+        {
+            GameManager.OnLoseEvent -= ChangeState;
         }
 
         /// <summary>
@@ -37,7 +51,7 @@ namespace Menu
         /// </summary>
         private void PauseGame()
         {
-            Time.timeScale = 0;
+            StopTime();
             ChangeState();
             resumeButton.Select();
         }
@@ -47,7 +61,8 @@ namespace Menu
         /// </summary>
         public void ResumeGame()
         {
-            Time.timeScale = 1;
+            playerInput.enabled = true;
+            ResumeTime();
             ChangeState();
         }
 
@@ -56,7 +71,6 @@ namespace Menu
         /// </summary>
         private void ChangeState()
         {
-            playerInput.enabled = !playerInput.inputIsActive;
             pauseMenu.SetActive(!pauseMenu.activeSelf);
         }
 
@@ -65,7 +79,8 @@ namespace Menu
         /// </summary>
         public void OnResetButtonClick()
         {
-            Time.timeScale = 1;
+            ResumeTime();
+            
             SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
         }
 
@@ -74,11 +89,28 @@ namespace Menu
         /// </summary>
         public void OnLoadMenuButtonClick()
         {
-            Time.timeScale = 1;
+            ResumeTime();
             
             SceneManager.LoadScene(MenuSceneIndex);
         }
 
+        /// <summary>
+        /// Modifies time scale to PauseTimeScale
+        /// </summary>
+        private void StopTime()
+        {
+            playerInput.enabled = false;
+            Time.timeScale = PauseTimeScale;
+        }
+
+        /// <summary>
+        /// Modifies time scale to NormalTimeScale
+        /// </summary>
+        private void ResumeTime()
+        {
+            Time.timeScale = NormalTimeScale; 
+        }
+        
         /// <summary>
         /// Quits the application
         /// </summary>

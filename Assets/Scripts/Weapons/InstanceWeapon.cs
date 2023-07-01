@@ -35,8 +35,8 @@ namespace Weapons
         public override void Shoot()
         {
             if (!CanShoot()) return;
-
             BulletShot();
+            
             SpawnBullet(out GameObject bullet);
             DestroyBullet(bullet);
 

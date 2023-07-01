@@ -1,14 +1,21 @@
+using System;
 using System.Collections;
 using UnityEngine;
 
-namespace Targets
+namespace Game
 {
-    public class TargetsManager : MonoBehaviour
+    public class GameManager : MonoBehaviour
     {
         public float Timer { get; set; }
+        [SerializeField] private int levelTimer = 30;
         private int targets;
-        
-       
+        public static Action OnLoseEvent;
+
+        private void Start()
+        {
+            Timer = levelTimer;
+        }
+
         private void Update()
         {
             StartCoroutine(TimerCoroutine());
@@ -21,20 +28,12 @@ namespace Targets
         private IEnumerator TimerCoroutine()
         {
             Timer -= Time.deltaTime;
-            //TODO CALL EVENT ON LOSE
             if (Timer <= 0)
             {
-                OnLose();
+                OnLoseEvent?.Invoke();
+                gameObject.SetActive(false);
             }
             yield return null;
-        }
-
-        /// <summary>
-        /// Trigger player's defeat
-        /// </summary>
-        private void OnLose()
-        {
-        //TODO Make player lose
         }
 
     }

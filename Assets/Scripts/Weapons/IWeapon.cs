@@ -51,7 +51,6 @@ namespace Weapons
             if (!Equipped) return false;
             if (Bullets > 0)
             {
-                BulletShot();
                 return true;
             }
 

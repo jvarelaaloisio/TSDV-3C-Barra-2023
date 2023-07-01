@@ -1,7 +1,6 @@
 ﻿using Audio;
 using Targets;
 using UnityEngine;
-using UnityEngine.Serialization;
 
 namespace Weapons
 {
@@ -40,7 +39,6 @@ namespace Weapons
         public override void Shoot()
         {
             if(!CanShoot()) return;
-            
             BulletShot();
             
             FireLaser();
