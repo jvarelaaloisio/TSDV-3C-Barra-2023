@@ -4319,7 +4319,7 @@ RectTransform:
   - {fileID: 887225746}
   - {fileID: 1611965603}
   m_Father: {fileID: 1343549334}
-  m_RootOrder: 1
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
@@ -11040,6 +11040,122 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 4000013149834228, guid: 6857ff1d3761e21479727f3b27cc8f68, type: 3}
   m_PrefabInstance: {fileID: 831014731}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &833906369
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 833906370}
+  - component: {fileID: 833906374}
+  - component: {fileID: 833906373}
+  - component: {fileID: 833906372}
+  - component: {fileID: 833906371}
+  m_Layer: 5
+  m_Name: MenusManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &833906370
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 833906369}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1343549334}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 100, y: 100}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &833906371
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 833906369}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c7976d7c8153db64294da19c8f9e838d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  dontDestroyOnLoad: 0
+  pauseMenu: {fileID: 367570332}
+  playerInput: {fileID: 8552921364691488969}
+  resumeButton: {fileID: 1250106840}
+--- !u!114 &833906372
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 833906369}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 62899f850307741f2a39c98a8b639597, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Actions: {fileID: -944628639613478452, guid: 0275f940bd016e44db2c27affdc72ccd, type: 3}
+  m_NotificationBehavior: 0
+  m_UIInputModule: {fileID: 0}
+  m_DeviceLostEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  m_DeviceRegainedEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  m_ControlsChangedEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  m_ActionEvents: []
+  m_NeverAutoSwitchControlSchemes: 0
+  m_DefaultControlScheme: 
+  m_DefaultActionMap: Menu
+  m_SplitScreenIndex: -1
+  m_Camera: {fileID: 0}
+--- !u!114 &833906373
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 833906369}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 522bbe9626c765349b3773bd2ecce7ec, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  timer: {fileID: 1808198301}
+  targetsRemaining: {fileID: 344595190}
+  bulletsCounter: {fileID: 455007792}
+  gameManager: {fileID: 1757367989}
+--- !u!114 &833906374
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 833906369}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 902c5cb390904cf486c0ef2106acf520, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  gameOverMenu: {fileID: 1719532786}
+  restartLevel: {fileID: 1603435628}
 --- !u!1001 &839262666
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -11841,7 +11957,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1343549335}
+      - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: Menu.PauseManager, Assembly-CSharp
         m_MethodName: OnLoadMenuButtonClick
         m_Mode: 1
@@ -15620,7 +15736,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1343549335}
+      - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: Menu.PauseManager, Assembly-CSharp
         m_MethodName: OnLoadMenuButtonClick
         m_Mode: 1
@@ -17260,7 +17376,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1343549335}
+      - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: Menu.PauseManager, Assembly-CSharp
         m_MethodName: ResumeGame
         m_Mode: 1
@@ -18123,10 +18239,6 @@ GameObject:
   - component: {fileID: 1343549333}
   - component: {fileID: 1343549332}
   - component: {fileID: 1343549331}
-  - component: {fileID: 1343549335}
-  - component: {fileID: 1343549336}
-  - component: {fileID: 1343549337}
-  - component: {fileID: 1343549338}
   m_Layer: 5
   m_Name: Canvas
   m_TagString: Untagged
@@ -18207,6 +18319,7 @@ RectTransform:
   m_LocalScale: {x: 0, y: 0, z: 0}
   m_ConstrainProportionsScale: 0
   m_Children:
+  - {fileID: 833906370}
   - {fileID: 1562103381}
   - {fileID: 367570333}
   - {fileID: 1719532787}
@@ -18218,81 +18331,6 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0, y: 0}
---- !u!114 &1343549335
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1343549330}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c7976d7c8153db64294da19c8f9e838d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  dontDestroyOnLoad: 0
-  pauseMenu: {fileID: 367570332}
-  playerInput: {fileID: 8552921364691488969}
-  resumeButton: {fileID: 1250106840}
---- !u!114 &1343549336
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1343549330}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 522bbe9626c765349b3773bd2ecce7ec, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  timer: {fileID: 1808198301}
-  targetsRemaining: {fileID: 344595190}
-  bulletsCounter: {fileID: 455007792}
-  targetsManager: {fileID: 1757367989}
---- !u!114 &1343549337
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1343549330}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 62899f850307741f2a39c98a8b639597, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_Actions: {fileID: -944628639613478452, guid: 0275f940bd016e44db2c27affdc72ccd, type: 3}
-  m_NotificationBehavior: 0
-  m_UIInputModule: {fileID: 0}
-  m_DeviceLostEvent:
-    m_PersistentCalls:
-      m_Calls: []
-  m_DeviceRegainedEvent:
-    m_PersistentCalls:
-      m_Calls: []
-  m_ControlsChangedEvent:
-    m_PersistentCalls:
-      m_Calls: []
-  m_ActionEvents: []
-  m_NeverAutoSwitchControlSchemes: 0
-  m_DefaultControlScheme: 
-  m_DefaultActionMap: Menu
-  m_SplitScreenIndex: -1
-  m_Camera: {fileID: 0}
---- !u!114 &1343549338
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1343549330}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 902c5cb390904cf486c0ef2106acf520, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  gameOverMenu: {fileID: 1719532786}
 --- !u!1001 &1346361881
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -21285,7 +21323,7 @@ RectTransform:
   - {fileID: 1808198300}
   - {fileID: 455007791}
   m_Father: {fileID: 1343549334}
-  m_RootOrder: 0
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
@@ -21454,7 +21492,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1343549335}
+      - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: Menu.PauseManager, Assembly-CSharp
         m_MethodName: OnResetButtonClick
         m_Mode: 1
@@ -22195,7 +22233,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1343549335}
+      - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: Menu.PauseManager, Assembly-CSharp
         m_MethodName: OnExitButtonClick
         m_Mode: 1
@@ -22341,7 +22379,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1343549335}
+      - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: Menu.PauseManager, Assembly-CSharp
         m_MethodName: OnResetButtonClick
         m_Mode: 1
@@ -22623,7 +22661,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1343549335}
+      - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: Menu.PauseManager, Assembly-CSharp
         m_MethodName: OnExitButtonClick
         m_Mode: 1
@@ -24120,7 +24158,7 @@ RectTransform:
   - {fileID: 1166364157}
   - {fileID: 1601092488}
   m_Father: {fileID: 1343549334}
-  m_RootOrder: 2
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
@@ -24646,6 +24684,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6f93ca94fe6e95a4599e5c9a01ce2a2d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  levelTimer: 5
 --- !u!1001 &1761228225
 PrefabInstance:
   m_ObjectHideFlags: 0
