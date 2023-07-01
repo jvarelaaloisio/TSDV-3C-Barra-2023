@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 using UnityEngine.InputSystem;
 using Weapons;
 
@@ -13,7 +14,7 @@ namespace Player
 
         private PlayerInputs playerInput;
         private Pickable[] pickables;
-
+        public static Action OnBulletsUpdate;
         private void Awake()
         {
             Cursor.visible = false;
@@ -60,6 +61,7 @@ namespace Player
         public void OnShoot()
         {
             FindObjectOfType<WeaponContainer>().GetWeapon()?.Shoot();
+            OnBulletsUpdate?.Invoke();
         }
 
         /// <summary>
@@ -70,6 +72,7 @@ namespace Player
             foreach (Pickable pickable in pickables)
             {
                 pickable.PickUp();
+                OnBulletsUpdate?.Invoke();
             }
         }
 
@@ -81,6 +84,7 @@ namespace Player
             foreach (Pickable pickable in pickables)
             {
                 pickable.Drop();
+                OnBulletsUpdate?.Invoke();
             }
         }
         /// <summary>
@@ -97,6 +101,7 @@ namespace Player
         public void OnReload()
         {
             FindObjectOfType<WeaponContainer>().GetWeapon()?.Reload();
+            OnBulletsUpdate?.Invoke();
         }
     }
 }

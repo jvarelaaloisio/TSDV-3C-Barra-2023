@@ -1,3 +1,4 @@
+using Player;
 using Targets;
 using TMPro;
 using UnityEngine;
@@ -8,19 +9,25 @@ namespace UI
     {
         [SerializeField] private TMP_Text timer;
         [SerializeField] private TMP_Text targetsRemaining;
+        [SerializeField] private TMP_Text bulletsCounter;
         [SerializeField] private TargetsManager targetsManager;
+        private WeaponContainer weaponContainer;
         private int targetAmount;
+
         private void Start()
         {
+            weaponContainer = FindObjectOfType<WeaponContainer>();
             targetsManager = FindObjectOfType<TargetsManager>();
             targetAmount = GameObject.FindGameObjectsWithTag("Target").Length;
             Target.OnTargetDeath += ShowTargetsRemaining;
             ShowTargetsRemaining();
+            InputManager.OnBulletsUpdate += ShowBullets;
         }
 
         private void OnDestroy()
         {
             Target.OnTargetDeath -= ShowTargetsRemaining;
+            InputManager.OnBulletsUpdate -= ShowBullets;
         }
 
         private void Update()
@@ -45,6 +52,16 @@ namespace UI
         {
             targetAmount = GameObject.FindGameObjectsWithTag("Target").Length;
             targetsRemaining.text = "Targets remaining: " + targetAmount;
+        }
+
+        private void ShowBullets()
+        {
+            if (weaponContainer.GetWeapon()==null)
+            {
+                bulletsCounter.text = "";
+                return;
+            }
+            bulletsCounter.text = weaponContainer.GetWeapon()?.Bullets + "/" + weaponContainer.GetWeapon()?.MaxBullets;
         }
     }
 }
