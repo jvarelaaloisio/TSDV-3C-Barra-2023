@@ -1,7 +1,6 @@
 ﻿using Audio;
 using Targets;
 using UnityEngine;
-using UnityEngine.Serialization;
 
 namespace Weapons
 {
@@ -19,6 +18,7 @@ namespace Weapons
 
         [Header("Events")] [SerializeField] private SoundEvent onRaycastShoot;
         [SerializeField] private SoundEvent onEmptyMagazine;
+        [SerializeField] private SoundEvent OnReload;
 
         private void Awake()
         {
@@ -52,35 +52,23 @@ namespace Weapons
             }
         }
 
+        public override void Reload()
+        {
+            Bullets = MaxBullets;
+            OnReload.Raise();
+        }
+
         private void FireLaser()
         {
             //TODO: TP2 - SOLID
             lineRenderer.enabled = true;
 
             //TODO: Fix - Calculating hit twice
-            RaycastHit hit;
-            Vector3 position = gunHitbox.position;
-            if (Physics.Raycast(position, transform.forward, out hit, range))
-            {
-                lineRenderer.SetPosition(0, position);
-                lineRenderer.SetPosition(1, hit.point);
+            Vector3 startPoint = gunHitbox.position;
+            Vector3 endPoint = transform.position + transform.forward * range;
 
-                //TODO: TP2 - Remove unused methods/variables/classes
-                // Perform actions when the laser hits an object (e.g., apply damage, trigger effects)
-                if (hit.collider != null)
-                {
-                    // Object hit! Access hit.collider.gameObject for further actions.
-                }
-            }
-            else
-            {
-                lineRenderer.SetPosition(0, position);
-                lineRenderer.SetPosition(1, position + transform.forward * range);
-            }
-
-            //TODO: Fix - Hardcoded value
-            //TODO: Fix - These comments really make it feel as if this is not your code.
-            // Hide the laser beam after a short delay (adjust as needed)
+            lineRenderer.SetPosition(0, startPoint);
+            lineRenderer.SetPosition(1, endPoint);
             Invoke(nameof(HideLaser), 0.1f);
         }
 

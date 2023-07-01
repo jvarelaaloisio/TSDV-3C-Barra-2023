@@ -37,6 +37,10 @@ namespace Targets
             movement.Move(transform, originalPosition, ref direction, speed, moveDistance, distanceTraveled, acceleration, originalSpeed, maxSpeed);
         }
 
+        /// <summary>
+        /// Modify target's health
+        /// </summary>
+        /// <param name="amount"></param>
         public void TakeDamage(float amount)
         {
             health -= amount;
@@ -46,6 +50,9 @@ namespace Targets
             }
         }
 
+        /// <summary>
+        /// On death, invoke event and destroy object.
+        /// </summary>
         private void Die()
         {
             OnTargetDeath?.Invoke();

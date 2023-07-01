@@ -12,10 +12,7 @@ namespace Weapons
         public virtual int Bullets { get; set; }
         protected int MaxBullets { get; set; }
         public int Id { get; protected set; }
-        public void Reload()
-        {
-            Bullets = MaxBullets;
-        }
+        public abstract void Reload();
 
         public bool Equipped { get; set; }
         public bool Inventory { get; set; }

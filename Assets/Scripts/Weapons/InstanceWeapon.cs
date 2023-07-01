@@ -17,6 +17,7 @@ namespace Weapons
         [Header("Events")] 
         [SerializeField] private SoundEvent onInstanceShot;
         [SerializeField] private SoundEvent onEmptyMagazine;
+        [SerializeField] private SoundEvent OnReload;
         private void Awake()
         {
             Id = id;
@@ -25,7 +26,7 @@ namespace Weapons
         }
 
         /// <summary>
-        /// If weapon is equipped (active), instantiate the bullet prefab forward
+        /// If weapon is equipped, instantiate the bullet prefab forward
         /// </summary>
         public override void Shoot()
         {
@@ -55,5 +56,11 @@ namespace Weapons
             Destroy(bullet, bulletDuration);
         }
         public override int Bullets { get; set; }
+
+        public override void Reload()
+        {
+            Bullets = MaxBullets;
+            OnReload.Raise();
+        }
     }
 }

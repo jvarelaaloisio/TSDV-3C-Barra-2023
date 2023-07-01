@@ -15100,6 +15100,7 @@ MonoBehaviour:
   id: 1
   onRaycastShoot: {fileID: 11400000, guid: 46c23227926990a489e166f439894f82, type: 2}
   onEmptyMagazine: {fileID: 11400000, guid: 29f4c4628a1cdfb4287dfacb9defffd1, type: 2}
+  OnReload: {fileID: 11400000, guid: afe662e81a4aaef40ba79a522c0863b2, type: 2}
 --- !u!114 &1145531993
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -28473,7 +28474,7 @@ MonoBehaviour:
           m_MethodName: PlaySound
           m_Mode: 2
           m_Arguments:
-            m_ObjectArgument: {fileID: 8300000, guid: 841bcaf96230c574d8eac8d4e2fc1fe4, type: 3}
+            m_ObjectArgument: {fileID: 8300000, guid: b4bcc5f9ef4c96c4caf642e1c2b127ed, type: 3}
             m_ObjectArgumentAssemblyTypeName: UnityEngine.AudioClip, UnityEngine
             m_IntArgument: 0
             m_FloatArgument: 0
@@ -29905,6 +29906,14 @@ PrefabInstance:
       propertyPath: weaponContainer
       value: 
       objectReference: {fileID: 1132191994}
+    - target: {fileID: 5142595305001918189, guid: 8801c706a183aa6439eeeecc67f2c0bc, type: 3}
+      propertyPath: OnReload
+      value: 
+      objectReference: {fileID: 11400000, guid: afe662e81a4aaef40ba79a522c0863b2, type: 2}
+    - target: {fileID: 5142595305001918189, guid: 8801c706a183aa6439eeeecc67f2c0bc, type: 3}
+      propertyPath: maxBullets
+      value: 10
+      objectReference: {fileID: 0}
     - target: {fileID: 5142595305001918189, guid: 8801c706a183aa6439eeeecc67f2c0bc, type: 3}
       propertyPath: onEmptyMagazine
       value: 

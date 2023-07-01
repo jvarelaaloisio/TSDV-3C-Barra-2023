@@ -30,11 +30,17 @@ namespace UI
         }
 
         //TODO TIMER EVENT
+        /// <summary>
+        /// Show time remaining
+        /// </summary>
         private void ShowTimer()
         {
             timer.text = targetsManager.Timer.ToString("0.##");
         }
 
+        /// <summary>
+        /// OnTargetDeath event, update targets remaining in ui
+        /// </summary>
         private void ShowTargetsRemaining()
         {
             targetAmount = GameObject.FindGameObjectsWithTag("Target").Length;
