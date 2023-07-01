@@ -1,5 +1,6 @@
 ﻿using Audio;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 namespace Weapons
 {
@@ -13,16 +14,19 @@ namespace Weapons
         [SerializeField] private float bulletSpeed = 600.0f;
         [SerializeField] private int id = 0;
         [SerializeField] private float bulletDuration = 1;
-
+        
         [Header("Events")] 
-        [SerializeField] private SoundEvent onInstanceShot;
-        [SerializeField] private SoundEvent onEmptyMagazine;
-        [SerializeField] private SoundEvent OnReload;
+        [SerializeField] private SoundEvent onInstanceShotEvent;
+        [SerializeField] private SoundEvent onEmptyMagazineEvent;
+        [SerializeField] private SoundEvent onReloadEvent;
         private void Awake()
         {
             Id = id;
             MaxBullets = maxBullets;
             Bullets = maxBullets;
+            OnReload = onReloadEvent;
+            OnEmptyMagazine = onEmptyMagazineEvent;
+            OnShot = onInstanceShotEvent;
         }
 
         /// <summary>
@@ -30,20 +34,18 @@ namespace Weapons
         /// </summary>
         public override void Shoot()
         {
-            if (!Equipped) return;
-            if (Bullets <= 0)
-            {
-                onEmptyMagazine.Raise();
-                return;
-            }
+            if (!CanShoot()) return;
 
-            Bullets--;
-            onInstanceShot.Raise();
+            BulletShot();
             SpawnBullet(out GameObject bullet);
             DestroyBullet(bullet);
 
         }
 
+        /// <summary>
+        /// Instantiates a bullet infront of the gun hitbox going forward.
+        /// </summary>
+        /// <param name="bullet"> reference to instantiate bullet </param>
         private void SpawnBullet(out GameObject bullet)
         {
             bullet = Instantiate(bulletPrefab, gunHitbox.transform.position, transform.rotation);
@@ -51,16 +53,14 @@ namespace Weapons
             bullet.GetComponent<Rigidbody>()?.AddForce(gunHitbox.transform.forward * bulletSpeed);
         }
 
+        /// <summary>
+        /// Destroys bullet after bulletDuration time time 
+        /// </summary>
+        /// <param name="bullet"> bullet to be destroyed </param>
         private void DestroyBullet(GameObject bullet)
         {
             Destroy(bullet, bulletDuration);
         }
-        public override int Bullets { get; set; }
 
-        public override void Reload()
-        {
-            Bullets = MaxBullets;
-            OnReload.Raise();
-        }
     }
 }

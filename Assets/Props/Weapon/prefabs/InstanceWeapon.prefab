@@ -3910,11 +3910,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   bulletPrefab: {fileID: 2123023524163366923, guid: c99b23e625ff46745a96485a11f8ec30, type: 3}
   gunHitbox: {fileID: 4516048657778326030}
-  maxBullets: 30
+  maxBullets: 10
   bulletSpeed: 3000
   id: 0
   bulletDuration: 1
-  onInstanceShot: {fileID: 11400000, guid: 471823ef4737b984e839b5bb69fb0717, type: 2}
+  onInstanceShotEvent: {fileID: 11400000, guid: 471823ef4737b984e839b5bb69fb0717, type: 2}
+  onEmptyMagazineEvent: {fileID: 11400000, guid: 29f4c4628a1cdfb4287dfacb9defffd1, type: 2}
+  onReloadEvent: {fileID: 11400000, guid: afe662e81a4aaef40ba79a522c0863b2, type: 2}
 --- !u!82 &2784579445481750575
 AudioSource:
   m_ObjectHideFlags: 0

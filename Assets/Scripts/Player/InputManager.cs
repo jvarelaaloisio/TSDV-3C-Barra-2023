@@ -41,6 +41,10 @@ namespace Player
             playerInput.Disable();
         }
 
+        /// <summary>
+        /// Returns the value of the player's movement input.
+        /// </summary>
+        /// <returns></returns>
         public Vector2 GetPlayerMovement()
         {
             return playerInput.World.Move.ReadValue<Vector2>();

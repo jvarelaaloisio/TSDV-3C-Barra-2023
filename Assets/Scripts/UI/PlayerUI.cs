@@ -54,6 +54,9 @@ namespace UI
             targetsRemaining.text = "Targets remaining: " + targetAmount;
         }
 
+        /// <summary>
+        /// Shows currently equipped weapon's remaing bullets
+        /// </summary>
         private void ShowBullets()
         {
             if (weaponContainer.GetWeapon()==null)

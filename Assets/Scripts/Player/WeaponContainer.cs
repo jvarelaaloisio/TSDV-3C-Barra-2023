@@ -16,6 +16,9 @@ namespace Player
             CreateIdWeapons();
         }
 
+        /// <summary>
+        /// Creates the dictionary of weapons and their id
+        /// </summary>
         void CreateIdWeapons()
         {
             idWeapons = new Dictionary<int, Weapon>(weapons.Length);
@@ -26,6 +29,10 @@ namespace Player
             }
         }
 
+        /// <summary>
+        /// Equips the weapon sent by the parameter.
+        /// </summary>
+        /// <param name="id"> id reference of the weapon</param>
         public void EquipWeapon(int id)
         {
             Weapon weapon = FindWeaponById(id);
@@ -48,6 +55,9 @@ namespace Player
             weapon.Equipped = equipWeapon;
         }
 
+        /// <summary>
+        /// Swaps the current weapon equiped with the next weapon in inventory.
+        /// </summary>
         public void SwapWeapon()
         {
             Weapon weapon = GetWeapon();
@@ -82,12 +92,20 @@ namespace Player
             weapon2.GetGameObject().SetActive(true);
         }
 
+        /// <summary>
+        /// Unequips the referenced weapon.
+        /// </summary>
+        /// <param name="id"> weapon id</param>
         public void UnequipWeapon(int id)
         {
             FindWeaponById(id).Inventory = false;
             FindWeaponById(id).Equipped = false;
         }
 
+        /// <summary>
+        /// Equiped weapon getter.
+        /// </summary>
+        /// <returns></returns>
         public Weapon GetWeapon()
         {
             foreach (GameObject weapon in weapons)
@@ -101,6 +119,11 @@ namespace Player
             return null;
         }
 
+        /// <summary>
+        /// Get the weapon referenced by the id
+        /// </summary>
+        /// <param name="id"> weapon's id </param>
+        /// <returns> returns the corresponding weapon, if any. </returns>
         private Weapon FindWeaponById(int id)
         {
             return idWeapons[id];

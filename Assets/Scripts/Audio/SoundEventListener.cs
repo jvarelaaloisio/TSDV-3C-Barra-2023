@@ -15,7 +15,7 @@ namespace Audio
         }
 
         [SerializeField] private List<EventResponse> eventResponses = new List<EventResponse>();
-
+        
         private void OnEnable()
         {
             foreach (var eventResponse in eventResponses)
@@ -31,7 +31,11 @@ namespace Audio
                 eventResponse.soundEvent.UnregisterListener(this);
             }
         }
-
+        
+        /// <summary>
+        /// Invokes all references of the event
+        /// </summary>
+        /// <param name="soundEvent"></param>
         public void OnEventRaised(SoundEvent soundEvent)
         {
             foreach (var eventResponse in eventResponses.Where(eventResponse => eventResponse.soundEvent == soundEvent))

@@ -14,6 +14,10 @@ namespace Targets
             StartCoroutine(TimerCoroutine());
         }
 
+        /// <summary>
+        /// Calculates time remaining until lose
+        /// </summary>
+        /// <returns></returns>
         private IEnumerator TimerCoroutine()
         {
             Timer -= Time.deltaTime;
@@ -25,6 +29,9 @@ namespace Targets
             yield return null;
         }
 
+        /// <summary>
+        /// Trigger player's defeat
+        /// </summary>
         private void OnLose()
         {
         //TODO Make player lose

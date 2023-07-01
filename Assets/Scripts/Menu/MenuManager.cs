@@ -24,38 +24,60 @@ namespace Menu
             LoadMenu();
         }
 
+        /// <summary>
+        /// Shows the main menu in the menu scene.
+        /// </summary>
         public void LoadMenu()
         {
             ChangeMenu(Menus.Main);
         }
 
+        /// <summary>
+        /// Loads the game scene
+        /// </summary>
         public void LoadGame()
         {
             const int sceneOffset = 1;
             LoadNextScene(sceneOffset);
         }
         
+        /// <summary>
+        /// Shows the options in the menu scene.
+        /// </summary>
         public void LoadOptions()
         {
             ChangeMenu(Menus.Options);
         }
-
+        /// <summary>
+        /// Shows the credits in the menu scene.
+        /// </summary>
         public void LoadCredits()
         {
             ChangeMenu(Menus.Credits);
         }
 
+        /// <summary>
+        /// Quits the application
+        /// </summary>
         public void OnExitButtonClick()
         {
             Application.Quit();
         }
 
+        /// <summary>
+        /// Loads the required scene from the current scene.
+        /// </summary>
+        /// <param name="sceneOffset"></param>
         private void LoadNextScene(int sceneOffset)
         {
             SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + sceneOffset);
         }
 
-        public void ChangeMenu(Menus menu)
+        /// <summary>
+        /// Basic menu state machine.
+        /// </summary>
+        /// <param name="menu"></param>
+        private void ChangeMenu(Menus menu)
         {
             optionsMenu.SetActive(false);
             creditsMenu.SetActive(false);

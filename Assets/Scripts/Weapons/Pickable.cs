@@ -40,7 +40,9 @@ namespace Weapons
             }
         }
 
-
+        /// <summary>
+        /// Picks ups object to corresponding place (gunContainer).
+        /// </summary>
         public void PickUp()
         {
             distance = playerTransform.position - transform.position;
@@ -58,6 +60,9 @@ namespace Weapons
             objectTransform.localRotation = Quaternion.Euler(Vector3.zero);
         }
 
+        /// <summary>
+        /// Drops object infront of its position
+        /// </summary>
         public void Drop()
         {
             if (!weapon.Equipped) return;

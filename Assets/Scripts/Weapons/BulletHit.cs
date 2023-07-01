@@ -10,10 +10,12 @@ namespace Weapons
 
         [Header("Events")] 
         [SerializeField] private SoundEvent onBulletHit;
+        /// <summary>
+        /// Destroys bullet on collision
+        /// </summary>
+        /// <param name="other"></param>
         private void OnCollisionEnter(Collision other)
         {
-            
-
             if (other.transform.TryGetComponent(out Target target))
             {
                 target.TakeDamage(damage);

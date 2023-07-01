@@ -25,6 +25,9 @@ namespace Player
             MoveCamera();
         }
 
+        /// <summary>
+        /// Rotates the camera to follow the mouse.
+        /// </summary>
         void MoveCamera()
         {
             float mouseX = Mouse.current.delta.x.ReadValue() * Time.deltaTime * sensitivityX;

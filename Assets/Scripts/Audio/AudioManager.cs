@@ -5,11 +5,15 @@ namespace Audio
 {
     public class AudioManager : MonoBehaviourSingleton<AudioManager>
     {
-        public AudioSource audioSource { get; set; }
-
+        public AudioSource AudioSource { get; set; }
+        
+        /// <summary>
+        /// Plays an audioclip in the audio source
+        /// </summary>
+        /// <param name="audioClip"> Audio source in player </param>
         public void PlaySound(AudioClip audioClip)
         {
-            audioSource.PlayOneShot(audioClip);
+            AudioSource.PlayOneShot(audioClip);
         }
     }
 }
