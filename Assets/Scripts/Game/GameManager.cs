@@ -1,24 +1,41 @@
 using System;
 using System.Collections;
+using UI;
 using UnityEngine;
 
 namespace Game
 {
     public class GameManager : MonoBehaviour
     {
-        public float Timer { get; set; }
         [SerializeField] private int levelTimer = 30;
+        public float Timer { get; set; }
+        
         private int targets;
+        
         public static Action OnLoseEvent;
+        public static Action OnWinEvent;
+
 
         private void Start()
         {
             Timer = levelTimer;
+            PlayerUI.OnNoTargets += PlayerWin;
+        }
+
+        private void OnDestroy()
+        {
+            PlayerUI.OnNoTargets -= PlayerWin;
         }
 
         private void Update()
         {
             StartCoroutine(TimerCoroutine());
+        }
+
+        private void PlayerWin()
+        {
+            gameObject.SetActive(false);
+            OnWinEvent?.Invoke();
         }
 
         /// <summary>
@@ -33,8 +50,8 @@ namespace Game
                 OnLoseEvent?.Invoke();
                 gameObject.SetActive(false);
             }
+
             yield return null;
         }
-
     }
 }

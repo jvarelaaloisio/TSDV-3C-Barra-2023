@@ -1,9 +1,9 @@
+using System;
 using Game;
 using Player;
 using Targets;
 using TMPro;
 using UnityEngine;
-using UnityEngine.Serialization;
 
 namespace UI
 {
@@ -15,6 +15,7 @@ namespace UI
 
         [SerializeField] private GameManager gameManager;
 
+        public static Action OnNoTargets;
         private WeaponContainer weaponContainer;
         private int targetAmount;
 
@@ -47,13 +48,14 @@ namespace UI
         /// </summary>
         private void ShowTimer()
         {
-            timer.text = gameManager.Timer.ToString("0.##");
+            timer.text = gameManager.Timer.ToString("0.#");
         }
 
         private void UpdateRemainingTargets()
         {
             targetAmount--;
             ShowTargetsRemaining();
+            if (targetAmount <= 0) OnNoTargets?.Invoke();
         }
 
         /// <summary>

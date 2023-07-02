@@ -96,6 +96,7 @@ namespace Player
         /// </summary>
         public void OnSwapWeapon()
         {
+            OnBulletsUpdate?.Invoke();
             FindObjectOfType<WeaponContainer>().SwapWeapon();
         }
         

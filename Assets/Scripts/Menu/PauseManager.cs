@@ -1,6 +1,4 @@
-using System;
 using Game;
-using Targets;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.SceneManagement;
@@ -23,12 +21,20 @@ namespace Menu
         {
             base.Awake();
             resumeButton.Select();
-            GameManager.OnLoseEvent += StopTime;
+            GameManager.OnLoseEvent += OnGameEnd;
+            GameManager.OnWinEvent += OnGameEnd;
         }
 
         private void OnDestroy()
         {
-            GameManager.OnLoseEvent -= ChangeState;
+            GameManager.OnLoseEvent -= OnGameEnd;
+            GameManager.OnWinEvent -= OnGameEnd;
+        }
+
+        private void OnGameEnd()
+        {
+            StopTime();
+            gameObject.SetActive(false);
         }
 
         /// <summary>
