@@ -41,17 +41,12 @@ namespace Weapons
             if(!CanShoot()) return;
             BulletShot();
             
-            FireLaser();
-            if (Physics.Raycast(gunHitbox.position, gunHitbox.forward, out var hit, range))
+            RaycastHit hit;
+            
+            if (Physics.Raycast(gunHitbox.position, gunHitbox.forward, out hit, range))
             {
                 Target target = hit.transform.GetComponent<Target>();
-
                 if (target != null) target.TakeDamage(damage);
-            }
-
-            if (hit.rigidbody != null)
-            {
-                hit.rigidbody.AddForce(-hit.normal * impactForce);
             }
         }
 
@@ -60,16 +55,7 @@ namespace Weapons
         /// </summary>
         private void FireLaser()
         {
-            //TODO: TP2 - SOLID
-            lineRenderer.enabled = true;
-
-            //TODO: Fix - Calculating hit twice
-            Vector3 startPoint = gunHitbox.position;
-            Vector3 endPoint = transform.position + transform.forward * range;
-
-            lineRenderer.SetPosition(0, startPoint);
-            lineRenderer.SetPosition(1, endPoint);
-            Invoke(nameof(HideLaser), 0.1f);
+            
         }
 
         /// <summary>
