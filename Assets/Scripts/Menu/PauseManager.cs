@@ -31,6 +31,9 @@ namespace Menu
             GameManager.OnWinEvent -= OnGameEnd;
         }
 
+        /// <summary>
+        /// In case of game ending by win or lose event, stops time and disables this menu.
+        /// </summary>
         private void OnGameEnd()
         {
             StopTime();

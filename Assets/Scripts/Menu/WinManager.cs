@@ -18,6 +18,9 @@ namespace Menu
             GameManager.OnWinEvent -= GameWin;
         }
 
+        /// <summary>
+        /// in case of win event, activates the game won menu
+        /// </summary>
         private void GameWin()
         {
             selectButton.Select();

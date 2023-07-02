@@ -32,6 +32,9 @@ namespace Game
             StartCoroutine(TimerCoroutine());
         }
 
+        /// <summary>
+        /// in case of win, disables this object to stop unecesary calculation and invokes win event.
+        /// </summary>
         private void PlayerWin()
         {
             gameObject.SetActive(false);
