@@ -20,21 +20,23 @@ namespace UI
         {
             weaponContainer = FindObjectOfType<WeaponContainer>();
             gameManager = FindObjectOfType<GameManager>();
-            targetAmount = GameObject.FindGameObjectsWithTag("Target").Length;
-            Target.OnTargetDeath += ShowTargetsRemaining;
-            ShowTargetsRemaining();
+            
+            Target.OnTargetDeath += UpdateRemainingTargets;
             InputManager.OnBulletsUpdate += ShowBullets;
+            
+            targetAmount = GameObject.FindGameObjectsWithTag("Target").Length;
+            ShowTargetsRemaining();
         }
 
         private void OnDestroy()
         {
-            Target.OnTargetDeath -= ShowTargetsRemaining;
+            Target.OnTargetDeath -= UpdateRemainingTargets;
             InputManager.OnBulletsUpdate -= ShowBullets;
         }
 
         private void Update()
         {
-            //TODO: Fix - Should be event based
+
             ShowTimer();
         }
 
@@ -47,12 +49,17 @@ namespace UI
             timer.text = gameManager.Timer.ToString("0.##");
         }
 
+        private void UpdateRemainingTargets()
+        {
+            targetAmount--;
+            ShowTargetsRemaining();
+        }
+
         /// <summary>
         /// OnTargetDeath event, update targets remaining in ui
         /// </summary>
         private void ShowTargetsRemaining()
         {
-            targetAmount = GameObject.FindGameObjectsWithTag("Target").Length;
             targetsRemaining.text = "Targets remaining: " + targetAmount;
         }
 
