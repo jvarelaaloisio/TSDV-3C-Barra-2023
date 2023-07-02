@@ -27641,6 +27641,18 @@ PrefabInstance:
       propertyPath: weapons.Array.data[1]
       value: 
       objectReference: {fileID: 356411627}
+    - target: {fileID: 7025749540019815011, guid: 7889f089da8201545b838e30b1ed16c5, type: 3}
+      propertyPath: Loop
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7025749540019815011, guid: 7889f089da8201545b838e30b1ed16c5, type: 3}
+      propertyPath: m_audioClip
+      value: 
+      objectReference: {fileID: 8300000, guid: 545b1c6e96db1ee418d01b009f514012, type: 3}
+    - target: {fileID: 7025749540019815011, guid: 7889f089da8201545b838e30b1ed16c5, type: 3}
+      propertyPath: m_PlayOnAwake
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 9105974073283466551, guid: 7889f089da8201545b838e30b1ed16c5, type: 3}
       propertyPath: m_LocalPosition.x
       value: -0.19653702
@@ -28293,6 +28305,10 @@ PrefabInstance:
     m_TransformParent: {fileID: 0}
     m_Modifications:
     - target: {fileID: 7178914108704902139, guid: 5c029f678d16a634cadbb01ddf465f1e, type: 3}
+      propertyPath: canWin
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7178914108704902139, guid: 5c029f678d16a634cadbb01ddf465f1e, type: 3}
       propertyPath: playerInput
       value: 
       objectReference: {fileID: 574231692}
@@ -28390,7 +28406,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7178914109874227108, guid: 5c029f678d16a634cadbb01ddf465f1e, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 53
+      value: 62
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 5c029f678d16a634cadbb01ddf465f1e, type: 3}

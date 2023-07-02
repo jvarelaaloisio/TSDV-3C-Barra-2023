@@ -27293,6 +27293,18 @@ PrefabInstance:
       propertyPath: weapons.Array.data[1]
       value: 
       objectReference: {fileID: 1145531990}
+    - target: {fileID: 7025749540019815011, guid: 7889f089da8201545b838e30b1ed16c5, type: 3}
+      propertyPath: Loop
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7025749540019815011, guid: 7889f089da8201545b838e30b1ed16c5, type: 3}
+      propertyPath: m_audioClip
+      value: 
+      objectReference: {fileID: 8300000, guid: 545b1c6e96db1ee418d01b009f514012, type: 3}
+    - target: {fileID: 7025749540019815011, guid: 7889f089da8201545b838e30b1ed16c5, type: 3}
+      propertyPath: m_PlayOnAwake
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 7889f089da8201545b838e30b1ed16c5, type: 3}
 --- !u!4 &2784579445481750570 stripped
