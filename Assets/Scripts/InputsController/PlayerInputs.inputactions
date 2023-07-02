@@ -137,7 +137,7 @@
                 {
                     "name": "",
                     "id": "deb8f1ff-b74c-4586-89e9-287654d6723f",
-                    "path": "<Gamepad>/leftStick",
+                    "path": "<DualShockGamepad>/leftStick",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
@@ -202,8 +202,30 @@
                 },
                 {
                     "name": "",
+                    "id": "aafdb1e0-7447-4c5d-8ed7-c0d56485a81f",
+                    "path": "<DualShockGamepad>/buttonWest",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "PickUp",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
                     "id": "31a2285f-c2c3-4910-8c79-a1a520b1e950",
                     "path": "<Mouse>/delta",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "CameraRotation",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "cba6a486-2ef5-4703-a655-10e1bc4ecd26",
+                    "path": "<DualShockGamepad>/rightStick",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
@@ -224,6 +246,17 @@
                 },
                 {
                     "name": "",
+                    "id": "90d7a6b3-16ba-42b9-85c8-f0ff978ca907",
+                    "path": "<DualShockGamepad>/rightShoulder",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "SwapWeapon",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
                     "id": "550e5d53-1d48-42f9-b0c4-6a2640b43701",
                     "path": "<Keyboard>/r",
                     "interactions": "",
@@ -235,8 +268,30 @@
                 },
                 {
                     "name": "",
+                    "id": "93c3618e-9e32-47b9-a22a-6dccccc21c4a",
+                    "path": "<DualShockGamepad>/buttonNorth",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Reload",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
                     "id": "870c0858-f849-40f5-b1f0-93b4982f0334",
                     "path": "<Keyboard>/f",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Drop",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "365dab04-b3e7-4cb0-b9bc-87a8ba70de66",
+                    "path": "<DualShockGamepad>/buttonEast",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
