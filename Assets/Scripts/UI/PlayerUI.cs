@@ -23,7 +23,6 @@ namespace UI
         private void Start()
         {
             weaponContainer = FindObjectOfType<WeaponContainer>();
-            gameManager = FindObjectOfType<GameManager>();
             isgameManagerNull = gameManager == null;
 
             Target.OnTargetDeath += UpdateRemainingTargets;

@@ -28292,22 +28292,14 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 7178914108251256782, guid: 5c029f678d16a634cadbb01ddf465f1e, type: 3}
-      propertyPath: m_text
-      value: 
-      objectReference: {fileID: 0}
-    - target: {fileID: 7178914108251256782, guid: 5c029f678d16a634cadbb01ddf465f1e, type: 3}
-      propertyPath: m_fontSize
-      value: 36
-      objectReference: {fileID: 0}
-    - target: {fileID: 7178914108704902139, guid: 5c029f678d16a634cadbb01ddf465f1e, type: 3}
-      propertyPath: canWin
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 7178914108704902139, guid: 5c029f678d16a634cadbb01ddf465f1e, type: 3}
       propertyPath: playerInput
       value: 
       objectReference: {fileID: 574231692}
+    - target: {fileID: 7178914108704902141, guid: 5c029f678d16a634cadbb01ddf465f1e, type: 3}
+      propertyPath: gameManager
+      value: 
+      objectReference: {fileID: 1927746137}
     - target: {fileID: 7178914109264872106, guid: 5c029f678d16a634cadbb01ddf465f1e, type: 3}
       propertyPath: m_Name
       value: GameMenusCanvas
@@ -28398,16 +28390,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7178914109874227108, guid: 5c029f678d16a634cadbb01ddf465f1e, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 34.8
+      value: 53
       objectReference: {fileID: 0}
-    - target: {fileID: 7178914109874227109, guid: 5c029f678d16a634cadbb01ddf465f1e, type: 3}
-      propertyPath: m_text
-      value: 
-      objectReference: {fileID: 0}
-    - target: {fileID: 7178914109874227109, guid: 5c029f678d16a634cadbb01ddf465f1e, type: 3}
-      propertyPath: m_fontSize
-      value: 36
-      objectReference: {fileID: 0}
-    m_RemovedComponents:
-    - {fileID: 7178914108704902143, guid: 5c029f678d16a634cadbb01ddf465f1e, type: 3}
+    m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 5c029f678d16a634cadbb01ddf465f1e, type: 3}

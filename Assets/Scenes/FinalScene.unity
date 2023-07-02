@@ -27293,14 +27293,6 @@ PrefabInstance:
       propertyPath: weapons.Array.data[1]
       value: 
       objectReference: {fileID: 1145531990}
-    - target: {fileID: 9105974074755583899, guid: 7889f089da8201545b838e30b1ed16c5, type: 3}
-      propertyPath: sensitivityX
-      value: 25
-      objectReference: {fileID: 0}
-    - target: {fileID: 9105974074755583899, guid: 7889f089da8201545b838e30b1ed16c5, type: 3}
-      propertyPath: sensitivityY
-      value: 25
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 7889f089da8201545b838e30b1ed16c5, type: 3}
 --- !u!4 &2784579445481750570 stripped
@@ -27335,6 +27327,14 @@ PrefabInstance:
       propertyPath: MinDistance
       value: 1.2991943
       objectReference: {fileID: 0}
+    - target: {fileID: 2784579445481750575, guid: 8801c706a183aa6439eeeecc67f2c0bc, type: 3}
+      propertyPath: m_audioClip
+      value: 
+      objectReference: {fileID: 8300000, guid: d70ebe09cd42d4249a3f4ae84300fba1, type: 3}
+    - target: {fileID: 2784579445481750575, guid: 8801c706a183aa6439eeeecc67f2c0bc, type: 3}
+      propertyPath: OutputAudioMixerGroup
+      value: 
+      objectReference: {fileID: 24300002, guid: 6402d2ceb9f5d49419a586d05f980628, type: 2}
     - target: {fileID: 7060231816217979574, guid: 8801c706a183aa6439eeeecc67f2c0bc, type: 3}
       propertyPath: m_RootOrder
       value: 0
@@ -27592,10 +27592,38 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 7178914108177058126, guid: 5c029f678d16a634cadbb01ddf465f1e, type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7178914108177058126, guid: 5c029f678d16a634cadbb01ddf465f1e, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7178914108177058126, guid: 5c029f678d16a634cadbb01ddf465f1e, type: 3}
+      propertyPath: m_AnchorMin.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7178914108232269988, guid: 5c029f678d16a634cadbb01ddf465f1e, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 7178914108704902139, guid: 5c029f678d16a634cadbb01ddf465f1e, type: 3}
       propertyPath: playerInput
       value: 
       objectReference: {fileID: 8552921364691488969}
+    - target: {fileID: 7178914108704902141, guid: 5c029f678d16a634cadbb01ddf465f1e, type: 3}
+      propertyPath: gameManager
+      value: 
+      objectReference: {fileID: 1953752299}
+    - target: {fileID: 7178914109206238246, guid: 5c029f678d16a634cadbb01ddf465f1e, type: 3}
+      propertyPath: m_Maskable
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7178914109206238246, guid: 5c029f678d16a634cadbb01ddf465f1e, type: 3}
+      propertyPath: m_RaycastTarget
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 7178914109264872106, guid: 5c029f678d16a634cadbb01ddf465f1e, type: 3}
       propertyPath: m_Name
       value: GameMenusCanvas
@@ -27682,6 +27710,22 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7178914109264872110, guid: 5c029f678d16a634cadbb01ddf465f1e, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7178914109999038932, guid: 5c029f678d16a634cadbb01ddf465f1e, type: 3}
+      propertyPath: m_Maskable
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7178914109999038932, guid: 5c029f678d16a634cadbb01ddf465f1e, type: 3}
+      propertyPath: m_RaycastTarget
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7178914110090668730, guid: 5c029f678d16a634cadbb01ddf465f1e, type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7178914110090668730, guid: 5c029f678d16a634cadbb01ddf465f1e, type: 3}
+      propertyPath: m_AnchorMax.y
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []

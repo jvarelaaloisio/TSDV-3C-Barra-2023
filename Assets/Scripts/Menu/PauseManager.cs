@@ -1,8 +1,8 @@
 using Game;
 using UnityEngine;
+using UnityEngine.Audio;
 using UnityEngine.InputSystem;
 using UnityEngine.SceneManagement;
-using UnityEngine.Serialization;
 using UnityEngine.UI;
 
 namespace Menu
@@ -12,8 +12,10 @@ namespace Menu
         [SerializeField] private GameObject pauseMenu;
         [SerializeField] private PlayerInput playerInput;
         [SerializeField] private Button resumeButton;
+        [SerializeField] private Slider volumeSlider;
+        [SerializeField] private AudioMixer audioMixer;
         [SerializeField] public bool canWin = true;
-
+        
         private const int MenuSceneIndex = 0;
 
         private const float NormalTimeScale = 1;
@@ -67,6 +69,7 @@ namespace Menu
         /// </summary>
         private void PauseGame()
         {
+            ChangeMouseState(true);
             StopTime();
             ChangeState();
             resumeButton.Select();
@@ -77,11 +80,22 @@ namespace Menu
         /// </summary>
         public void ResumeGame()
         {
+            ChangeMouseState(false);
             playerInput.enabled = true;
             ResumeTime();
             ChangeState();
         }
-
+        
+        /// <summary>
+        /// Changes the state of the mouse. Locks/unlocks, visible/unvisible.
+        /// </summary>
+        /// <param name="mouseVisible"> mouse visibility state </param>
+        private void ChangeMouseState(bool mouseVisible)
+        {
+            Cursor.visible = mouseVisible;
+            Cursor.lockState = mouseVisible ? CursorLockMode.None : CursorLockMode.Locked;
+        }
+        
         /// <summary>
         /// Enables or disavles the player's input and the pause menu
         /// </summary>

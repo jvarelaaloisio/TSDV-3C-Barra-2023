@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.Audio;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
@@ -13,12 +14,15 @@ namespace Menu
 
     public class MenuManager : MonoBehaviour
     {
-        [Header("Buttons")] [SerializeField] private Button playButton;
-        [SerializeField] private Button optionsBackButton;
+        [Header("Buttons")] 
+        [SerializeField] private Button playButton;
+        [SerializeField] private Slider volumeSlider;
         [SerializeField] private Button creditsBackButton;
 
-        [Header("Menus")] [SerializeField] private GameObject optionsMenu;
+        [Header("Menus")] 
+        [SerializeField] private GameObject optionsMenu;
         [SerializeField] private GameObject creditsMenu;
+
         private void Start()
         {
             LoadMenu();
@@ -90,7 +94,7 @@ namespace Menu
                     gameObject.SetActive(true);
                     break;
                 case Menus.Options:
-                    optionsBackButton.Select();
+                    volumeSlider.Select();
                     optionsMenu.SetActive(true);
                     break;
                 case Menus.Credits:
