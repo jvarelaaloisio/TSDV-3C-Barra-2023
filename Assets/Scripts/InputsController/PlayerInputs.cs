@@ -181,7 +181,7 @@ public partial class @PlayerInputs: IInputActionCollection2, IDisposable
                 {
                     ""name"": """",
                     ""id"": ""60218819-d9db-48ce-b07a-eea13b48ad24"",
-                    ""path"": ""<DualShockGamepad>/rightStickPress"",
+                    ""path"": ""<DualShockGamepad>/buttonSouth"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",

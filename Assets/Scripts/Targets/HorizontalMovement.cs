@@ -18,7 +18,7 @@ namespace Targets
         /// <param name="ogSpeed"> Original speed </param>
         /// <param name="maxSpeed"> Max speed it can reach </param>
         public override void Move(Transform transform, Vector3 originalPos, ref bool direction, float speed,
-            float distance, float distanceTraveled, float acceleration, float ogSpeed, float maxSpeed)
+            float distance, ref float distanceTraveled, float acceleration, float ogSpeed, float maxSpeed)
         {
             Vector3 objPosition = transform.position;
             float newPositionX = objPosition.x + (direction ? speed : -speed) * Time.deltaTime;

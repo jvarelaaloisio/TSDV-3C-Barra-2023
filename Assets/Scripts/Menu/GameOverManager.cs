@@ -1,6 +1,4 @@
-﻿using System;
-using Game;
-using Targets;
+﻿using Game;
 using UnityEngine;
 using UnityEngine.UI;
 

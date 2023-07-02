@@ -34,7 +34,7 @@ namespace Targets
 
         private void Update()
         {
-            movement.Move(transform, originalPosition, ref direction, speed, moveDistance, distanceTraveled, acceleration, originalSpeed, maxSpeed);
+            movement.Move(transform, originalPosition, ref direction, speed, moveDistance, ref distanceTraveled, acceleration, originalSpeed, maxSpeed);
         }
 
         /// <summary>

@@ -18,11 +18,13 @@ namespace UI
         public static Action OnNoTargets;
         private WeaponContainer weaponContainer;
         private int targetAmount;
+        private bool isgameManagerNull;
 
         private void Start()
         {
             weaponContainer = FindObjectOfType<WeaponContainer>();
             gameManager = FindObjectOfType<GameManager>();
+            isgameManagerNull = gameManager == null;
 
             Target.OnTargetDeath += UpdateRemainingTargets;
             InputManager.OnBulletsUpdate += ShowBullets;
@@ -48,6 +50,8 @@ namespace UI
         /// </summary>
         private void ShowTimer()
         {
+            if(isgameManagerNull) return;
+            if (gameManager.Timer < 0) timer.text = "";
             timer.text = gameManager.Timer.ToString("0.#");
         }
 

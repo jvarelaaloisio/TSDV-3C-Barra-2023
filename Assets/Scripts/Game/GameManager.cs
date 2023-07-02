@@ -8,10 +8,11 @@ namespace Game
     public class GameManager : MonoBehaviour
     {
         [SerializeField] private int levelTimer = 30;
+        [SerializeField] private bool startTimer = true;
         public float Timer { get; set; }
-        
+
         private int targets;
-        
+
         public static Action OnLoseEvent;
         public static Action OnWinEvent;
 
@@ -29,7 +30,10 @@ namespace Game
 
         private void Update()
         {
-            StartCoroutine(TimerCoroutine());
+            if (startTimer)
+            {
+                StartCoroutine(TimerCoroutine());
+            }
         }
 
         /// <summary>

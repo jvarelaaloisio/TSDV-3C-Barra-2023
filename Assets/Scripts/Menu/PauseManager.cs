@@ -2,33 +2,40 @@ using Game;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.SceneManagement;
+using UnityEngine.Serialization;
 using UnityEngine.UI;
 
 namespace Menu
 {
-    public class PauseManager : MonoBehaviourSingleton<PauseManager>
+    public class PauseManager : MonoBehaviour
     {
         [SerializeField] private GameObject pauseMenu;
         [SerializeField] private PlayerInput playerInput;
         [SerializeField] private Button resumeButton;
-        
+        [SerializeField] public bool canWin = true;
+
         private const int MenuSceneIndex = 0;
-        
+
         private const float NormalTimeScale = 1;
         private const float PauseTimeScale = 0;
-        
-        private new void Awake()
+
+        private void Awake()
         {
-            base.Awake();
             resumeButton.Select();
-            GameManager.OnLoseEvent += OnGameEnd;
-            GameManager.OnWinEvent += OnGameEnd;
+            if (canWin)
+            {
+                GameManager.OnLoseEvent += OnGameEnd;
+                GameManager.OnWinEvent += OnGameEnd;
+            }
         }
 
         private void OnDestroy()
         {
-            GameManager.OnLoseEvent -= OnGameEnd;
-            GameManager.OnWinEvent -= OnGameEnd;
+            if (canWin)
+            {
+                GameManager.OnLoseEvent -= OnGameEnd;
+                GameManager.OnWinEvent -= OnGameEnd;
+            }
         }
 
         /// <summary>
@@ -89,7 +96,7 @@ namespace Menu
         public void OnResetButtonClick()
         {
             ResumeTime();
-            
+
             SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
         }
 
@@ -99,7 +106,7 @@ namespace Menu
         public void OnLoadMenuButtonClick()
         {
             ResumeTime();
-            
+
             SceneManager.LoadScene(MenuSceneIndex);
         }
 
@@ -117,9 +124,9 @@ namespace Menu
         /// </summary>
         private void ResumeTime()
         {
-            Time.timeScale = NormalTimeScale; 
+            Time.timeScale = NormalTimeScale;
         }
-        
+
         /// <summary>
         /// Quits the application
         /// </summary>
