@@ -10,16 +10,20 @@ namespace Menu
         [SerializeField] private Button restartLevel;
         private void Start()
         {
-            GameManager.OnLoseEvent += GameOver;
+            GameManager.OnDefeatEvent += GameOver;
         }
 
         private void OnDestroy()
         {
-            GameManager.OnLoseEvent -= GameOver;
+            GameManager.OnDefeatEvent -= GameOver;
         }
 
+        /// <summary>
+        /// in case of defeat event, activates the game over menu
+        /// </summary>
         private void GameOver()
         {
+            PauseManager.ChangeMouseState(true);
             restartLevel.Select();
             gameOverMenu.SetActive(true);
         }

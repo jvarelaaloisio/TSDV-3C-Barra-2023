@@ -23,6 +23,7 @@ namespace Menu
         /// </summary>
         private void GameWin()
         {
+            PauseManager.ChangeMouseState(true);
             selectButton.Select();
             gameWonMenu.SetActive(true);
         }

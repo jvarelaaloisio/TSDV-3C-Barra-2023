@@ -13,7 +13,7 @@ namespace Game
 
         private int targets;
 
-        public static Action OnLoseEvent;
+        public static Action OnDefeatEvent;
         public static Action OnWinEvent;
 
 
@@ -54,7 +54,7 @@ namespace Game
             Timer -= Time.deltaTime;
             if (Timer <= 0)
             {
-                OnLoseEvent?.Invoke();
+                OnDefeatEvent?.Invoke();
                 gameObject.SetActive(false);
             }
 

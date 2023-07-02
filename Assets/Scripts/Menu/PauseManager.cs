@@ -12,9 +12,7 @@ namespace Menu
         [SerializeField] private GameObject pauseMenu;
         [SerializeField] private PlayerInput playerInput;
         [SerializeField] private Button resumeButton;
-        [SerializeField] private Slider volumeSlider;
-        [SerializeField] private AudioMixer audioMixer;
-        [SerializeField] public bool canWin = true;
+        [SerializeField] private bool canWin = true;
         
         private const int MenuSceneIndex = 0;
 
@@ -26,7 +24,7 @@ namespace Menu
             resumeButton.Select();
             if (canWin)
             {
-                GameManager.OnLoseEvent += OnGameEnd;
+                GameManager.OnDefeatEvent += OnGameEnd;
                 GameManager.OnWinEvent += OnGameEnd;
             }
         }
@@ -35,7 +33,7 @@ namespace Menu
         {
             if (canWin)
             {
-                GameManager.OnLoseEvent -= OnGameEnd;
+                GameManager.OnDefeatEvent -= OnGameEnd;
                 GameManager.OnWinEvent -= OnGameEnd;
             }
         }
@@ -90,7 +88,7 @@ namespace Menu
         /// Changes the state of the mouse. Locks/unlocks, visible/unvisible.
         /// </summary>
         /// <param name="mouseVisible"> mouse visibility state </param>
-        private void ChangeMouseState(bool mouseVisible)
+        public static void ChangeMouseState(bool mouseVisible)
         {
             Cursor.visible = mouseVisible;
             Cursor.lockState = mouseVisible ? CursorLockMode.None : CursorLockMode.Locked;

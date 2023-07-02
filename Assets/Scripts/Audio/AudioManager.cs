@@ -13,13 +13,13 @@ namespace Audio
         private void Start()
         {
             GameManager.OnWinEvent += PlayWinSound;
-            GameManager.OnLoseEvent += PlayLoseSound;
+            GameManager.OnDefeatEvent += PlayLoseSound;
         }
 
         private void OnDestroy()
         {
             GameManager.OnWinEvent -= PlayWinSound;
-            GameManager.OnLoseEvent -= PlayLoseSound;   
+            GameManager.OnDefeatEvent -= PlayLoseSound;   
         }
 
         /// <summary>
