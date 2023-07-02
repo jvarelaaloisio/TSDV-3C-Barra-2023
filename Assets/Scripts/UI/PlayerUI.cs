@@ -12,7 +12,9 @@ namespace UI
         [SerializeField] private TMP_Text timer;
         [SerializeField] private TMP_Text targetsRemaining;
         [SerializeField] private TMP_Text bulletsCounter;
-        [FormerlySerializedAs("targetsManager")] [SerializeField] private GameManager gameManager;
+
+        [SerializeField] private GameManager gameManager;
+
         private WeaponContainer weaponContainer;
         private int targetAmount;
 
@@ -20,10 +22,10 @@ namespace UI
         {
             weaponContainer = FindObjectOfType<WeaponContainer>();
             gameManager = FindObjectOfType<GameManager>();
-            
+
             Target.OnTargetDeath += UpdateRemainingTargets;
             InputManager.OnBulletsUpdate += ShowBullets;
-            
+
             targetAmount = GameObject.FindGameObjectsWithTag("Target").Length;
             ShowTargetsRemaining();
         }
@@ -36,7 +38,6 @@ namespace UI
 
         private void Update()
         {
-
             ShowTimer();
         }
 
@@ -68,11 +69,12 @@ namespace UI
         /// </summary>
         private void ShowBullets()
         {
-            if (weaponContainer.GetWeapon()==null)
+            if (weaponContainer.GetWeapon() == null)
             {
                 bulletsCounter.text = "";
                 return;
             }
+
             bulletsCounter.text = weaponContainer.GetWeapon()?.Bullets + "/" + weaponContainer.GetWeapon()?.MaxBullets;
         }
     }
