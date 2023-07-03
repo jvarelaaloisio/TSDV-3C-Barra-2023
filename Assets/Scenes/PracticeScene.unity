@@ -27686,15 +27686,30 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 9105974074755583899, guid: 7889f089da8201545b838e30b1ed16c5, type: 3}
+      propertyPath: inputManager
+      value: 
+      objectReference: {fileID: 2121418509}
+    - target: {fileID: 9105974074755583899, guid: 7889f089da8201545b838e30b1ed16c5, type: 3}
       propertyPath: sensitivityX
-      value: 25
+      value: 50
       objectReference: {fileID: 0}
     - target: {fileID: 9105974074755583899, guid: 7889f089da8201545b838e30b1ed16c5, type: 3}
       propertyPath: sensitivityY
-      value: 25
+      value: 50
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 7889f089da8201545b838e30b1ed16c5, type: 3}
+--- !u!114 &2121418509 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 2296434312269396757, guid: 7889f089da8201545b838e30b1ed16c5, type: 3}
+  m_PrefabInstance: {fileID: 2121418508}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b8d90b74c823454b8766609e324626a2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &2126205541
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -28304,6 +28319,18 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 7178914108177058126, guid: 5c029f678d16a634cadbb01ddf465f1e, type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7178914108177058126, guid: 5c029f678d16a634cadbb01ddf465f1e, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7178914108177058126, guid: 5c029f678d16a634cadbb01ddf465f1e, type: 3}
+      propertyPath: m_AnchorMin.x
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 7178914108704902139, guid: 5c029f678d16a634cadbb01ddf465f1e, type: 3}
       propertyPath: canWin
       value: 0
@@ -28411,6 +28438,14 @@ PrefabInstance:
     - target: {fileID: 7178914109874227108, guid: 5c029f678d16a634cadbb01ddf465f1e, type: 3}
       propertyPath: m_AnchoredPosition.y
       value: -74
+      objectReference: {fileID: 0}
+    - target: {fileID: 7178914110090668730, guid: 5c029f678d16a634cadbb01ddf465f1e, type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7178914110090668730, guid: 5c029f678d16a634cadbb01ddf465f1e, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 5c029f678d16a634cadbb01ddf465f1e, type: 3}

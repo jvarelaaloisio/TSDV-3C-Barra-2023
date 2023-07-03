@@ -10,7 +10,7 @@ namespace Player
         [SerializeField] private float sensitivityY;
 
         [SerializeField] private Transform orientation;
-
+        [SerializeField] private InputManager inputManager;
         private float xRotation;
         private float yRotation;
 
@@ -30,11 +30,12 @@ namespace Player
         /// </summary>
         void MoveCamera()
         {
-            float mouseX = Mouse.current.delta.x.ReadValue() * Time.deltaTime * sensitivityX;
-            float mouseY = Mouse.current.delta.y.ReadValue() * Time.deltaTime * sensitivityY;
+            Vector2 cameraMovement = inputManager.OnCameraRotation();
+            float xMovement = cameraMovement.x  * Time.deltaTime * sensitivityX;
+            float yMovement = cameraMovement.y * Time.deltaTime * sensitivityY;
 
-            yRotation += mouseX;
-            xRotation -= mouseY;
+            yRotation += xMovement;
+            xRotation -= yMovement;
 
             xRotation = Mathf.Clamp(xRotation, -90f, 90f);
 

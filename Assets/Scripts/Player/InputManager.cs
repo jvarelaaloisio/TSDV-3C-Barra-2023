@@ -108,5 +108,10 @@ namespace Player
             FindObjectOfType<WeaponContainer>().GetWeapon()?.Reload();
             OnBulletsUpdate?.Invoke();
         }
+
+        public Vector2 OnCameraRotation()
+        {
+            return playerInput.World.CameraRotation.ReadValue<Vector2>();
+        }
     }
 }
