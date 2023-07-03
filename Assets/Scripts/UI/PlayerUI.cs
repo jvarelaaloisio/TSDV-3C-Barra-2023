@@ -43,7 +43,6 @@ namespace UI
             ShowTimer();
         }
 
-        //TODO TIMER EVENT
         /// <summary>
         /// Show time remaining
         /// </summary>
