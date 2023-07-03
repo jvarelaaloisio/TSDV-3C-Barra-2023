@@ -27604,22 +27604,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 7178914108177058126, guid: 5c029f678d16a634cadbb01ddf465f1e, type: 3}
-      propertyPath: m_AnchorMax.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7178914108177058126, guid: 5c029f678d16a634cadbb01ddf465f1e, type: 3}
-      propertyPath: m_AnchorMax.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7178914108177058126, guid: 5c029f678d16a634cadbb01ddf465f1e, type: 3}
-      propertyPath: m_AnchorMin.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7178914108232269988, guid: 5c029f678d16a634cadbb01ddf465f1e, type: 3}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 7178914108704902139, guid: 5c029f678d16a634cadbb01ddf465f1e, type: 3}
       propertyPath: playerInput
       value: 
@@ -27628,14 +27612,6 @@ PrefabInstance:
       propertyPath: gameManager
       value: 
       objectReference: {fileID: 1953752299}
-    - target: {fileID: 7178914109206238246, guid: 5c029f678d16a634cadbb01ddf465f1e, type: 3}
-      propertyPath: m_Maskable
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7178914109206238246, guid: 5c029f678d16a634cadbb01ddf465f1e, type: 3}
-      propertyPath: m_RaycastTarget
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 7178914109264872106, guid: 5c029f678d16a634cadbb01ddf465f1e, type: 3}
       propertyPath: m_Name
       value: GameMenusCanvas
@@ -27722,22 +27698,6 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7178914109264872110, guid: 5c029f678d16a634cadbb01ddf465f1e, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7178914109999038932, guid: 5c029f678d16a634cadbb01ddf465f1e, type: 3}
-      propertyPath: m_Maskable
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7178914109999038932, guid: 5c029f678d16a634cadbb01ddf465f1e, type: 3}
-      propertyPath: m_RaycastTarget
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7178914110090668730, guid: 5c029f678d16a634cadbb01ddf465f1e, type: 3}
-      propertyPath: m_AnchorMax.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7178914110090668730, guid: 5c029f678d16a634cadbb01ddf465f1e, type: 3}
-      propertyPath: m_AnchorMax.y
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []

@@ -438,8 +438,8 @@ RectTransform:
   m_Father: {fileID: 7178914109329219197}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.9, y: 0}
-  m_AnchorMax: {x: 0.9, y: 1}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 0}
   m_AnchoredPosition: {x: 0.00010681152, y: 0.10000038}
   m_SizeDelta: {x: 19.5867, y: -0.143}
   m_Pivot: {x: 0.5, y: 0.5}
@@ -1300,6 +1300,7 @@ GameObject:
   - component: {fileID: 7178914108704902140}
   - component: {fileID: 7178914108704902139}
   - component: {fileID: 7178914108704902143}
+  - component: {fileID: 5968195129088894485}
   m_Layer: 5
   m_Name: MenusManager
   m_TagString: Untagged
@@ -1402,8 +1403,6 @@ MonoBehaviour:
   pauseMenu: {fileID: 7178914108232269988}
   playerInput: {fileID: 0}
   resumeButton: {fileID: 7178914109357961440}
-  volumeSlider: {fileID: 7178914109555393629}
-  audioMixer: {fileID: 24100000, guid: 6402d2ceb9f5d49419a586d05f980628, type: 2}
   canWin: 1
 --- !u!114 &7178914108704902143
 MonoBehaviour:
@@ -1419,6 +1418,20 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   gameWonMenu: {fileID: 7178914108715870196}
   selectButton: {fileID: 7178914109876111930}
+--- !u!114 &5968195129088894485
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7178914108704902137}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a93eb8538a6568f4aa49f446526ab4b0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  mainMixer: {fileID: 24100000, guid: 6402d2ceb9f5d49419a586d05f980628, type: 2}
+  volumeSlider: {fileID: 7178914109555393629}
 --- !u!1 &7178914108715870196
 GameObject:
   m_ObjectHideFlags: 0
@@ -2529,9 +2542,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
   m_Color: {r: 0, g: 0, b: 0, a: 0.65882355}
-  m_RaycastTarget: 1
+  m_RaycastTarget: 0
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
-  m_Maskable: 1
+  m_Maskable: 0
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
@@ -3265,16 +3278,16 @@ MonoBehaviour:
   m_FillRect: {fileID: 7178914110090668730}
   m_HandleRect: {fileID: 7178914108177058126}
   m_Direction: 0
-  m_MinValue: -40
+  m_MinValue: -80
   m_MaxValue: 0
   m_WholeNumbers: 0
   m_Value: -4
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 7178914108704902139}
+      - m_Target: {fileID: 7178914108704902137}
         m_TargetAssemblyTypeName: Menu.PauseManager, Assembly-CSharp
-        m_MethodName: SetVolume
+        m_MethodName: 
         m_Mode: 0
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -4266,9 +4279,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
   m_Color: {r: 0, g: 0, b: 0, a: 0.8666667}
-  m_RaycastTarget: 1
+  m_RaycastTarget: 0
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
-  m_Maskable: 1
+  m_Maskable: 0
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
@@ -4597,7 +4610,7 @@ RectTransform:
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0.9, y: 1}
+  m_AnchorMax: {x: 0, y: 0}
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 10, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
