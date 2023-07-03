@@ -17,7 +17,28 @@ Clone this repository to your local machine using git clone https://github.com/B
 Open the project in Unity 3D.
 Build and run the game in your desired platform (Windows, macOS, Linux, etc.).
 Enjoy the First Person Gallery Shooter!
+
+Controls: 
+
+Camera: Mouse
+
+Move: WASD  /  Left stick
+
+Sprint: Shift  /  X
+
+Weapons:
+
+Shoot: Left click  /  R2
+
+Pickup: E  /  ■
+
+Drop: F  /  O
+
+Swap: Q  / R1
+
+Reload: R  /  ▲
+
 About the Developer
 This game was developed by Santiago Barra, a passionate game developer with a love for creating exciting and immersive experiences. This project marks the debut of Barba Games Studios, an independent game development studio focused on delivering high-quality games for players around the world.
 
-If you have any questions, feedback, or suggestions, feel free to contact Santiago at santiagobarradev@example.com. Your input is greatly appreciated!
+If you have any questions, feedback, or suggestions, feel free to contact Santiago at barrasanti@gmail.com. Your input is greatly appreciated!
