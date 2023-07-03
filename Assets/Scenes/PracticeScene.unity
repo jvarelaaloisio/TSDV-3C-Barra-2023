@@ -28435,6 +28435,18 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 7178914109555393629, guid: 5c029f678d16a634cadbb01ddf465f1e, type: 3}
+      propertyPath: m_OnValueChanged.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 2146658447}
+    - target: {fileID: 7178914109555393629, guid: 5c029f678d16a634cadbb01ddf465f1e, type: 3}
+      propertyPath: m_OnValueChanged.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: SetVolume
+      objectReference: {fileID: 0}
+    - target: {fileID: 7178914109555393629, guid: 5c029f678d16a634cadbb01ddf465f1e, type: 3}
+      propertyPath: m_OnValueChanged.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: Menu.VolumeSlider, Assembly-CSharp
+      objectReference: {fileID: 0}
     - target: {fileID: 7178914109874227107, guid: 5c029f678d16a634cadbb01ddf465f1e, type: 3}
       propertyPath: m_IsActive
       value: 0
@@ -28453,3 +28465,14 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 5c029f678d16a634cadbb01ddf465f1e, type: 3}
+--- !u!114 &2146658447 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 5968195129088894485, guid: 5c029f678d16a634cadbb01ddf465f1e, type: 3}
+  m_PrefabInstance: {fileID: 2146658446}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a93eb8538a6568f4aa49f446526ab4b0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
