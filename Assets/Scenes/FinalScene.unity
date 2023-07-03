@@ -27551,11 +27551,11 @@ PrefabInstance:
       objectReference: {fileID: 8552921364691488971}
     - target: {fileID: 9105974074755583899, guid: 7889f089da8201545b838e30b1ed16c5, type: 3}
       propertyPath: sensitivityX
-      value: 50
+      value: 20
       objectReference: {fileID: 0}
     - target: {fileID: 9105974074755583899, guid: 7889f089da8201545b838e30b1ed16c5, type: 3}
       propertyPath: sensitivityY
-      value: 50
+      value: 20
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 7889f089da8201545b838e30b1ed16c5, type: 3}
