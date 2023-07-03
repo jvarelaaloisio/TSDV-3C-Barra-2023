@@ -28343,6 +28343,10 @@ PrefabInstance:
       propertyPath: gameManager
       value: 
       objectReference: {fileID: 1927746137}
+    - target: {fileID: 7178914108704902143, guid: 5c029f678d16a634cadbb01ddf465f1e, type: 3}
+      propertyPath: canWin
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 7178914109264872106, guid: 5c029f678d16a634cadbb01ddf465f1e, type: 3}
       propertyPath: m_Name
       value: GameMenusCanvas

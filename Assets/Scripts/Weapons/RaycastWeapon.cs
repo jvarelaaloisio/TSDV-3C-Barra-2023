@@ -1,14 +1,18 @@
-﻿using Audio;
+﻿using System.Collections;
+using Audio;
 using Targets;
 using UnityEngine;
+using UnityEngine.UIElements;
 
 namespace Weapons
 {
     public class RaycastWeapon : Weapon
     {
         [Header("Raycast")] 
-        [SerializeField] private Transform gunHitbox;
         [SerializeField] private float range = 100f;
+        [SerializeField] private LineRenderer laserRenderer;
+        [SerializeField] private Transform laserOrigin;
+        [SerializeField] private float laserDuration = 0.05f;
 
         [Header("Stats")] 
         [SerializeField] private float damage = 10f;
@@ -28,6 +32,7 @@ namespace Weapons
             OnReload = onReloadEvent;
             OnShot = onRaycastShootEvent;
             OnEmptyMagazine = onEmptyMagazineEvent;
+            laserRenderer = GetComponent<LineRenderer>();
         }
 
         /// <summary>
@@ -39,12 +44,32 @@ namespace Weapons
             BulletShot();
             
             RaycastHit hit;
-            
-            if (Physics.Raycast(gunHitbox.position, gunHitbox.forward, out hit, range))
+            laserRenderer.SetPosition(0, laserOrigin.position);
+            if (Physics.Raycast(Camera.main!.transform.position, Camera.main!.transform.forward, out hit, range))
             {
                 Target target = hit.transform.GetComponent<Target>();
                 if (target != null) target.TakeDamage(damage);
+                laserRenderer.SetPosition(1, hit.point);
             }
+            else
+            {
+                laserRenderer.SetPosition(1, laserOrigin.position + Camera.main.transform.forward * range);
+                
+            }
+
+            StartCoroutine(ShowLaser());
         }
+
+        /// <summary>
+        /// Enables and disables the laser line renderer
+        /// </summary>
+        /// <returns></returns>
+        private IEnumerator ShowLaser()
+        {
+            laserRenderer.enabled = true;
+            yield return new WaitForSeconds(laserDuration);
+            laserRenderer.enabled = false;
+        }
+        
     }
 }

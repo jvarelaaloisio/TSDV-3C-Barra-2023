@@ -8,6 +8,7 @@ namespace Menu
     {
         [SerializeField] private GameObject gameWonMenu;
         [SerializeField] private Button selectButton;
+        [SerializeField] private bool canWin = true;
         private void Start()
         {
             GameManager.OnWinEvent += GameWin;
@@ -23,6 +24,7 @@ namespace Menu
         /// </summary>
         private void GameWin()
         {
+            if(!canWin) return;
             PauseManager.ChangeMouseState(true);
             selectButton.Select();
             gameWonMenu.SetActive(true);
