@@ -1,5 +1,6 @@
 using System;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 namespace Player
 {
@@ -9,7 +10,7 @@ namespace Player
         [SerializeField] private float sensitivityY;
 
         [SerializeField] private Transform orientation;
-
+        [SerializeField] private InputManager inputManager;
         private float xRotation;
         private float yRotation;
 
@@ -24,20 +25,22 @@ namespace Player
             MoveCamera();
         }
 
+        /// <summary>
+        /// Rotates the camera to follow the mouse.
+        /// </summary>
         void MoveCamera()
         {
-            //TODO: Fix - Old inputManager
-            float mouseX = Input.GetAxisRaw("Mouse X") * Time.deltaTime * sensitivityX;
-            float mouseY = Input.GetAxisRaw("Mouse Y") * Time.deltaTime * sensitivityY;
+            Vector2 cameraMovement = inputManager.OnCameraRotation();
+            float xMovement = cameraMovement.x  * Time.deltaTime * sensitivityX;
+            float yMovement = cameraMovement.y * Time.deltaTime * sensitivityY;
 
-            yRotation += mouseX;
-            xRotation -= mouseY;
+            yRotation += xMovement;
+            xRotation -= yMovement;
 
             xRotation = Mathf.Clamp(xRotation, -90f, 90f);
-            
+
             transform.rotation = Quaternion.Euler(xRotation, yRotation, 0);
             orientation.rotation = Quaternion.Euler(0, yRotation, 0);
-            
         }
     }
 }

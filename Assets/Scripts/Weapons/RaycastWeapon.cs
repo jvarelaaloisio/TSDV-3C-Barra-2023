@@ -1,122 +1,75 @@
-﻿using UnityEngine;
+﻿using System.Collections;
+using Audio;
+using Targets;
+using UnityEngine;
+using UnityEngine.UIElements;
 
 namespace Weapons
 {
-    public class RaycastWeapon : MonoBehaviour, IWeapon
+    public class RaycastWeapon : Weapon
     {
-        [Header("Raycast")] [SerializeField] private Transform gunHitbox;
+        [Header("Raycast")] 
         [SerializeField] private float range = 100f;
-        [SerializeField] private LineRenderer lineRenderer;
+        [SerializeField] private LineRenderer laserRenderer;
+        [SerializeField] private Transform laserOrigin;
+        [SerializeField] private float laserDuration = 0.05f;
 
-
-        [Header("Stats")] [SerializeField] private float damage = 10f;
-        [SerializeField] private int bullets = 10;
+        [Header("Stats")] 
+        [SerializeField] private float damage = 10f;
         [SerializeField] private int maxBullets = 10;
-        [SerializeField] private float impactForce = 30f;
         [SerializeField] private int id = 1;
-        private bool inInventory = false;
+        
+        [Header("Events")] 
+        [SerializeField] private SoundEvent onRaycastShootEvent;
+        [SerializeField] private SoundEvent onEmptyMagazineEvent;
+        [SerializeField] private SoundEvent onReloadEvent;
 
-        private bool isActive;
-
-
-        public GameObject GetGameObject()
+        private void Awake()
         {
-            return gameObject;
+            Id = id;
+            MaxBullets = maxBullets;
+            Bullets = maxBullets;
+            OnReload = onReloadEvent;
+            OnShot = onRaycastShootEvent;
+            OnEmptyMagazine = onEmptyMagazineEvent;
+            laserRenderer = GetComponent<LineRenderer>();
         }
 
-        public void Shoot()
+        /// <summary>
+        /// Casts a ray going forward
+        /// </summary>
+        public override void Shoot()
         {
-            if (!isActive) return;
-
-            FireLaser();
-
-            if (Physics.Raycast(gunHitbox.position, gunHitbox.forward, out var hit, range))
+            if(!CanShoot()) return;
+            BulletShot();
+            
+            RaycastHit hit;
+            laserRenderer.SetPosition(0, laserOrigin.position);
+            if (Physics.Raycast(Camera.main!.transform.position, Camera.main!.transform.forward, out hit, range))
             {
                 Target target = hit.transform.GetComponent<Target>();
-
                 if (target != null) target.TakeDamage(damage);
-            }
-
-            if (hit.rigidbody != null)
-            {
-                hit.rigidbody.AddForce(-hit.normal * impactForce);
-            }
-        }
-
-        //TODO: Fix - Should be native Setter/Getter
-        public int GetBullets()
-        {
-            return bullets;
-        }
-
-        //TODO: Fix - Should be native Setter/Getter
-        public bool IsEquiped()
-        {
-            return isActive;
-        }
-
-        //TODO: Fix - Should be native Setter/Getter
-        public void SetEquiped(bool equiped)
-        {
-            isActive = equiped;
-        }
-
-        //TODO: Fix - Repeated code
-        public void Reload()
-        {
-            bullets = maxBullets;
-        }
-
-        public int GetId()
-        {
-            return id;
-        }
-
-        public bool InInventory()
-        {
-            return inInventory;
-        }
-
-        public void SetInventory(bool inInventory)
-        {
-            this.inInventory = inInventory;
-        }
-
-        private void FireLaser()
-        {
-            //TODO: TP2 - SOLID
-            lineRenderer.enabled = true;
-
-            //TODO: Fix - Calculating hit twice
-            RaycastHit hit;
-            Vector3 position = transform.position;
-            if (Physics.Raycast(position, transform.forward, out hit, range))
-            {
-                lineRenderer.SetPosition(0, position);
-                lineRenderer.SetPosition(1, hit.point);
-
-                //TODO: TP2 - Remove unused methods/variables/classes
-                // Perform actions when the laser hits an object (e.g., apply damage, trigger effects)
-                if (hit.collider != null)
-                {
-                    // Object hit! Access hit.collider.gameObject for further actions.
-                }
+                laserRenderer.SetPosition(1, hit.point);
             }
             else
             {
-                lineRenderer.SetPosition(0, position);
-                lineRenderer.SetPosition(1, position + transform.forward * range);
+                laserRenderer.SetPosition(1, laserOrigin.position + Camera.main.transform.forward * range);
+                
             }
 
-            //TODO: Fix - Hardcoded value
-            //TODO: Fix - These comments really make it feel as if this is not your code.
-            // Hide the laser beam after a short delay (adjust as needed)
-            Invoke(nameof(HideLaser), 0.1f);
+            StartCoroutine(ShowLaser());
         }
 
-        private void HideLaser()
+        /// <summary>
+        /// Enables and disables the laser line renderer
+        /// </summary>
+        /// <returns></returns>
+        private IEnumerator ShowLaser()
         {
-            lineRenderer.enabled = false;
+            laserRenderer.enabled = true;
+            yield return new WaitForSeconds(laserDuration);
+            laserRenderer.enabled = false;
         }
+        
     }
 }

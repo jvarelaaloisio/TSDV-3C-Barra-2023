@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 using UnityEngine.InputSystem;
 using Weapons;
 
@@ -6,24 +7,20 @@ namespace Player
 {
     public class InputManager : MonoBehaviour
     {
-        //TODO: TP2 - Remove unused methods/variables/classes
-        private bool isSprinting = false;
+        public bool IsSprinting { get; private set; }
         private static InputManager _instance;
 
-        public static InputManager Instance
-        {
-            get { return _instance; }
-        }
+        public static InputManager Instance => _instance;
 
         private PlayerInputs playerInput;
         private Pickable[] pickables;
-
+        public static Action OnBulletsUpdate;
         private void Awake()
         {
             Cursor.visible = false;
             if (_instance != null && _instance != this)
             {
-                Destroy(this.gameObject);
+                Destroy(gameObject);
             }
             else
             {
@@ -44,14 +41,13 @@ namespace Player
             playerInput.Disable();
         }
 
+        /// <summary>
+        /// Returns the value of the player's movement input.
+        /// </summary>
+        /// <returns></returns>
         public Vector2 GetPlayerMovement()
         {
             return playerInput.World.Move.ReadValue<Vector2>();
-        }
-
-        public Vector2 GetMouseDelta()
-        {
-            return playerInput.World.CameraRotation.ReadValue<Vector2>();
         }
 
         /// <summary>
@@ -60,15 +56,16 @@ namespace Player
         /// <param name="value"> new speed </param>
         public void OnSprint(InputValue value)
         {
-            isSprinting = value.isPressed;
+            IsSprinting = value.isPressed;
         }
 
         /// <summary>
-        /// In case of having a weapon equiped, shoots
+        /// In case of having a weapon equipped, shoots
         /// </summary>
         public void OnShoot()
         {
             FindObjectOfType<WeaponContainer>().GetWeapon()?.Shoot();
+            OnBulletsUpdate?.Invoke();
         }
 
         /// <summary>
@@ -78,15 +75,28 @@ namespace Player
         {
             foreach (Pickable pickable in pickables)
             {
-                pickable.PickAndDrop();
+                pickable.PickUp();
+                OnBulletsUpdate?.Invoke();
             }
         }
 
         /// <summary>
-        /// Swaps equiped weapon with the unequiped weapon
+        /// Drops the currently equipped weapon, if any equipped.
+        /// </summary>
+        public void OnDrop()
+        {
+            foreach (Pickable pickable in pickables)
+            {
+                pickable.Drop();
+                OnBulletsUpdate?.Invoke();
+            }
+        }
+        /// <summary>
+        /// Swaps equipped weapon with the next available weapon.
         /// </summary>
         public void OnSwapWeapon()
         {
+            OnBulletsUpdate?.Invoke();
             FindObjectOfType<WeaponContainer>().SwapWeapon();
         }
         
@@ -96,6 +106,12 @@ namespace Player
         public void OnReload()
         {
             FindObjectOfType<WeaponContainer>().GetWeapon()?.Reload();
+            OnBulletsUpdate?.Invoke();
+        }
+
+        public Vector2 OnCameraRotation()
+        {
+            return playerInput.World.CameraRotation.ReadValue<Vector2>();
         }
     }
 }

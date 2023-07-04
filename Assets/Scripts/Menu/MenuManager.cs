@@ -1,54 +1,111 @@
 using UnityEngine;
-using UnityEngine.InputSystem;
+using UnityEngine.Audio;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 namespace Menu
 {
+    public enum Menus
+    {
+        Main,
+        Options,
+        Credits
+    }
+
     public class MenuManager : MonoBehaviour
     {
-        [Header("Buttons")]
+        [Header("Buttons")] 
         [SerializeField] private Button playButton;
-        [SerializeField] private Button optionsBackButton;
+        [SerializeField] private Slider volumeSlider;
         [SerializeField] private Button creditsBackButton;
 
-        [Header("Menus")]
+        [Header("Menus")] 
         [SerializeField] private GameObject optionsMenu;
         [SerializeField] private GameObject creditsMenu;
 
-        //TODO: TP2 - Syntax - Consistency in access modifiers (private/protected/public/etc)
-        void Start()
+        private void Start()
         {
-            playButton.Select();
-            gameObject.SetActive(true);
-            optionsMenu.SetActive(false);
-            creditsMenu.SetActive(false);
+            LoadMenu();
         }
 
-        public void OnPlayButtonClick()
+        /// <summary>
+        /// Shows the main menu in the menu scene.
+        /// </summary>
+        public void LoadMenu()
         {
-            //TODO: Fix - Hardcoded value
-            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
+            ChangeMenu(Menus.Main);
         }
 
-        public void OnOptionsButtonClick()
+        /// <summary>
+        /// Loads the game scene
+        /// </summary>
+        public void LoadGame()
         {
-            gameObject.SetActive(false);
-            optionsMenu.SetActive(true);
-            optionsBackButton.Select();
-            
+            const int sceneOffset = 1;
+            LoadNextScene(sceneOffset);
+        }
+        
+        /// <summary>
+        /// Shows the options in the menu scene.
+        /// </summary>
+        public void LoadOptions()
+        {
+            ChangeMenu(Menus.Options);
+        }
+        /// <summary>
+        /// Shows the credits in the menu scene.
+        /// </summary>
+        public void LoadCredits()
+        {
+            ChangeMenu(Menus.Credits);
         }
 
-        public void OnCreditsButtonClick()
-        {
-            gameObject.SetActive(false);
-            creditsMenu.SetActive(true);
-            creditsBackButton.Select();
-        }
-
+        /// <summary>
+        /// Quits the application
+        /// </summary>
         public void OnExitButtonClick()
         {
             Application.Quit();
+        }
+
+        /// <summary>
+        /// Loads the required scene from the current scene.
+        /// </summary>
+        /// <param name="sceneOffset"></param>
+        private void LoadNextScene(int sceneOffset)
+        {
+            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + sceneOffset);
+        }
+
+        /// <summary>
+        /// Basic menu state machine.
+        /// </summary>
+        /// <param name="menu"></param>
+        private void ChangeMenu(Menus menu)
+        {
+            optionsMenu.SetActive(false);
+            creditsMenu.SetActive(false);
+            gameObject.SetActive(false);
+
+            switch (menu)
+            {
+                case Menus.Main:
+                    playButton.Select();
+                    gameObject.SetActive(true);
+                    break;
+                case Menus.Options:
+                    volumeSlider.Select();
+                    optionsMenu.SetActive(true);
+                    break;
+                case Menus.Credits:
+                    creditsBackButton.Select();
+                    creditsMenu.SetActive(true);
+                    break;
+                default:
+                    playButton.Select();
+                    gameObject.SetActive(true);
+                    break;
+            }
         }
     }
 }

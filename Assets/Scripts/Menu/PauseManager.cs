@@ -1,37 +1,56 @@
+using Game;
 using UnityEngine;
+using UnityEngine.Audio;
 using UnityEngine.InputSystem;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 namespace Menu
 {
-    public class PauseManager : MonoBehaviourSingleton<PauseManager>
+    public class PauseManager : MonoBehaviour
     {
         [SerializeField] private GameObject pauseMenu;
         [SerializeField] private PlayerInput playerInput;
         [SerializeField] private Button resumeButton;
-        private InputAction pauseAction;
+        [SerializeField] private bool canWin = true;
+        
+        private const int MenuSceneIndex = 0;
 
-        private new void Awake()
+        private const float NormalTimeScale = 1;
+        private const float PauseTimeScale = 0;
+
+        private void Awake()
         {
-            base.Awake();
             resumeButton.Select();
-            //TODO: Fix - Hardcoded value - Why not just setup this in the input window?
-            pauseAction = new InputAction(binding: "<Keyboard>/escape");
-            pauseAction.performed += OnPause;
+            if (canWin)
+            {
+                GameManager.OnDefeatEvent += OnGameEnd;
+                GameManager.OnWinEvent += OnGameEnd;
+            }
         }
 
-        private void OnEnable()
+        private void OnDestroy()
         {
-            pauseAction.Enable();
+            if (canWin)
+            {
+                GameManager.OnDefeatEvent -= OnGameEnd;
+                GameManager.OnWinEvent -= OnGameEnd;
+            }
         }
 
-        private void OnDisable()
+        /// <summary>
+        /// In case of game ending by win or lose event, stops time and disables this menu.
+        /// </summary>
+        private void OnGameEnd()
         {
-            pauseAction.Disable();
+            StopTime();
+            gameObject.SetActive(false);
         }
 
-        public void OnPause(InputAction.CallbackContext context)
+        /// <summary>
+        /// Activates or deactivates the pause.
+        /// </summary>
+        private void OnPause()
         {
             if (pauseMenu.activeSelf)
             {
@@ -43,32 +62,86 @@ namespace Menu
             }
         }
 
+        /// <summary>
+        /// Stops the game and deactivates gameplay inputs.
+        /// </summary>
         private void PauseGame()
         {
-            Time.timeScale = 0;
-            playerInput.enabled = false;
-            pauseMenu.SetActive(true);
+            ChangeMouseState(true);
+            StopTime();
+            ChangeState();
             resumeButton.Select();
         }
 
+        /// <summary>
+        /// Resumes the game and reactivates the gameplay inputs.
+        /// </summary>
         public void ResumeGame()
         {
-            Time.timeScale = 1;
+            ChangeMouseState(false);
             playerInput.enabled = true;
-            pauseMenu.SetActive(false);
+            ResumeTime();
+            ChangeState();
         }
         
+        /// <summary>
+        /// Changes the state of the mouse. Locks/unlocks, visible/unvisible.
+        /// </summary>
+        /// <param name="mouseVisible"> mouse visibility state </param>
+        public static void ChangeMouseState(bool mouseVisible)
+        {
+            Cursor.visible = mouseVisible;
+            Cursor.lockState = mouseVisible ? CursorLockMode.None : CursorLockMode.Locked;
+        }
+        
+        /// <summary>
+        /// Enables or disavles the player's input and the pause menu
+        /// </summary>
+        private void ChangeState()
+        {
+            pauseMenu.SetActive(!pauseMenu.activeSelf);
+        }
+
+        /// <summary>
+        /// Reloads the current scene.
+        /// </summary>
         public void OnResetButtonClick()
         {
+            ResumeTime();
+
             SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
         }
-        
+
+        /// <summary>
+        /// Loads the menu scene
+        /// </summary>
         public void OnLoadMenuButtonClick()
         {
-            Time.timeScale = 1;
-            SceneManager.LoadScene(0);
+            ResumeTime();
+
+            SceneManager.LoadScene(MenuSceneIndex);
         }
-        
+
+        /// <summary>
+        /// Modifies time scale to PauseTimeScale
+        /// </summary>
+        private void StopTime()
+        {
+            playerInput.enabled = false;
+            Time.timeScale = PauseTimeScale;
+        }
+
+        /// <summary>
+        /// Modifies time scale to NormalTimeScale
+        /// </summary>
+        private void ResumeTime()
+        {
+            Time.timeScale = NormalTimeScale;
+        }
+
+        /// <summary>
+        /// Quits the application
+        /// </summary>
         public void OnExitButtonClick()
         {
             Application.Quit();

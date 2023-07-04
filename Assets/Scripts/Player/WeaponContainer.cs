@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using UnityEngine;
 using Weapons;
 
@@ -6,85 +7,126 @@ namespace Player
 {
     public class WeaponContainer : MonoBehaviour
     {
-        //TODO: TP2 - Remove unused methods/variables/classes
-        private IWeapon equipedWeapon;
+        private Dictionary<int, Weapon> idWeapons;
 
         [SerializeField] private GameObject[] weapons;
 
+        private void Start()
+        {
+            CreateIdWeapons();
+        }
+
+        /// <summary>
+        /// Creates the dictionary of weapons and their id
+        /// </summary>
+        void CreateIdWeapons()
+        {
+            idWeapons = new Dictionary<int, Weapon>(weapons.Length);
+
+            foreach (GameObject weapon in weapons)
+            {
+                idWeapons.Add(weapon.GetComponent<Weapon>().Id, weapon.GetComponent<Weapon>());
+            }
+        }
+
+        /// <summary>
+        /// Equips the weapon sent by the parameter.
+        /// </summary>
+        /// <param name="id"> id reference of the weapon</param>
         public void EquipWeapon(int id)
         {
-            if (FindWeaponById(id) != null)
+            Weapon weapon = FindWeaponById(id);
+
+            if (weapon == null) return;
+
+            weapon.Inventory = true;
+
+            bool equipWeapon = true;
+
+            foreach (GameObject weapon2 in weapons)
             {
-                IWeapon weapon = FindWeaponById(id);
-                weapon.SetInventory(true);
-
-                bool equipWeapon = true;
-
-                foreach (GameObject weapon2 in weapons)
+                if (weapon2.GetComponent<Weapon>().Equipped)
                 {
-                    if (weapon2.GetComponent<IWeapon>().IsEquiped())
-                    {
-                        equipWeapon = false;
-                    }
+                    equipWeapon = false;
                 }
-
-                weapon.SetEquiped(equipWeapon);
             }
+
+            weapon.GetGameObject().SetActive(equipWeapon);
+            weapon.Equipped = equipWeapon;
         }
 
+        /// <summary>
+        /// Swaps the current weapon equiped with the next weapon in inventory.
+        /// </summary>
         public void SwapWeapon()
         {
-            foreach (GameObject weapon in weapons)
+            Weapon weapon = GetWeapon();
+
+            int id = 0;
+
+            if (weapon != null)
             {
-                if (weapon.GetComponent<IWeapon>().IsEquiped())
+                id = weapon.Id + 1;
+                weapon.Equipped = false;
+                weapon.GetGameObject().SetActive(false);
+            }
+
+            if (id >= weapons.Length) id = 0;
+
+            Weapon weapon2 = FindWeaponById(id);
+
+            if (!FindWeaponById(id).Inventory)
+            {
+                foreach (GameObject weaponAux in weapons)
                 {
-                    weapon.GetComponent<IWeapon>().SetEquiped(false);
-                    //TODO: Fix - Too many iterations
-                    foreach (GameObject weapon2 in weapons)
+                    if (weaponAux.GetComponent<Weapon>().Inventory)
                     {
-                        if (weapon2.GetComponent<IWeapon>().GetId() != weapon.GetComponent<IWeapon>().GetId() &&
-                            weapon2.GetComponent<IWeapon>().InInventory())
-                        {
-                            weapon2.GetComponent<IWeapon>().SetEquiped(true);
-                            break;
-                        }
+                        weapon2 = weaponAux.GetComponent<Weapon>();
                     }
                 }
             }
+
+            if (!weapon2.Inventory) return;
+            
+            weapon2.Equipped = true;
+            weapon2.GetGameObject().SetActive(true);
         }
 
+        /// <summary>
+        /// Unequips the referenced weapon.
+        /// </summary>
+        /// <param name="id"> weapon id</param>
         public void UnequipWeapon(int id)
         {
-            FindWeaponById(id).SetInventory(false);
-            FindWeaponById(id).SetEquiped(false);
+            FindWeaponById(id).Inventory = false;
+            FindWeaponById(id).Equipped = false;
         }
 
-        public IWeapon GetWeapon()
+        /// <summary>
+        /// Equiped weapon getter.
+        /// </summary>
+        /// <returns></returns>
+        public Weapon GetWeapon()
         {
             foreach (GameObject weapon in weapons)
             {
-                //TODO: Fix - Cache value
-                if (weapon.GetComponent<IWeapon>().IsEquiped())
+                if (weapon.TryGetComponent(out Weapon weaponComponent) && weaponComponent.Equipped)
                 {
-                    return weapon.GetComponent<IWeapon>();
+                    return weaponComponent;
                 }
             }
 
             return null;
         }
 
-        //TODO: Fix - This could be cached in a dictionary
-        private IWeapon FindWeaponById(int id)
+        /// <summary>
+        /// Get the weapon referenced by the id
+        /// </summary>
+        /// <param name="id"> weapon's id </param>
+        /// <returns> returns the corresponding weapon, if any. </returns>
+        private Weapon FindWeaponById(int id)
         {
-            foreach (GameObject weapon in weapons)
-            {
-                if (weapon.GetComponent<IWeapon>().GetId() == id)
-                {
-                    return weapon.GetComponent<IWeapon>();
-                }
-            }
-
-            return null;
+            return idWeapons[id];
         }
     }
 }

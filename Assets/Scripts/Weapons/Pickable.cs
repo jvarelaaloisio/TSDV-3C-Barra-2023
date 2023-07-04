@@ -6,7 +6,7 @@ namespace Weapons
 {
     public class Pickable : MonoBehaviour
     {
-        private IWeapon weapon;
+        private Weapon weapon;
         private Rigidbody itemBody;
         private BoxCollider itemCollider;
         [SerializeField] private Transform gunContainer;
@@ -14,77 +14,70 @@ namespace Weapons
         [SerializeField] private WeaponContainer weaponContainer;
 
         [SerializeField] private float pickupRange;
-        [SerializeField] private float dropForwardForce, dropUpwardForce;
-
-        [SerializeField] private bool isEquipped = false;
+        [SerializeField] private float forwardForce = 5;
+        [SerializeField] private float upwardForce = 5;
 
         private Vector3 distance;
 
         private void Start()
         {
-            weapon = GetComponent<IWeapon>();
-            itemBody = GetComponent<Rigidbody>();
-            itemCollider = GetComponent<BoxCollider>();
-
-            if (!isEquipped)
+            weapon = GetComponent<Weapon>();
+            if (GetComponent<Rigidbody>() != null)
             {
-                weapon.SetEquiped(false);
+                itemBody = GetComponent<Rigidbody>();
+            }
+
+            if (GetComponent<BoxCollider>() != null)
+            {
+                itemCollider = GetComponent<BoxCollider>();
+            }
+
+            if (!weapon.Equipped)
+            {
+                weapon.Equipped = false;
                 itemBody.isKinematic = false;
                 itemCollider.isTrigger = false;
             }
         }
 
-        private void Update()
+        /// <summary>
+        /// Picks ups object to corresponding place (gunContainer).
+        /// </summary>
+        public void PickUp()
         {
-            if (!isEquipped)
-            {
-                distance = playerTransform.position - transform.position;
-            }
-        }
+            distance = playerTransform.position - transform.position;
 
-        public void PickAndDrop()
-        {
-            if (!isEquipped)
-            {
-                PickUp();
-            }
-            //TODO: Fix - Redundant logic
-            else if (isEquipped)
-            {
-                Drop();
-            }
-        }
+            if (weapon.Equipped || distance.magnitude > pickupRange) return;
 
-        private void PickUp()
-        {
-            if (isEquipped || distance.magnitude > pickupRange) return;
-            Transform objectTransform = transform;
-
-            isEquipped = true;
             itemBody.isKinematic = true;
             itemCollider.isTrigger = true;
-            weaponContainer.EquipWeapon(weapon.GetId());
+            weaponContainer.EquipWeapon(weapon.Id);
 
 
+            Transform objectTransform = transform;
             objectTransform.SetParent(gunContainer);
             objectTransform.localPosition = Vector3.zero;
             objectTransform.localRotation = Quaternion.Euler(Vector3.zero);
         }
 
-        private void Drop()
+        /// <summary>
+        /// Drops object infront of its position
+        /// </summary>
+        public void Drop()
         {
-            isEquipped = false;
-            weapon.SetEquiped(false);
-            weaponContainer.UnequipWeapon(weapon.GetId());
-            
+            if (!weapon.Equipped) return;
+
+            weapon.Equipped = false;
+            weaponContainer.UnequipWeapon(weapon.Id);
+
             itemCollider.isTrigger = false;
 
             transform.SetParent(null);
 
             itemBody.isKinematic = false;
             itemBody.velocity = playerTransform.GetComponent<Rigidbody>().velocity;
-            itemBody.AddForce(playerTransform.transform.forward * dropUpwardForce, ForceMode.Impulse);
-            itemBody.AddForce(playerTransform.transform.up * dropUpwardForce, ForceMode.Impulse);
+            itemBody.AddForce(playerTransform.transform.forward * forwardForce, ForceMode.Impulse);
+            itemBody.AddForce(playerTransform.transform.up * upwardForce, ForceMode.Impulse);
         }
     }
 }
