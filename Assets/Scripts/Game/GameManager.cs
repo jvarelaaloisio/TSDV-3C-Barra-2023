@@ -7,16 +7,16 @@ namespace Game
 {
     public class GameManager : MonoBehaviour
     {
-        [SerializeField] private int levelTimer = 30;
-        [SerializeField] private bool startTimer = true;
         public float Timer { get; set; }
-
-        private int targets;
-
+        
         public static Action OnDefeatEvent;
         public static Action OnWinEvent;
+        
+        [SerializeField] private bool startTimer = true;
+        [SerializeField] private int levelTimer = 30;
 
-
+        private int targets;
+        
         private void Start()
         {
             Timer = levelTimer;

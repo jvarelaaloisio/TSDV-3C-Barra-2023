@@ -11,13 +11,14 @@ namespace Player
         [SerializeField] private float playerSpeed = 2.0f;
         [SerializeField] private float gravityValue = -9.81f;
         [SerializeField] private float rotationSensitivity = 5f;
+        [SerializeField] private Transform cameraTransform;
 
         private float originalSpeed;
+        private bool groundedPlayer;
+
         private Vector3 playerVelocity;
         private CharacterController controller;
         private InputManager inputManager;
-        [SerializeField] private Transform cameraTransform;
-        private bool groundedPlayer;
 
 
         private void Start()
@@ -34,7 +35,6 @@ namespace Player
             {
                 playerVelocity.y = 0f;
             }
-
             Move();
         }
 

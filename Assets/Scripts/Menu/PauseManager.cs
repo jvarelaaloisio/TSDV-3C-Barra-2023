@@ -1,6 +1,5 @@
 using Game;
 using UnityEngine;
-using UnityEngine.Audio;
 using UnityEngine.InputSystem;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
@@ -9,15 +8,14 @@ namespace Menu
 {
     public class PauseManager : MonoBehaviour
     {
+        private const float NormalTimeScale = 1;
+        private const float PauseTimeScale = 0;
+        private const int MenuSceneIndex = 0;
+
         [SerializeField] private GameObject pauseMenu;
         [SerializeField] private PlayerInput playerInput;
         [SerializeField] private Button resumeButton;
         [SerializeField] private bool canWin = true;
-        
-        private const int MenuSceneIndex = 0;
-
-        private const float NormalTimeScale = 1;
-        private const float PauseTimeScale = 0;
 
         private void Awake()
         {
@@ -36,6 +34,55 @@ namespace Menu
                 GameManager.OnDefeatEvent -= OnGameEnd;
                 GameManager.OnWinEvent -= OnGameEnd;
             }
+        }
+
+        /// <summary>
+        /// Resumes the game and reactivates the gameplay inputs.
+        /// </summary>
+        public void ResumeGame()
+        {
+            ChangeMouseState(false);
+            playerInput.enabled = true;
+            ResumeTime();
+            ChangeState();
+        }
+
+        /// <summary>
+        /// Changes the state of the mouse. Locks/unlocks, visible/invisible.
+        /// </summary>
+        /// <param name="mouseVisible"> mouse visibility state </param>
+        public static void ChangeMouseState(bool mouseVisible)
+        {
+            Cursor.visible = mouseVisible;
+            Cursor.lockState = mouseVisible ? CursorLockMode.None : CursorLockMode.Locked;
+        }
+
+        /// <summary>
+        /// Reloads the current scene.
+        /// </summary>
+        public void OnResetButtonClick()
+        {
+            ResumeTime();
+
+            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+        }
+
+        /// <summary>
+        /// Loads the menu scene
+        /// </summary>
+        public void OnLoadMenuButtonClick()
+        {
+            ResumeTime();
+
+            SceneManager.LoadScene(MenuSceneIndex);
+        }
+
+        /// <summary>
+        /// Quits the application
+        /// </summary>
+        public void OnExitButtonClick()
+        {
+            Application.Quit();
         }
 
         /// <summary>
@@ -74,52 +121,11 @@ namespace Menu
         }
 
         /// <summary>
-        /// Resumes the game and reactivates the gameplay inputs.
-        /// </summary>
-        public void ResumeGame()
-        {
-            ChangeMouseState(false);
-            playerInput.enabled = true;
-            ResumeTime();
-            ChangeState();
-        }
-        
-        /// <summary>
-        /// Changes the state of the mouse. Locks/unlocks, visible/unvisible.
-        /// </summary>
-        /// <param name="mouseVisible"> mouse visibility state </param>
-        public static void ChangeMouseState(bool mouseVisible)
-        {
-            Cursor.visible = mouseVisible;
-            Cursor.lockState = mouseVisible ? CursorLockMode.None : CursorLockMode.Locked;
-        }
-        
-        /// <summary>
-        /// Enables or disavles the player's input and the pause menu
+        /// Enables or disables the player's input and the pause menu
         /// </summary>
         private void ChangeState()
         {
             pauseMenu.SetActive(!pauseMenu.activeSelf);
-        }
-
-        /// <summary>
-        /// Reloads the current scene.
-        /// </summary>
-        public void OnResetButtonClick()
-        {
-            ResumeTime();
-
-            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
-        }
-
-        /// <summary>
-        /// Loads the menu scene
-        /// </summary>
-        public void OnLoadMenuButtonClick()
-        {
-            ResumeTime();
-
-            SceneManager.LoadScene(MenuSceneIndex);
         }
 
         /// <summary>
@@ -137,14 +143,6 @@ namespace Menu
         private void ResumeTime()
         {
             Time.timeScale = NormalTimeScale;
-        }
-
-        /// <summary>
-        /// Quits the application
-        /// </summary>
-        public void OnExitButtonClick()
-        {
-            Application.Quit();
         }
     }
 }

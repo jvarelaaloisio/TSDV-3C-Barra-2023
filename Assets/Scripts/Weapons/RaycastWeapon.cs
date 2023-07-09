@@ -56,7 +56,6 @@ namespace Weapons
                 laserRenderer.SetPosition(1, laserOrigin.position + Camera.main.transform.forward * range);
                 
             }
-
             StartCoroutine(ShowLaser());
         }
 
