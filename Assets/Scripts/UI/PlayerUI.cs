@@ -26,7 +26,11 @@ namespace UI
             isgameManagerNull = gameManager == null;
 
             Target.OnTargetDeath += UpdateRemainingTargets;
-            InputManager.OnBulletsUpdate += ShowBullets;
+            InputManager.OnShootEvent += ShowBullets;
+            InputManager.OnReloadEvent += ShowBullets;
+            InputManager.OnPickUpEvent += ShowBullets;
+            InputManager.OnDropEvent += ShowBullets;
+            InputManager.OnSwapWeaponEvent += ShowBullets;
 
             targetAmount = GameObject.FindGameObjectsWithTag("Target").Length;
             ShowTargetsRemaining();
@@ -35,7 +39,11 @@ namespace UI
         private void OnDestroy()
         {
             Target.OnTargetDeath -= UpdateRemainingTargets;
-            InputManager.OnBulletsUpdate -= ShowBullets;
+            InputManager.OnShootEvent -= ShowBullets;
+            InputManager.OnReloadEvent -= ShowBullets;
+            InputManager.OnPickUpEvent -= ShowBullets;
+            InputManager.OnDropEvent -= ShowBullets;
+            InputManager.OnSwapWeaponEvent -= ShowBullets;
         }
 
         private void Update()
