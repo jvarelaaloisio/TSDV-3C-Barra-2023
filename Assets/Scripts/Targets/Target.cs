@@ -5,26 +5,24 @@ namespace Targets
 {
     public class Target : MonoBehaviour
     {
+        public static Action OnTargetDeath;
 
-        [Header("Targets configuration")] [SerializeField]
-        private Movement movement;
-
+        [Header("Targets configuration")] 
+        [SerializeField] private Movement movement;
         [SerializeField] private float speed = 5f;
         [SerializeField] private float moveDistance = 5f;
         [SerializeField] private float health = 50f;
-
-        [Header("Acceleration options")] [SerializeField]
-        private float acceleration = 1f;
-
+        
+        [Header("Acceleration options")] 
+        [SerializeField] private float acceleration = 1f;
         [SerializeField] private float maxSpeed = 10f;
 
         private float distanceTraveled = 0;
         private float originalSpeed;
-
-        private Vector3 originalPosition;
         private bool direction = true;
 
-        public static Action OnTargetDeath;
+        private Vector3 originalPosition;
+
 
         private void Start()
         {

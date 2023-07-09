@@ -23,6 +23,15 @@ namespace Weapons
         {
             return gameObject;
         }
+        
+        /// <summary>
+        /// Reload bullets and triggers OnReload event.
+        /// </summary>
+        public void Reload()
+        {
+            Bullets = MaxBullets;
+            OnReload.Raise();
+        }
 
         /// <summary>
         /// Reaction of shooting.
@@ -31,15 +40,6 @@ namespace Weapons
         {
             Bullets--;
             OnShot.Raise();
-        }
-
-        /// <summary>
-        /// Reload bullets and triggers OnReload event.
-        /// </summary>
-        public void Reload()
-        {
-            Bullets = MaxBullets;
-            OnReload.Raise();
         }
 
         /// <summary>

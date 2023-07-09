@@ -17,19 +17,6 @@ namespace Player
         }
 
         /// <summary>
-        /// Creates the dictionary of weapons and their id
-        /// </summary>
-        void CreateIdWeapons()
-        {
-            idWeapons = new Dictionary<int, Weapon>(weapons.Length);
-
-            foreach (GameObject weapon in weapons)
-            {
-                idWeapons.Add(weapon.GetComponent<Weapon>().Id, weapon.GetComponent<Weapon>());
-            }
-        }
-
-        /// <summary>
         /// Equips the weapon sent by the parameter.
         /// </summary>
         /// <param name="id"> id reference of the weapon</param>
@@ -127,6 +114,19 @@ namespace Player
         private Weapon FindWeaponById(int id)
         {
             return idWeapons[id];
+        }
+        
+        /// <summary>
+        /// Creates the dictionary of weapons and their id
+        /// </summary>
+        private void CreateIdWeapons()
+        {
+            idWeapons = new Dictionary<int, Weapon>(weapons.Length);
+
+            foreach (GameObject weapon in weapons)
+            {
+                idWeapons.Add(weapon.GetComponent<Weapon>().Id, weapon.GetComponent<Weapon>());
+            }
         }
     }
 }

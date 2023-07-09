@@ -9,16 +9,16 @@ namespace UI
 {
     public class PlayerUI : MonoBehaviour
     {
+        public static Action OnNoTargets;
+        
         [SerializeField] private TMP_Text timer;
         [SerializeField] private TMP_Text targetsRemaining;
         [SerializeField] private TMP_Text bulletsCounter;
-
         [SerializeField] private GameManager gameManager;
 
-        public static Action OnNoTargets;
-        private WeaponContainer weaponContainer;
         private int targetAmount;
         private bool isgameManagerNull;
+        private WeaponContainer weaponContainer;
 
         private void Start()
         {
@@ -86,7 +86,6 @@ namespace UI
                 bulletsCounter.text = "";
                 return;
             }
-
             bulletsCounter.text = weaponContainer.GetWeapon()?.Bullets + "/" + weaponContainer.GetWeapon()?.MaxBullets;
         }
     }
