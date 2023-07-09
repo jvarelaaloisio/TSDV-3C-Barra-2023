@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 
 namespace Player
@@ -6,7 +7,7 @@ namespace Player
     /// Class that enables a character to be moved
     /// </summary>
     [RequireComponent(typeof(CharacterController))]
-    public class Playercontroller : MonoBehaviour
+    public class PlayerController : MonoBehaviour
     {
         [SerializeField] private float playerSpeed = 2.0f;
         [SerializeField] private float gravityValue = -9.81f;
@@ -20,12 +21,10 @@ namespace Player
         private CharacterController controller;
         private InputManager inputManager;
 
-
         private void Start()
         {
             if (Camera.main != null) cameraTransform = Camera.main.transform;
             controller = FindObjectOfType<CharacterController>();
-            inputManager = InputManager.Instance;
             originalSpeed = playerSpeed;
         }
 
@@ -35,20 +34,18 @@ namespace Player
             {
                 playerVelocity.y = 0f;
             }
-            Move();
         }
 
         /// <summary>
         /// Character movement
         /// </summary>
-        private void Move()
+        public void Move(Vector2 movement, bool isSprinting)
         {
-            Vector2 movement = inputManager.GetPlayerMovement();
             Vector3 move = new Vector3(movement.x, 0, movement.y);
+            
             move = cameraTransform.forward * move.z + cameraTransform.right * move.x;
             move.y = 0;
 
-            // Rotate the character towards the move direction
             if (move != Vector3.zero)
             {
                 Quaternion targetRotation = Quaternion.LookRotation(move);
@@ -56,7 +53,7 @@ namespace Player
                     rotationSensitivity * Time.deltaTime);
             }
 
-            playerSpeed = inputManager.IsSprinting ? originalSpeed * 2f : originalSpeed;
+            playerSpeed = isSprinting ? originalSpeed * 2f : originalSpeed;
             controller.Move(move * (Time.deltaTime * playerSpeed));
 
             playerVelocity.y += gravityValue * Time.deltaTime;

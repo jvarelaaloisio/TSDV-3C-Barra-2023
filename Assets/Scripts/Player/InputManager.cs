@@ -7,47 +7,36 @@ namespace Player
 {
     public class InputManager : MonoBehaviour
     {
-        public bool IsSprinting { get; private set; }
-        private static InputManager _instance;
+        #region Events
 
-        public static InputManager Instance => _instance;
+        public static Action OnShootEvent;
+        public static Action OnReloadEvent;
+        public static Action OnPickUpEvent;
+        public static Action OnDropEvent;
+        public static Action OnSwapWeaponEvent;
 
-        private PlayerInputs playerInput;
+        #endregion
+
+        [SerializeField] private CameraManager cameraManager;
+        [SerializeField] private PlayerController playerController;
+
+        private bool isSprinting;
         private Pickable[] pickables;
-        public static Action OnBulletsUpdate;
+
         private void Awake()
         {
             Cursor.visible = false;
-            if (_instance != null && _instance != this)
-            {
-                Destroy(gameObject);
-            }
-            else
-            {
-                _instance = this;
-            }
 
-            playerInput = new PlayerInputs();
             pickables = FindObjectsOfType<Pickable>();
         }
 
-        private void OnEnable()
-        {
-            playerInput.Enable();
-        }
-
-        private void OnDisable()
-        {
-            playerInput.Disable();
-        }
-
         /// <summary>
-        /// Returns the value of the player's movement input.
+        /// Player movement logic.
         /// </summary>
-        /// <returns></returns>
-        public Vector2 GetPlayerMovement()
+        public void OnMove(InputValue context)
         {
-            return playerInput.World.Move.ReadValue<Vector2>();
+            Vector2 movementInput = context.Get<Vector2>();
+            playerController.Move(movementInput, isSprinting);
         }
 
         /// <summary>
@@ -56,16 +45,16 @@ namespace Player
         /// <param name="value"> new speed </param>
         public void OnSprint(InputValue value)
         {
-            IsSprinting = value.isPressed;
+            isSprinting = value.isPressed;
         }
 
         /// <summary>
-        /// In case of having a weapon equipped, shoots
+        /// In case of having a weapon equipped, shoots.
         /// </summary>
         public void OnShoot()
         {
             FindObjectOfType<WeaponContainer>().GetWeapon()?.Shoot();
-            OnBulletsUpdate?.Invoke();
+            OnShootEvent?.Invoke();
         }
 
         /// <summary>
@@ -76,42 +65,47 @@ namespace Player
             foreach (Pickable pickable in pickables)
             {
                 pickable.PickUp();
-                OnBulletsUpdate?.Invoke();
+                OnPickUpEvent?.Invoke();
             }
         }
 
         /// <summary>
-        /// Drops the currently equipped weapon, if any equipped.
+        /// Drops the currently equipped weapon, if any.
         /// </summary>
         public void OnDrop()
         {
             foreach (Pickable pickable in pickables)
             {
                 pickable.Drop();
-                OnBulletsUpdate?.Invoke();
+                OnDropEvent?.Invoke();
             }
         }
+
         /// <summary>
         /// Swaps equipped weapon with the next available weapon.
         /// </summary>
         public void OnSwapWeapon()
         {
-            OnBulletsUpdate?.Invoke();
+            OnSwapWeaponEvent?.Invoke();
             FindObjectOfType<WeaponContainer>().SwapWeapon();
         }
-        
+
         /// <summary>
-        /// Resets the bullets count
+        /// Resets the bullets count.
         /// </summary>
         public void OnReload()
         {
             FindObjectOfType<WeaponContainer>().GetWeapon()?.Reload();
-            OnBulletsUpdate?.Invoke();
+            OnReloadEvent?.Invoke();
         }
 
-        public Vector2 OnCameraRotation()
+        /// <summary>
+        /// Rotates the camera with the mouse or controller's input
+        /// </summary>
+        public void OnCameraRotation(InputValue context)
         {
-            return playerInput.World.CameraRotation.ReadValue<Vector2>();
+            Vector2 cameraMovement = context.Get<Vector2>();
+            cameraManager.MoveCamera(cameraMovement);
         }
     }
 }
