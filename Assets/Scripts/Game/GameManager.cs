@@ -8,19 +8,24 @@ namespace Game
     public class GameManager : MonoBehaviour
     {
         public float Timer { get; set; }
-        
+
         public static Action OnDefeatEvent;
         public static Action OnWinEvent;
-        
+
         [SerializeField] private bool startTimer = true;
         [SerializeField] private int levelTimer = 30;
 
         private int targets;
-        
+
         private void Start()
         {
             Timer = levelTimer;
             PlayerUI.OnNoTargets += PlayerWin;
+
+            if (startTimer)
+            {
+                StartCoroutine(TimerCoroutine());
+            }
         }
 
         private void OnDestroy()
@@ -28,13 +33,6 @@ namespace Game
             PlayerUI.OnNoTargets -= PlayerWin;
         }
 
-        private void Update()
-        {
-            if (startTimer)
-            {
-                StartCoroutine(TimerCoroutine());
-            }
-        }
 
         /// <summary>
         /// in case of win, disables this object to stop unecesary calculation and invokes win event.
@@ -51,14 +49,16 @@ namespace Game
         /// <returns></returns>
         private IEnumerator TimerCoroutine()
         {
-            Timer -= Time.deltaTime;
-            if (Timer <= 0)
+            while (Timer > 0)
             {
-                OnDefeatEvent?.Invoke();
-                gameObject.SetActive(false);
+                Timer -= Time.deltaTime;
+                yield return null;
             }
-
-            yield return null;
+            
+            if ((Timer > 0)) yield break;
+            
+            OnDefeatEvent?.Invoke();
+            gameObject.SetActive(false);
         }
     }
 }

@@ -2427,6 +2427,11 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 4000011066351628, guid: 36b4cee33c5a95b4fa7f0ae6bdb49564, type: 3}
   m_PrefabInstance: {fileID: 232023910}
   m_PrefabAsset: {fileID: 0}
+--- !u!4 &234934290 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 7283585626362934874, guid: 7889f089da8201545b838e30b1ed16c5, type: 3}
+  m_PrefabInstance: {fileID: 2296434312628967253}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &249307110
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -27498,9 +27503,33 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 627715530}
     - target: {fileID: 2296434312269396757, guid: 7889f089da8201545b838e30b1ed16c5, type: 3}
+      propertyPath: cameraController
+      value: 
+      objectReference: {fileID: 627715531}
+    - target: {fileID: 2296434312269396757, guid: 7889f089da8201545b838e30b1ed16c5, type: 3}
       propertyPath: playerController
       value: 
       objectReference: {fileID: 7025749540019815012}
+    - target: {fileID: 2296434312628967250, guid: 7889f089da8201545b838e30b1ed16c5, type: 3}
+      propertyPath: feet
+      value: 
+      objectReference: {fileID: 234934290}
+    - target: {fileID: 2296434312628967250, guid: 7889f089da8201545b838e30b1ed16c5, type: 3}
+      propertyPath: walkingSpeed
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 2296434312628967250, guid: 7889f089da8201545b838e30b1ed16c5, type: 3}
+      propertyPath: sprintingSpeed
+      value: 16
+      objectReference: {fileID: 0}
+    - target: {fileID: 2296434312628967250, guid: 7889f089da8201545b838e30b1ed16c5, type: 3}
+      propertyPath: groundCheckRange
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 2296434312628967250, guid: 7889f089da8201545b838e30b1ed16c5, type: 3}
+      propertyPath: characterController
+      value: 
+      objectReference: {fileID: 7025749540019815013}
     - target: {fileID: 2296434313336851950, guid: 7889f089da8201545b838e30b1ed16c5, type: 3}
       propertyPath: m_RootOrder
       value: 3
@@ -27573,6 +27602,14 @@ PrefabInstance:
       propertyPath: m_Camera
       value: 
       objectReference: {fileID: 227203168}
+    - target: {fileID: 9105974073283466551, guid: 7889f089da8201545b838e30b1ed16c5, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0.811
+      objectReference: {fileID: 0}
+    - target: {fileID: 9105974073283466551, guid: 7889f089da8201545b838e30b1ed16c5, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -0.287
+      objectReference: {fileID: 0}
     - target: {fileID: 9105974074755583899, guid: 7889f089da8201545b838e30b1ed16c5, type: 3}
       propertyPath: inputManager
       value: 
@@ -27888,6 +27925,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 40e53d27532c1a84985300e4b4142402, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!143 &7025749540019815013 stripped
+CharacterController:
+  m_CorrespondingSourceObject: {fileID: 9105974073283466547, guid: 7889f089da8201545b838e30b1ed16c5, type: 3}
+  m_PrefabInstance: {fileID: 2296434312628967253}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &7178914108460313912
 PrefabInstance:
   m_ObjectHideFlags: 0

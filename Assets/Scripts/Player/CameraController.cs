@@ -4,7 +4,7 @@ using UnityEngine.InputSystem;
 
 namespace Player
 {
-    public class CameraManager : MonoBehaviour
+    public class CameraController : MonoBehaviour
     {
         [SerializeField] private float sensitivityX;
         [SerializeField] private float sensitivityY;
