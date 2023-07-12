@@ -1,4 +1,3 @@
-using System;
 using UnityEngine;
 
 namespace Player
@@ -9,55 +8,50 @@ namespace Player
     [RequireComponent(typeof(CharacterController))]
     public class PlayerController : MonoBehaviour
     {
-        [SerializeField] private float playerSpeed = 2.0f;
-        [SerializeField] private float gravityValue = -9.81f;
-        [SerializeField] private float rotationSensitivity = 5f;
+        public bool IsSprinting { get; set; }
+        
+        [SerializeField] private float sprintingSpeed = 4.0f;
+        [SerializeField] private float walkingSpeed = 2.0f;
         [SerializeField] private Transform cameraTransform;
+        [SerializeField] private CharacterController characterController;
 
-        private float originalSpeed;
-        private bool groundedPlayer;
-
+        private const float GravityValue = -9.81f;
+        
+        private Vector3 desiredDirection;
         private Vector3 playerVelocity;
-        private CharacterController controller;
-        private InputManager inputManager;
 
         private void Start()
         {
             if (Camera.main != null) cameraTransform = Camera.main.transform;
-            controller = FindObjectOfType<CharacterController>();
-            originalSpeed = playerSpeed;
         }
 
         private void Update()
         {
-            if (groundedPlayer && playerVelocity.y < 0)
-            {
-                playerVelocity.y = 0f;
-            }
+            Vector3 currentDirection = GetCharacterDirection();
+            characterController.Move(
+                currentDirection * (Time.deltaTime * (IsSprinting ? sprintingSpeed : walkingSpeed)));
         }
 
         /// <summary>
-        /// Character movement
+        /// Modifies the direction in which the player is moving relative to camera direction and gravity.
         /// </summary>
-        public void Move(Vector2 movement, bool isSprinting)
+        /// <returns> New transform direction </returns>
+        private Vector3 GetCharacterDirection()
         {
-            Vector3 move = new Vector3(movement.x, 0, movement.y);
+            Vector3 transformDirection = cameraTransform.TransformDirection(desiredDirection);
             
-            move = cameraTransform.forward * move.z + cameraTransform.right * move.x;
-            move.y = 0;
+            transformDirection.y = characterController.isGrounded ? 0 : GravityValue;
 
-            if (move != Vector3.zero)
-            {
-                Quaternion targetRotation = Quaternion.LookRotation(move);
-                transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation,
-                    rotationSensitivity * Time.deltaTime);
-            }
+            return transformDirection;
+        }
 
-            playerSpeed = isSprinting ? originalSpeed * 2f : originalSpeed;
-            controller.Move(move * (Time.deltaTime * playerSpeed));
-
-            playerVelocity.y += gravityValue * Time.deltaTime;
-            controller.Move(playerVelocity * Time.deltaTime);
+        /// <summary>
+        /// Recieves the direction the user wants to move in and saves it in desiredDirection.
+        /// </summary>
+        /// <param name="movement"> direction from the Input </param>
+        public void ChangeDirection(Vector2 movement)
+        {
+            desiredDirection = new Vector3(movement.x, 0, movement.y);
         }
     }
 }

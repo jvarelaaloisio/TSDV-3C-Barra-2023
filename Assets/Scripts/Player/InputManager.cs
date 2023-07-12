@@ -17,10 +17,9 @@ namespace Player
 
         #endregion
 
-        [SerializeField] private CameraManager cameraManager;
+        [SerializeField] private CameraController cameraController;
         [SerializeField] private PlayerController playerController;
-
-        private bool isSprinting;
+        
         private Pickable[] pickables;
 
         private void Awake()
@@ -36,7 +35,7 @@ namespace Player
         public void OnMove(InputValue context)
         {
             Vector2 movementInput = context.Get<Vector2>();
-            playerController.Move(movementInput, isSprinting);
+            playerController.ChangeDirection(movementInput);
         }
 
         /// <summary>
@@ -45,7 +44,7 @@ namespace Player
         /// <param name="value"> new speed </param>
         public void OnSprint(InputValue value)
         {
-            isSprinting = value.isPressed;
+            playerController.IsSprinting = value.isPressed;
         }
 
         /// <summary>
@@ -105,7 +104,7 @@ namespace Player
         public void OnCameraRotation(InputValue context)
         {
             Vector2 cameraMovement = context.Get<Vector2>();
-            cameraManager.MoveCamera(cameraMovement);
+            cameraController.MoveCamera(cameraMovement);
         }
     }
 }
