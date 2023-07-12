@@ -6,17 +6,16 @@ namespace Weapons
 {
     public class Pickable : MonoBehaviour
     {
-        private Weapon weapon;
-        private Rigidbody itemBody;
-        private BoxCollider itemCollider;
         [SerializeField] private Transform gunContainer;
         [SerializeField] private Transform playerTransform;
         [SerializeField] private WeaponContainer weaponContainer;
-
         [SerializeField] private float pickupRange;
         [SerializeField] private float forwardForce = 5;
         [SerializeField] private float upwardForce = 5;
 
+        private Weapon weapon;
+        private Rigidbody itemBody;
+        private BoxCollider itemCollider;
         private Vector3 distance;
 
         private void Start()

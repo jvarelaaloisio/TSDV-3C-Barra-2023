@@ -10,6 +10,7 @@ namespace Weapons
 
         [Header("Events")] 
         [SerializeField] private SoundEvent onBulletHit;
+        
         /// <summary>
         /// Destroys bullet on collision
         /// </summary>

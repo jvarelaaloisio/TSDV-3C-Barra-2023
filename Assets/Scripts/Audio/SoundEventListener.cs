@@ -14,7 +14,7 @@ namespace Audio
             public UnityEvent response;
         }
 
-        [SerializeField] private List<EventResponse> eventResponses = new List<EventResponse>();
+        [SerializeField] private List<EventResponse> eventResponses;
         
         private void OnEnable()
         {

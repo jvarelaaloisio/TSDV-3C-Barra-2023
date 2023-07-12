@@ -40,23 +40,26 @@ namespace Weapons
         /// </summary>
         public override void Shoot()
         {
+            const int laserStartId = 0;
+            const int laserEndId = 1;
+            
             if(!CanShoot()) return;
             BulletShot();
             
             RaycastHit hit;
-            laserRenderer.SetPosition(0, laserOrigin.position);
+            
+            laserRenderer.SetPosition(laserStartId, laserOrigin.position);
             if (Physics.Raycast(Camera.main!.transform.position, Camera.main!.transform.forward, out hit, range))
             {
                 Target target = hit.transform.GetComponent<Target>();
                 if (target != null) target.TakeDamage(damage);
-                laserRenderer.SetPosition(1, hit.point);
+                laserRenderer.SetPosition(laserEndId, hit.point);
             }
             else
             {
-                laserRenderer.SetPosition(1, laserOrigin.position + Camera.main.transform.forward * range);
+                laserRenderer.SetPosition(laserEndId, laserOrigin.position + Camera.main.transform.forward * range);
                 
             }
-
             StartCoroutine(ShowLaser());
         }
 

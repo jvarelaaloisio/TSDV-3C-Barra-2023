@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -5,14 +6,11 @@ namespace Game
 {
     public class LoadNextLevel : MonoBehaviour
     {
-        private const int SceneOffset = 1;
-
-        /// <summary>
-        /// Last hour implementation :)
-        /// </summary>
+        private readonly int sceneId = 2;
+        
         private void OnDestroy()
         {
-            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + SceneOffset);
+            SceneManager.LoadScene(sceneId);
         }
     }
 }

@@ -4,13 +4,13 @@ using UnityEngine.InputSystem;
 
 namespace Player
 {
-    public class CameraManager : MonoBehaviour
+    public class CameraController : MonoBehaviour
     {
         [SerializeField] private float sensitivityX;
         [SerializeField] private float sensitivityY;
 
         [SerializeField] private Transform orientation;
-        [SerializeField] private InputManager inputManager;
+        
         private float xRotation;
         private float yRotation;
 
@@ -20,17 +20,12 @@ namespace Player
             Cursor.visible = false;
         }
 
-        private void Update()
-        {
-            MoveCamera();
-        }
-
         /// <summary>
         /// Rotates the camera to follow the mouse.
         /// </summary>
-        void MoveCamera()
+        public void MoveCamera(Vector2 cameraRotation)
         {
-            Vector2 cameraMovement = inputManager.OnCameraRotation();
+            Vector2 cameraMovement = cameraRotation;
             float xMovement = cameraMovement.x  * Time.deltaTime * sensitivityX;
             float yMovement = cameraMovement.y * Time.deltaTime * sensitivityY;
 

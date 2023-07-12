@@ -9,9 +9,11 @@ namespace Menu
         [SerializeField] private AudioMixer mainMixer;
         [SerializeField] private Slider volumeSlider;
 
-        void Start()
+        private const string MixerVolume = "Volume";
+        
+        private void Start()
         {
-            mainMixer.GetFloat("Volume", out float currentVolume);
+            mainMixer.GetFloat(MixerVolume, out float currentVolume);
             volumeSlider.value = currentVolume;
         }
         
@@ -21,7 +23,7 @@ namespace Menu
         /// <param name="volume"> new volume </param>
         public void SetVolume(float volume)
         {
-            mainMixer.SetFloat("Volume", volume);
+            mainMixer.SetFloat(MixerVolume, volume);
         }
     }
 }

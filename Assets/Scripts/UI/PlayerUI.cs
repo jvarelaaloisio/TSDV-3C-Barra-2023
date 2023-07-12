@@ -9,16 +9,16 @@ namespace UI
 {
     public class PlayerUI : MonoBehaviour
     {
+        public static Action OnNoTargets;
+        
         [SerializeField] private TMP_Text timer;
         [SerializeField] private TMP_Text targetsRemaining;
         [SerializeField] private TMP_Text bulletsCounter;
-
         [SerializeField] private GameManager gameManager;
 
-        public static Action OnNoTargets;
-        private WeaponContainer weaponContainer;
         private int targetAmount;
         private bool isgameManagerNull;
+        private WeaponContainer weaponContainer;
 
         private void Start()
         {
@@ -26,7 +26,11 @@ namespace UI
             isgameManagerNull = gameManager == null;
 
             Target.OnTargetDeath += UpdateRemainingTargets;
-            InputManager.OnBulletsUpdate += ShowBullets;
+            InputManager.OnShootEvent += ShowBullets;
+            InputManager.OnReloadEvent += ShowBullets;
+            InputManager.OnPickUpEvent += ShowBullets;
+            InputManager.OnDropEvent += ShowBullets;
+            InputManager.OnSwapWeaponEvent += ShowBullets;
 
             targetAmount = GameObject.FindGameObjectsWithTag("Target").Length;
             ShowTargetsRemaining();
@@ -35,7 +39,11 @@ namespace UI
         private void OnDestroy()
         {
             Target.OnTargetDeath -= UpdateRemainingTargets;
-            InputManager.OnBulletsUpdate -= ShowBullets;
+            InputManager.OnShootEvent -= ShowBullets;
+            InputManager.OnReloadEvent -= ShowBullets;
+            InputManager.OnPickUpEvent -= ShowBullets;
+            InputManager.OnDropEvent -= ShowBullets;
+            InputManager.OnSwapWeaponEvent -= ShowBullets;
         }
 
         private void Update()
@@ -78,7 +86,6 @@ namespace UI
                 bulletsCounter.text = "";
                 return;
             }
-
             bulletsCounter.text = weaponContainer.GetWeapon()?.Bullets + "/" + weaponContainer.GetWeapon()?.MaxBullets;
         }
     }

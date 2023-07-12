@@ -16,6 +16,6 @@ namespace Targets
         /// <param name="acceleration"> Acceletarion over time </param>
         /// <param name="ogSpeed"> Original speed </param>
         /// <param name="maxSpeed"> Max speed it can reach </param>
-        public abstract void Move(Transform transform, Vector3 originalPos, ref bool direction, float speed, float distance, ref float f, float acceleration, float ogSpeed, float maxSpeed);
+        public abstract void Move(Transform transform, Vector3 originalPos, ref bool direction, float speed, float distance, ref float distanceTraveled, float acceleration, float ogSpeed, float maxSpeed);
     }
 }
